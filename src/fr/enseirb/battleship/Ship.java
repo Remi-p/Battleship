@@ -22,26 +22,26 @@ public class Ship {
 	// ATTENTION : methodes public a changer en fonction après
 	
 	public String getName(String name) {
-		return name;
+		return this.name;
 	}
 	
 	public Type getType(Type type) {
-		return type;
+		return this.type;
 	}
 	
 	public int getX(int x) {
-		return x;
+		return this.x;
 	}
 	
 	public int getY(int y) {
-		return y;
+		return this.y;
 	}
 	
 	public Orientation getOrientation(Orientation orientation) {
-		return orientation;
+		return this.orientation;
 	}
 	
 	public int getSize(int size) {
-		return size;
+		return this.size;
 	}
 }

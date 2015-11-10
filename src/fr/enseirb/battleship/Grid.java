@@ -97,11 +97,11 @@ public class Grid {
 	// ATTENTION : methodes public a changer en fonction après
 	
 	public int getHeight(int height) {
-		return height;
+		return this.height;
 	}
 	
 	public int getWidth(int width) {
-		return width;
+		return this.width;
 	}
 	
 }
