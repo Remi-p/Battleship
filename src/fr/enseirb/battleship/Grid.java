@@ -92,4 +92,16 @@ public class Grid {
 			e.printStackTrace();
 		}
 	}
+	
+	// GETTERS
+	// ATTENTION : methodes public a changer en fonction après
+	
+	public int getHeight(int height) {
+		return height;
+	}
+	
+	public int getWidth(int width) {
+		return width;
+	}
+	
 }
