@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 	<ships>
-	<ship type=”battleship” id=”K-19”>
-		<position x=”0” y=”0” orientation=”horizontal”/>
+	<ship type="battleship" id="K-19">
+		<position x="0" y="0" orientation="horizontal"/>
 	</ship>
-	<ship type=”destroyer”c id=”Titanic”>
-		<position x=”0” y=”2” orientation=”vertical”/>
+	<ship type="destroyer" id="Titanic">
+		<position x="0" y="2" orientation="vertical"/>
 	</ship>
 </ships>
