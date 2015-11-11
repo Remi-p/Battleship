@@ -1,11 +1,13 @@
+import exceptions.InvalidGridException;
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Ship;
 
 public class TestXML {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidGridException {
 		// TODO Auto-generated method stub
 		Grid grid = new Grid();
+
 	}
 
 }

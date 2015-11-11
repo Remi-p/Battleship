@@ -54,27 +54,27 @@ public class Ship {
 	// GETTERS
 	// ATTENTION : methodes public a changer en fonction après
 	
-	public String getName(String name) {
+	public String getName() {
 		return this.name;
 	}
 	
-	public Type getType(Type type) {
+	public Type getType() {
 		return this.type;
 	}
 	
-	public int getX(int x) {
+	public int getX() {
 		return this.x;
 	}
 	
-	public int getY(int y) {
+	public int getY() {
 		return this.y;
 	}
 	
-	public Orientation getOrientation(Orientation orientation) {
+	public Orientation getOrientation() {
 		return this.orientation;
 	}
 	
-	public int getSize(int size) {
+	public int getSize() {
 		return this.size;
 	}
 }

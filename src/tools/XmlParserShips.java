@@ -24,7 +24,9 @@ public class XmlParserShips extends XmlParser {
 	public Ship[] getShips(HashMap<String, List<Integer>> ships_size) {
 		
 		// Boat array initializing
-		Ship[] ships_array = new Ship[this.ships.getLength()];	
+		Ship[] ships_array = new Ship[(this.ships.getLength()-1)/2];	
+		// index of ships_array
+		int j = 0;
 		
 		for (int i = 0; i < ships.getLength(); i++) {
 
@@ -32,7 +34,7 @@ public class XmlParserShips extends XmlParser {
 			
 			// We check if we really are in a node
 			if (ship.getNodeType() == Node.ELEMENT_NODE) {
-
+				
 				// We use this conversion, this way, we can use getAttribute() and getElementsByTagName()
 				Element elt = (Element) ship;
 				Element position = (Element) elt.getElementsByTagName("position").item(0);
@@ -47,8 +49,10 @@ public class XmlParserShips extends XmlParser {
 				int max_ships = ships_size.get(elt.getAttribute("type")).get(1);
 				
 				// Adding new Ship object in the array
-				ships_array[i] = new Ship(name, type, x, y, orientation, size);
-								
+				 
+				ships_array[j] = new Ship(name, type, x, y, orientation, size);
+				j++ ; // incr of ships_array index	
+				
 				System.out.println("Player has one " + size + "-length " + type +
 								   " named " + name + " at position (" + x + "," + y + "), " +
 								   orientation + "-oriented, over " + max_ships + " maximum.");

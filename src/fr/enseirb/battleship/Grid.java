@@ -1,5 +1,7 @@
 package fr.enseirb.battleship;
 
+import exceptions.InvalidGridException;
+
 import tools.XmlParserGrid;
 import tools.XmlParserShips;
 
@@ -12,38 +14,65 @@ public class Grid {
 	private int width;
 	private Ship[] ships;
 
-	public Grid() {
+	public Grid() throws InvalidGridException {
 		this("configs/");
 	}
 
-	public Grid(String configs_path){
+	public Grid(String configs_path) throws InvalidGridException{
 		super();
 		
 		// --------------- grid.xml
 		XmlParserGrid grid = new XmlParserGrid(configs_path);
 		
 		// Dimensions
-		this.height = grid.getDimHorizontal();
-		this.width = grid.getDimVertical();
+		int height = grid.getDimHorizontal();
+		int width = grid.getDimVertical();
+		
+		// Minimum of 10*10 grid, else InvalidGridException
+		if (height < 10 || width < 10)
+			throw new InvalidGridException();
+		else {
+			this.height = height;
+			this.width = width;
+		}
 		
 		// Boat types
 		HashMap<String, List<Integer> > ships_size = grid.getShips();
 
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path);
+		Ship[] ships = ships_xml.getShips(ships_size);
+
+		// Ships has to take less than 20% of total number of cases
+		if (((double)shipGridTaking(ships) / ((double)height  *(double)width)) > 0.2) {
+			throw new InvalidGridException();
+		}
+		else {
+			this.ships = ships;
+		}
+	}
+	
+	// Return number of cases taken by ships
+	private int shipGridTaking(Ship[] ships) {
 		
-		this.ships = ships_xml.getShips(ships_size);
+		// Number of case taken by ships
+		int num_cases = 0;
 		
+		for (int i = 0; i < ships.length; i++) {
+			int size = ships[i].getSize();
+			num_cases += size;
+		}
+		return num_cases;
 	}
 	
 	// GETTERS
 	// ATTENTION : methodes public a changer en fonction après
 	
-	public int getHeight(int height) {
+	public int getHeight() {
 		return this.height;
 	}
 	
-	public int getWidth(int width) {
+	public int getWidth() {
 		return this.width;
 	}
 	
