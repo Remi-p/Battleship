@@ -4,6 +4,7 @@ import tools.XmlParserGrid;
 import tools.XmlParserShips;
 
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Grid {
@@ -26,7 +27,7 @@ public class Grid {
 		this.width = grid.getDimVertical();
 		
 		// Boat types
-		HashMap<String, Integer> ships_size = grid.getShips();
+		HashMap<String, List<Integer> > ships_size = grid.getShips();
 
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path);

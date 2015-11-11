@@ -1,6 +1,8 @@
 package tools;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Arrays;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -74,7 +76,7 @@ public class XmlParserGrid extends XmlParser {
 		return new int[] {height, width};
 	}
 
-	public HashMap<String, Integer> getShips() {
+	public HashMap<String, List<Integer> > getShips() {
 		
 		Node ships_node = this.document.getElementsByTagName("ships").item(0);
 		NodeList ships = ships_node.getChildNodes();
@@ -82,7 +84,7 @@ public class XmlParserGrid extends XmlParser {
 		// set of an hashMap to associate a name of ship to a size
 		// hashMap for temporarily store size of boats
 		// a simple hashMap declaration with default size and load factor
-		HashMap<String, Integer> ships_size = new HashMap<String, Integer>();
+		HashMap<String, List<Integer> > ships_size = new HashMap<String, List<Integer> >();
  
 		for (int i = 0; i < ships.getLength(); i++) {
 
@@ -95,7 +97,8 @@ public class XmlParserGrid extends XmlParser {
 				Element elt = (Element) ship;
 				
 				// Put elements to the ships_size hashmap
-				ships_size.put(elt.getNodeName(), new Integer(Integer.parseInt(elt.getAttribute("size"))));
+				ships_size.put(elt.getNodeName(), Arrays.asList( new Integer(Integer.parseInt(elt.getAttribute("size"))), 
+																 new Integer(Integer.parseInt(elt.getTextContent() ))));		
 				
 				// TODO : Save the number of time we can use one ship
 				

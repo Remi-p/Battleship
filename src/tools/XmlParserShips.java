@@ -1,6 +1,7 @@
 package tools;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -20,7 +21,7 @@ public class XmlParserShips extends XmlParser {
 		this.ships = ships_node.getChildNodes();
 	}
 	
-	public Ship[] getShips(HashMap<String, Integer> ships_size) {
+	public Ship[] getShips(HashMap<String, List<Integer>> ships_size) {
 		
 		// Boat array initializing
 		Ship[] ships_array = new Ship[this.ships.getLength()];	
@@ -42,14 +43,15 @@ public class XmlParserShips extends XmlParser {
 				int x = Integer.parseInt(position.getAttribute("x"));
 				int y = Integer.parseInt(position.getAttribute("y"));
 				String orientation = position.getAttribute("orientation");
-				int size = ships_size.get(elt.getAttribute("type"));
+				int size = ships_size.get(elt.getAttribute("type")).get(0);
+				int max_ships = ships_size.get(elt.getAttribute("type")).get(1);
 				
 				// Adding new Ship object in the array
 				ships_array[i] = new Ship(name, type, x, y, orientation, size);
 								
 				System.out.println("Player has one " + size + "-length " + type +
 								   " named " + name + " at position (" + x + "," + y + "), " +
-								   orientation + "-oriented.");
+								   orientation + "-oriented, over " + max_ships + " maximum.");
 				
 			}
 		}
