@@ -26,5 +26,11 @@ public class TestException {
 	public void testGridMin() throws InvalidGridException {
 		new Grid(8, 11);
 	}
+
+//  Comment faire quand cela dépend des informations de ships.xml ?
+//	@Test(expected=ShipOverlapException.class)
+//	public void testGridMin() throws InvalidGridException {
+//		new Grid(8, 11);
+//	}
 	
 }

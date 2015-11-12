@@ -2,7 +2,9 @@ package fr.enseirb.battleship;
 
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
+import exceptions.ShipOverlapException;
 
+import tools.Coordinates;
 import tools.XmlParserGrid;
 import tools.XmlParserShips;
 
@@ -15,7 +17,7 @@ public class Grid {
 	private int width;
 	private Ship[] ships;
 
-	public Grid() throws InvalidGridException, ShipOutOfBoundsException {
+	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
 		this("configs/");
 	}
 	
@@ -24,7 +26,7 @@ public class Grid {
 		this.setDim(height, width);
 	}
 
-	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException {
+	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
 		super();
 		
 		// --------------- grid.xml
@@ -49,7 +51,12 @@ public class Grid {
 			throw new InvalidGridException(occupation);
 		}
 		else {
-			this.ships = ships;
+			if(shipGridOverLap(ships) == false) {
+				throw new ShipOverlapException();
+			}
+			else {
+				this.ships = ships;
+			}
 		}
 	}
 	
@@ -75,6 +82,51 @@ public class Grid {
 			num_cases += size;
 		}
 		return num_cases;
+	}
+	
+	// Check if overlap ships exists
+	private boolean shipGridOverLap(Ship[] ships) {
+		
+		int x, y, size;
+		int index = 0;
+		// Coordinates array initializing
+		Coordinates[] coordinates = new Coordinates[shipGridTaking(ships)]; 
+		
+		// Store all coordinates in the Coordinates[]
+		for (int i = 0; i < ships.length; i++) {
+			
+			size = ships[i].getSize();
+			Orientation orientation = ships[i].getOrientation();
+			x = ships[i].getX();
+			y = ships[i].getY();
+			
+			for(int j = 0; j < size; j++) {
+
+				switch(orientation) {
+		            case HORIZONTAL: 
+		            	coordinates[index] = new Coordinates(x + j,y);
+		                break;
+	
+		            case VERTICAL: 
+		            	coordinates[index] = new Coordinates(x,y + j);
+		                break;
+				}
+				index++;
+			}
+		}
+		
+		// Comparation between each coordinates from the array
+		for (int k = 0; k < coordinates.length; k++) {
+			
+			for(int l = k + 1; l < coordinates.length ; l++ ) {
+					
+				if(coordinates[k].getX() == coordinates[l].getX() 
+				   && coordinates[k].getY() == coordinates[l].getY() ) {
+					return false; // Overlapping
+				}
+			}	
+		}
+		return true; // No overlapping
 	}
 	
 	// GETTERS
