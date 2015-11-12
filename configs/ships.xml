@@ -4,6 +4,6 @@
 		<position x="0" y="0" orientation="horizontal"/>
 	</ship>
 	<ship type="destroyer" id="Titanic">
-		<position x="0" y="2" orientation="vertical"/>
+		<position x="11" y="2" orientation="vertical"/>
 	</ship>
 </ships>

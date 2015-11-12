@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import exceptions.ShipOutOfBoundsException;
 import fr.enseirb.battleship.Ship;
 
 public class XmlParserShips extends XmlParser {
@@ -21,11 +22,11 @@ public class XmlParserShips extends XmlParser {
 		this.ships = ships_node.getChildNodes();
 	}
 	
-	public Ship[] getShips(HashMap<String, List<Integer>> ships_size) {
+	public Ship[] getShips(HashMap<String, List<Integer>> ships_size, int height, int width) throws ShipOutOfBoundsException{
 		
 		// Boat array initializing
 		Ship[] ships_array = new Ship[(this.ships.getLength()-1)/2];	
-		// index of ships_array
+		// Index of ships_array
 		int j = 0;
 		
 		for (int i = 0; i < ships.getLength(); i++) {
@@ -50,7 +51,7 @@ public class XmlParserShips extends XmlParser {
 				
 				// Adding new Ship object in the array
 				 
-				ships_array[j] = new Ship(name, type, x, y, orientation, size);
+				ships_array[j] = new Ship(name, type, x, y, orientation, size, height, width);
 				j++ ; // incr of ships_array index	
 				
 				System.out.println("Player has one " + size + "-length " + type +

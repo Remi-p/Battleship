@@ -1,6 +1,7 @@
 package fr.enseirb.battleship;
 
 import exceptions.InvalidGridException;
+import exceptions.ShipOutOfBoundsException;
 
 import tools.XmlParserGrid;
 import tools.XmlParserShips;
@@ -14,11 +15,11 @@ public class Grid {
 	private int width;
 	private Ship[] ships;
 
-	public Grid() throws InvalidGridException {
+	public Grid() throws InvalidGridException, ShipOutOfBoundsException {
 		this("configs/");
 	}
 
-	public Grid(String configs_path) throws InvalidGridException{
+	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException {
 		super();
 		
 		// --------------- grid.xml
@@ -41,9 +42,9 @@ public class Grid {
 
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path);
-		Ship[] ships = ships_xml.getShips(ships_size);
+		Ship[] ships = ships_xml.getShips(ships_size, height, width);
 
-		// Ships has to take less than 20% of total number of cases
+		// Ships has to take less than 20% of total number of cases, else InvalidGridException
 		if (((double)shipGridTaking(ships) / ((double)height  *(double)width)) > 0.2) {
 			throw new InvalidGridException();
 		}

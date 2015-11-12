@@ -1,5 +1,7 @@
 package fr.enseirb.battleship;
 
+import exceptions.ShipOutOfBoundsException;
+
 public class Ship {
 	private String name;
 	private Type type;
@@ -8,16 +10,32 @@ public class Ship {
 	private Orientation orientation;
 	private int size;
 	
-	public Ship(String name, String type, int x, int y, String orientation, int size) {
+	public Ship(String name, String type, int x, int y, String orientation, int size, int height_grid, int width_grid) throws ShipOutOfBoundsException {
 		super();
 		
 		this.name = name;
-		setType(type);
-		this.x = x;
-		this.y = y;
-		setOrientation(orientation);
 		this.size = size;
-	}
+		setType(type);
+		setOrientation(orientation);
+		setType(type);
+		
+			if( x < 0 || y < 0 || x > width_grid || y > height_grid ) {
+					throw new ShipOutOfBoundsException();
+			}
+			else {
+				
+				if(this.orientation == Orientation.HORIZONTAL && x+size > height_grid ) {
+					throw new ShipOutOfBoundsException();
+				}
+				else if(this.orientation == Orientation.VERTICAL && y+size > width_grid ) {
+					throw new ShipOutOfBoundsException();
+				}
+				else {
+					this.x = x;
+					this.y = y;
+				}
+			}
+		}
 
 
 	// SETTERS
