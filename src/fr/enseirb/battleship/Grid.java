@@ -18,6 +18,11 @@ public class Grid {
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException {
 		this("configs/");
 	}
+	
+	// This constructor is mainly here for test purpose
+	public Grid(int height, int width) throws InvalidGridException {
+		this.setDim(height, width);
+	}
 
 	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException {
 		super();
@@ -29,13 +34,7 @@ public class Grid {
 		int height = grid.getDimHorizontal();
 		int width = grid.getDimVertical();
 		
-		// Minimum of 10*10 grid, else InvalidGridException
-		if (height < 10 || width < 10)
-			throw new InvalidGridException();
-		else {
-			this.height = height;
-			this.width = width;
-		}
+		this.setDim(height, width);
 		
 		// Boat types
 		HashMap<String, List<Integer> > ships_size = grid.getShips();
@@ -44,12 +43,24 @@ public class Grid {
 		XmlParserShips ships_xml = new XmlParserShips(configs_path);
 		Ship[] ships = ships_xml.getShips(ships_size, height, width);
 
+		double occupation = (double)shipGridTaking(ships) / ((double)height  *(double)width); 
 		// Ships has to take less than 20% of total number of cases, else InvalidGridException
-		if (((double)shipGridTaking(ships) / ((double)height  *(double)width)) > 0.2) {
-			throw new InvalidGridException();
+		if (occupation > 0.2) {
+			throw new InvalidGridException(occupation);
 		}
 		else {
 			this.ships = ships;
+		}
+	}
+	
+	private void setDim(int height, int width) throws InvalidGridException {
+
+		// Minimum of 10*10 grid, else InvalidGridException
+		if (height < 10 || width < 10)
+			throw new InvalidGridException(height, width);
+		else {
+			this.height = height;
+			this.width = width;
 		}
 	}
 	

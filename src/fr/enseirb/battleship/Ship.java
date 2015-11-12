@@ -10,7 +10,10 @@ public class Ship {
 	private Orientation orientation;
 	private int size;
 	
-	public Ship(String name, String type, int x, int y, String orientation, int size, int height_grid, int width_grid) throws ShipOutOfBoundsException {
+	public Ship(String name, String type,
+			    int x, int y, String orientation,
+			    int size, int height_grid, int width_grid) throws ShipOutOfBoundsException {
+		
 		super();
 		
 		this.name = name;
@@ -19,23 +22,23 @@ public class Ship {
 		setOrientation(orientation);
 		setType(type);
 		
-			if( x < 0 || y < 0 || x > width_grid || y > height_grid ) {
-					throw new ShipOutOfBoundsException();
+		if( x < 0 || y < 0 || x > width_grid || y > height_grid ) {
+			throw new ShipOutOfBoundsException(x, y, name);
+		}
+		else {
+			
+			if(this.orientation == Orientation.HORIZONTAL && x+size > height_grid ) {
+				throw new ShipOutOfBoundsException(name);
+			}
+			else if(this.orientation == Orientation.VERTICAL && y+size > width_grid ) {
+				throw new ShipOutOfBoundsException(name);
 			}
 			else {
-				
-				if(this.orientation == Orientation.HORIZONTAL && x+size > height_grid ) {
-					throw new ShipOutOfBoundsException();
-				}
-				else if(this.orientation == Orientation.VERTICAL && y+size > width_grid ) {
-					throw new ShipOutOfBoundsException();
-				}
-				else {
-					this.x = x;
-					this.y = y;
-				}
+				this.x = x;
+				this.y = y;
 			}
 		}
+	}
 
 
 	// SETTERS

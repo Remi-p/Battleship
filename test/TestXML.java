@@ -5,8 +5,11 @@ import fr.enseirb.battleship.Ship;
 
 public class TestXML {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InvalidGridException, ShipOutOfBoundsException {
 		// TODO Auto-generated method stub
+		
+		Grid grid = new Grid();
+		/*
 		try {
 		Grid grid = new Grid();
 		}
@@ -18,6 +21,7 @@ public class TestXML {
 		catch(ShipOutOfBoundsException e) {
 			System.out.println("ShipOutOfBoundsException : il ne faut pas qu'un bateau ne dépasse de la grille.\n ");
 		}
+		*/
 
 	}
 
