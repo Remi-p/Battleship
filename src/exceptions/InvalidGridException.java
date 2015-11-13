@@ -4,7 +4,7 @@ public class InvalidGridException extends Exception {
 
 	public InvalidGridException(double occupation) {
 		System.out.println("Ships has to take less than 20% of total number of cases.");
-		System.out.println("\tCurrently : " + occupation + "%");
+		System.out.println("\tCurrently : " + occupation*100 + "%");
 	}
 
 	public InvalidGridException(int height, int width) {

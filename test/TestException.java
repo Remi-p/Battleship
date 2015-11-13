@@ -1,5 +1,6 @@
 import org.junit.Test;
 
+import tools.Constant;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
@@ -30,13 +31,13 @@ public class TestException {
 
 	@Test(expected=InvalidGridException.class)
 	public void testGridTooMuchShips() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		new Grid("configs/", "grid_too_much_ships.xml", "ships.xml");
+		new Grid(Constant.CONFIGS, "grid_too_much_ships.xml", Constant.SHIPS);
 	}
 
 	// TODO : Vérifier le bon fonctionnement. Here it seems like it works only when first coordinates are equals
 	@Test(expected=ShipOverlapException.class)
 	public void testGridShipsOverlap() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		new Grid("configs/", "grid.xml", "ships_overlap.xml");
+		new Grid(Constant.CONFIGS, Constant.GRID, "ships_overlap.xml");
 	}
 	
 }

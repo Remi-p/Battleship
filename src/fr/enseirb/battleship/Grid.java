@@ -3,6 +3,7 @@ package fr.enseirb.battleship;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
+import tools.Constant;
 import tools.Coordinates;
 import tools.XmlParserGrid;
 import tools.XmlParserShips;
@@ -18,7 +19,7 @@ public class Grid {
 	private Ship[] ships;
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		this("configs/");
+		this(Constant.CONFIGS);
 	}
 	
 	// This constructor is mainly here for test purpose
@@ -27,7 +28,7 @@ public class Grid {
 	}
 	
 	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		this(configs_path, "grid.xml", "ships.xml");
+		this(configs_path, Constant.GRID, Constant.SHIPS);
 	}
 
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
@@ -43,19 +44,21 @@ public class Grid {
 		this.setDim(height, width);
 		
 		// Boat types
-		HashMap<String, List<Integer> > ships_size = grid.getShips();
+		Type ships_type = grid.getShips();
 
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
-		Ship[] ships = ships_xml.getShips(ships_size, height, width);
+		Ship[] ships = ships_xml.getShips(ships_type, height, width);
 
-		double occupation = (double)shipGridTaking(ships_size) / ((double)height  *(double)width); 
+		System.out.println("Occupation : "+ships_type.getGridOccupation());
+		
+		double occupation = (double) ships_type.getGridOccupation() / ((double)height  *(double)width); 
 		// Ships has to take less than 20% of total number of cases, else InvalidGridException
 		if (occupation > 0.2) {
 			throw new InvalidGridException(occupation);
 		}
 		else {
-			if(shipGridOverLap(ships, ships_size) == false) {
+			if(shipGridOverLap(ships, ships_type) == false) {
 				throw new ShipOverlapException();
 			}
 			else {
@@ -75,33 +78,13 @@ public class Grid {
 		}
 	}
 	
-	// Return number of cases taken by ships
-	private int shipGridTaking(HashMap<String, List<Integer> > ships_size) {
-		
-		// Number of case taken by ships
-		int num_cases = 0;
-		
-		Iterator itr = ships_size.keySet().iterator();
-		
-		// TODO : Faire une classe pour les types, actuellement ça complique pour pas grd chose
-		// D'ailleurs ça ne marche pas!
-		while(itr.hasNext()) {
-			Object cle = itr.next();
-			int size = ships_size.get(cle).get(0);
-			int nb = ships_size.get(cle).get(1);
-			num_cases += size * nb;
-		}
-		
-		return num_cases;
-	}
-	
 	// Check if overlap ships exists
-	private boolean shipGridOverLap(Ship[] ships, HashMap<String, List<Integer> > ships_size) {
+	private boolean shipGridOverLap(Ship[] ships, Type ships_type) {
 		
 		int x, y, size;
 		int index = 0;
 		// Coordinates array initializing
-		Coordinates[] coordinates = new Coordinates[shipGridTaking(ships_size)]; 
+		Coordinates[] coordinates = new Coordinates[ships_type.getGridOccupation()]; 
 		
 		// Store all coordinates in the Coordinates[]
 		for (int i = 0; i < ships.length; i++) {
@@ -126,7 +109,7 @@ public class Grid {
 			}
 		}
 		
-		// Comparation between each coordinates from the array
+		// Comparison between each coordinates from the array
 		for (int k = 0; k < coordinates.length; k++) {
 			
 			for(int l = k + 1; l < coordinates.length ; l++ ) {

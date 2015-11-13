@@ -13,6 +13,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import fr.enseirb.battleship.Type;
+
 // We're using both xpath and nodelist for that
 public class XmlParserGrid extends XmlParser {
 
@@ -79,42 +81,27 @@ public class XmlParserGrid extends XmlParser {
 		
 		return new int[] {height, width};
 	}
-
-	public HashMap<String, List<Integer> > getShips() {
+	
+	private int getNbShipsType() {
 		
+		int nb = 0;
+		
+		// See getShips for commentary
+		NodeList ships = this.document.getElementsByTagName("ships").item(0).getChildNodes();
+		
+		for (int i = 0; i < ships.getLength(); i++)
+			if (ships.item(i).getNodeType() == Node.ELEMENT_NODE)
+				nb++;
+		
+		return nb;
+	}
+	
+	public Type getShips() {
+
+		// We get the boat nodes
 		Node ships_node = this.document.getElementsByTagName("ships").item(0);
 		NodeList ships = ships_node.getChildNodes();
 		
-		// set of an hashMap to associate a name of ship to a size
-		// hashMap for temporarily store size of boats
-		// a simple hashMap declaration with default size and load factor
-		HashMap<String, List<Integer> > ships_size = new HashMap<String, List<Integer> >();
- 
-		for (int i = 0; i < ships.getLength(); i++) {
-
-			Node ship = ships.item(i);
-			
-			// We check if we really are in a node
-			if (ship.getNodeType() == Node.ELEMENT_NODE) {
-
-				// We use this conversion, this way, we can use getAttribute() and getElementsByTagName()
-				Element elt = (Element) ship;
-				
-				// Put elements to the ships_size hashmap
-				ships_size.put(elt.getNodeName(), Arrays.asList( new Integer(Integer.parseInt(elt.getAttribute("size"))), 
-																 new Integer(Integer.parseInt(elt.getTextContent() ))));		
-				
-				// TODO : Save the number of time we can use one ship
-				
-				/* System.out.println("There is " + elt.getFirstChild().getNodeValue() + " " + 
-									elt.getAttribute("size") + "-length ship of type " +
-									elt.getNodeName());
-				*/
-				
-			}
-		}
-		
-		return ships_size;
+		return new Type(this.getNbShipsType(), ships);
 	}
-
 }

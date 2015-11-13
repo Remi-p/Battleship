@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import exceptions.ShipOutOfBoundsException;
 import fr.enseirb.battleship.Ship;
+import fr.enseirb.battleship.Type;
 
 public class XmlParserShips extends XmlParser {
 
@@ -26,7 +27,7 @@ public class XmlParserShips extends XmlParser {
 		this.ships = ships_node.getChildNodes();
 	}
 	
-	public Ship[] getShips(HashMap<String, List<Integer>> ships_size, int height, int width) throws ShipOutOfBoundsException{
+	public Ship[] getShips(Type ships_type, int height, int width) throws ShipOutOfBoundsException{
 		
 		// Boat array initializing
 		Ship[] ships_array = new Ship[(this.ships.getLength()-1)/2];	
@@ -50,17 +51,18 @@ public class XmlParserShips extends XmlParser {
 				int x = Integer.parseInt(position.getAttribute("x"));
 				int y = Integer.parseInt(position.getAttribute("y"));
 				String orientation = position.getAttribute("orientation");
-				int size = ships_size.get(elt.getAttribute("type")).get(0);
-				int max_ships = ships_size.get(elt.getAttribute("type")).get(1);
+				int size = ships_type.getSize(elt.getAttribute("type"));
+				int max_ships = ships_type.getQty(elt.getAttribute("type"));
 				
 				// Adding new Ship object in the array
 				 
 				ships_array[j] = new Ship(name, type, x, y, orientation, size, height, width);
 				j++ ; // incr of ships_array index	
 				
-				System.out.println("Player has one " + size + "-length " + type +
-								   " named " + name + " at position (" + x + "," + y + "), " +
-								   orientation + "-oriented, over " + max_ships + " maximum.");
+				if (Constant.VERBOSE)
+					System.out.println("Player has one " + size + "-length " + type +
+									   " named " + name + " at position (" + x + "," + y + "), " +
+									   orientation + "-oriented, over " + max_ships + " maximum.");
 				
 			}
 		}

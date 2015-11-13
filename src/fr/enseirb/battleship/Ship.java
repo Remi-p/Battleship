@@ -4,7 +4,7 @@ import exceptions.ShipOutOfBoundsException;
 
 public class Ship {
 	private String name;
-	private Type type;
+	private String type;
 	private int x;
 	private int y;
 	private Orientation orientation;
@@ -18,9 +18,8 @@ public class Ship {
 		
 		this.name = name;
 		this.size = size;
-		setType(type);
+		this.type = type;
 		setOrientation(orientation);
-		setType(type);
 		
 		if( x < 0 || y < 0 || x > width_grid || y > height_grid ) {
 			throw new ShipOutOfBoundsException(x, y, name);
@@ -42,24 +41,6 @@ public class Ship {
 
 
 	// SETTERS
-	public void setType(String type) {
-		
-		if("battleship".compareTo(type) == 0) {
-			this.type = Type.BATTLESHIP;
-		}
-		else if("submarine".compareTo(type) == 0) {
-			this.type = Type.SUBMARINE;
-		}
-		else if("destroyer".compareTo(type) == 0) {
-			this.type = Type.DESTROYER;
-		}
-		else if("patrol-boat".compareTo(type) == 0) {
-			this.type = Type.PATROL_BOARD;
-		}
-		else if("aircraft-carrier".compareTo(type) == 0) {
-			this.type = Type.AIRCRAFT_CARRIER;
-		}
-	}
 	
 	public void setOrientation(String orientation) {
 		
@@ -79,7 +60,7 @@ public class Ship {
 		return this.name;
 	}
 	
-	public Type getType() {
+	public String getType() {
 		return this.type;
 	}
 	
