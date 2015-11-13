@@ -15,7 +15,11 @@ public class XmlParserShips extends XmlParser {
 	private NodeList ships;
 	
 	public XmlParserShips(String configs_path) {
-		super(configs_path, "ships.xml");
+		this(configs_path, "ships.xml");
+	}
+	
+	public XmlParserShips(String configs_path, String xmlfilename) {
+		super(configs_path, xmlfilename);
 		
 		// NodeList initializing
 		Node ships_node = this.document.getElementsByTagName("ships").item(0);

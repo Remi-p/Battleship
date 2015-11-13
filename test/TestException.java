@@ -2,6 +2,7 @@ import org.junit.Test;
 
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
+import exceptions.ShipOverlapException;
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Ship;
 
@@ -27,10 +28,15 @@ public class TestException {
 		new Grid(8, 11);
 	}
 
-//  Comment faire quand cela dépend des informations de ships.xml ?
-//	@Test(expected=ShipOverlapException.class)
-//	public void testGridMin() throws InvalidGridException {
-//		new Grid(8, 11);
-//	}
+	@Test(expected=InvalidGridException.class)
+	public void testGridTooMuchShips() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+		new Grid("configs/", "grid_too_much_ships.xml", "ships.xml");
+	}
+
+	// TODO : Vérifier le bon fonctionnement. Here it seems like it works only when first coordinates are equals
+	@Test(expected=ShipOverlapException.class)
+	public void testGridShipsOverlap() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+		new Grid("configs/", "grid.xml", "ships_overlap.xml");
+	}
 	
 }

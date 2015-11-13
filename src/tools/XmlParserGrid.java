@@ -19,9 +19,13 @@ public class XmlParserGrid extends XmlParser {
 	private final static XPath xpath = XPathFactory.newInstance().newXPath();
 	private XPathExpression xpr_vert;
 	private XPathExpression xpr_hor;
-	
+
 	public XmlParserGrid(String configs_path) {
-		super(configs_path, "grid.xml");
+		this(configs_path, "grid.xml");
+	}
+	
+	public XmlParserGrid(String configs_path, String gridname) {
+		super(configs_path, gridname);
 		
 		// Initialising XPath for dimensions
 		try {
