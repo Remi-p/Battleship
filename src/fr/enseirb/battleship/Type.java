@@ -55,7 +55,9 @@ public class Type {
 			
 			// We check if we really are in a node
 			if (ship.getNodeType() == Node.ELEMENT_NODE) {
-
+				
+				
+				
 				// TODO : Quand on enleve cette ligne, le verbose de 'name' ne s'affiche pas
 				System.out.println(name + " ??");
 				
@@ -69,10 +71,14 @@ public class Type {
 				
 				System.out.println("arr_pos = "+arr_pos);
 				
+				TypeElt single_type = new TypeElt(name, Integer.parseInt(elt.getAttribute("size")), Integer.parseInt(elt.getTextContent()));
+				
+				types[arr_pos] = single_type;
+				
 				// Put elements in the array
-				types[arr_pos].type = name; // TODO : Java NullPointer ?!
-				types[arr_pos].size = Integer.parseInt(elt.getAttribute("size"));
-				types[arr_pos].quantity = Integer.parseInt(elt.getTextContent());		
+				// types[arr_pos].type = name; // TODO : Java NullPointer ?!
+				// types[arr_pos].size = Integer.parseInt(elt.getAttribute("size"));
+				// types[arr_pos].quantity = Integer.parseInt(elt.getTextContent());		
 				
 				arr_pos++;
 				
@@ -111,4 +117,10 @@ class TypeElt {
 	public String type;
 	public int size;
 	public int quantity;
+	
+	TypeElt( String type, int size, int quantity) {
+		this.type = type;
+		this.size = size;
+		this.quantity = quantity;
+	}
 }
