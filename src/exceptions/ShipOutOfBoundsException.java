@@ -2,6 +2,11 @@ package exceptions;
 
 public class ShipOutOfBoundsException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public ShipOutOfBoundsException(int x, int y, String name) {
 		
 		System.out.println("One or both of " + name + " coordinates are out of bounds");

@@ -1,22 +1,10 @@
 package fr.enseirb.battleship;
 
-import java.util.Arrays;
-import java.util.Iterator;
-
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import tools.Constant;
-
-/*
-public enum Type {
-	BATTLESHIP,
-	PATROL_BOARD,
-	SUBMARINE,
-	DESTROYER,
-	AIRCRAFT_CARRIER;
-} */
+import tools.Config;
 
 public class Type {
 	private TypeElt[] types;
@@ -64,7 +52,7 @@ public class Type {
 				// We use this conversion, this way, we can use getAttribute() and getElementsByTagName()
 				Element elt = (Element) ship;
 
-				if (Constant.VERBOSE)
+				if (Config.VERBOSE)
 					System.out.println("There is " + elt.getFirstChild().getNodeValue() + " " + 
 										elt.getAttribute("size") + "-length ship of type " +
 										name);
@@ -111,7 +99,7 @@ public class Type {
 	}
 }
 
-// TOASK : Deux classes, ok ?
+// Declaring this class here, because it's only used in that file
 class TypeElt {
 	
 	public String type;

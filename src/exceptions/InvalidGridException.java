@@ -2,6 +2,11 @@ package exceptions;
 
 public class InvalidGridException extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public InvalidGridException(double occupation) {
 		System.out.println("Ships has to take less than 20% of total number of cases.");
 		System.out.println("\tCurrently : " + occupation*100 + "%");

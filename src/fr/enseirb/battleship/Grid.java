@@ -1,16 +1,12 @@
 package fr.enseirb.battleship;
 
-import exceptions.InvalidGridException;
-import exceptions.ShipOutOfBoundsException;
-import exceptions.ShipOverlapException;
-import tools.Constant;
+import tools.Config;
 import tools.Coordinates;
 import tools.XmlParserGrid;
 import tools.XmlParserShips;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import exceptions.InvalidGridException;
+import exceptions.ShipOutOfBoundsException;
+import exceptions.ShipOverlapException;
 
 
 public class Grid {
@@ -19,7 +15,7 @@ public class Grid {
 	private Ship[] ships;
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		this(Constant.CONFIGS);
+		this(Config.CONFIGS);
 	}
 	
 	// This constructor is mainly here for test purpose
@@ -28,7 +24,7 @@ public class Grid {
 	}
 	
 	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		this(configs_path, Constant.GRID, Constant.SHIPS);
+		this(configs_path, Config.GRID, Config.SHIPS);
 	}
 
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
@@ -83,6 +79,7 @@ public class Grid {
 		
 		int x, y, size;
 		int index = 0;
+		
 		// Coordinates array initializing
 		Coordinates[] coordinates = new Coordinates[ships_type.getGridOccupation()]; 
 		

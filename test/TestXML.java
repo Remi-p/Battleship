@@ -1,4 +1,4 @@
-import tools.Constant;
+import tools.Config;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
@@ -12,7 +12,7 @@ public class TestXML {
 		
 		//Grid grid = new Grid(Constant.CONFIGS, "grid_too_much_ships.xml", Constant.SHIPS);
 		
-		new Grid(Constant.CONFIGS, Constant.GRID, "ships_overlap.xml");
+		new Grid(Config.CONFIGS, Config.GRID, "ships_overlap.xml");
 		/*
 		try {
 		Grid grid = new Grid();

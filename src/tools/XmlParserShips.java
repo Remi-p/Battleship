@@ -1,8 +1,5 @@
 package tools;
 
-import java.util.HashMap;
-import java.util.List;
-
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -59,7 +56,7 @@ public class XmlParserShips extends XmlParser {
 				ships_array[j] = new Ship(name, type, x, y, orientation, size, height, width);
 				j++ ; // incr of ships_array index	
 				
-				if (Constant.VERBOSE)
+				if (Config.VERBOSE)
 					System.out.println("Player has one " + size + "-length " + type +
 									   " named " + name + " at position (" + x + "," + y + "), " +
 									   orientation + "-oriented, over " + max_ships + " maximum.");
