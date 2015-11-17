@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import exceptions.ShipOutOfBoundsException;
+import exceptions.*;
 import fr.enseirb.battleship.Ship;
 import fr.enseirb.battleship.Type;
 
@@ -27,7 +27,7 @@ public class XmlParserShips extends XmlParser {
 		this.ships = ships_node.getChildNodes();
 	}
 	
-	public List<Ship> getShips(Type ships_type, int height, int width) throws ShipOutOfBoundsException{
+	public List<Ship> getShips(Type ships_type, int height, int width) throws ShipOutOfBoundsException,ShipsConfigurationException{
 		
 		// Boat array initializing
 		List<Ship> ships_array = new ArrayList();
@@ -35,10 +35,13 @@ public class XmlParserShips extends XmlParser {
 		// Index of ships_array
 		int j = 0;
 		
+		int number = 0;
+		//
+		
 		for (int i = 0; i < ships.getLength(); i++) {
 
 			Node ship = ships.item(i);
-			
+			number = 0;
 			// We check if we really are in a node
 			if (ship.getNodeType() == Node.ELEMENT_NODE) {
 				
@@ -55,8 +58,17 @@ public class XmlParserShips extends XmlParser {
 				int size = ships_type.getSize(elt.getAttribute("type"));
 				int max_ships = ships_type.getQty(elt.getAttribute("type"));
 				
+				for(Ship s : ships_array){
+					if(s.getType().equals(type)){
+						number ++;
+					}
+				}
+				if(number == max_ships){
+					throw new ShipsConfigurationException();
+				}
+				
 				// Adding new Ship object in the array
-				 
+				
 				ships_array.add(new Ship(name, type, x, y, orientation, size, height, width));
 				j++ ; // incr of ships_array index	
 				

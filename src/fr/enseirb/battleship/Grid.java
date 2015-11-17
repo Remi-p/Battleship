@@ -12,6 +12,8 @@ import tools.XmlParserShips;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
+import exceptions.ShipsConfigurationException;
+
 
 
 public class Grid {
@@ -19,7 +21,7 @@ public class Grid {
 	private int width;
 	private List<Ship> ships;
 
-	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
 	}
 	
@@ -28,11 +30,11 @@ public class Grid {
 		this.setDim(height, width);
 	}
 	
-	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public Grid(String configs_path) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(configs_path, Config.GRID, Config.SHIPS);
 	}
 
-	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException , ShipsConfigurationException {
 		super();
 		
 		// --------------- grid.xml
@@ -62,12 +64,12 @@ public class Grid {
 			if(shipGridOverLap(ships, ships_type) == false) {
 				throw new ShipOverlapException();
 			}
-			else {
+			else{
 				this.ships = ships;
+			
 			}
 		}
-	}
-	
+	}	
 	private void setDim(int height, int width) throws InvalidGridException {
 
 		// Minimum of 10*10 grid, else InvalidGridException

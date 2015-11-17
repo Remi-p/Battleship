@@ -77,20 +77,6 @@ public class XmlParserGrid extends XmlParser {
 		return new int[] {height, width};
 	}
 	
-	// Was used for initializing an array, in the past
-	private int getNbShipsType() {
-		
-		int nb = 0;
-		
-		// See getShips for commentary
-		NodeList ships = this.document.getElementsByTagName("ships").item(0).getChildNodes();
-		
-		for (int i = 0; i < ships.getLength(); i++)
-			if (ships.item(i).getNodeType() == Node.ELEMENT_NODE)
-				nb++;
-		
-		return nb;
-	}
 	
 	public Type getShips() {
 

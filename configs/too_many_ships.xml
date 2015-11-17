@@ -6,5 +6,8 @@
 	<ship type="destroyer" id="Titanic">
 		<position x="10" y="0" orientation="vertical"/>
 	</ship>
+	<ship type="destroyer" id="Titanic2">
+		<position x="10" y="5" orientation="vertical"/>
+	</ship>
 	
 </ships>

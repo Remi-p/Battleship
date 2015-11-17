@@ -4,6 +4,7 @@ import tools.Config;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
+import exceptions.ShipsConfigurationException;
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Ship;
 
@@ -30,19 +31,24 @@ public class TestException {
 	}
 
 	@Test(expected=InvalidGridException.class)
-	public void testGridTooMuchShips() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public void testGridTooMuchShips() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		new Grid(Config.CONFIGS, "grid_too_much_ships.xml", Config.SHIPS);
 	}
 
 	@Test(expected=ShipOverlapException.class)
-	public void testGridShipsOverlap() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public void testGridShipsOverlap() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		new Grid(Config.CONFIGS, Config.GRID, "ships_overlap.xml");
 	}
 	
 	// Testing with different coordinates
 	@Test(expected=ShipOverlapException.class)
-	public void testGridShipsOverlapDifferents() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
+	public void testGridShipsOverlapDifferents() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		new Grid(Config.CONFIGS, Config.GRID, "ships_overlap_diff.xml");
+	}
+	
+	@Test(expected=ShipsConfigurationException.class)
+	public void testGridTooManyShips() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
+		new Grid(Config.CONFIGS, Config.GRID, "too_many_ships.xml");
 	}
 	
 }

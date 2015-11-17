@@ -76,8 +76,14 @@ public class Type {
 		// Error :
 		return -1;
 	}
-}
 
+
+//Getter 
+
+	public List<TypeElt> getListTypeElt(){
+		return this.types;
+	}	
+}
 // Declaring this class here, because it's only used in that file
 class TypeElt {
 	
