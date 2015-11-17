@@ -79,4 +79,19 @@ public class Ship {
 	public int getSize() {
 		return this.size;
 	}
+
+	public boolean isHorizontal() {
+		if(this.orientation == Orientation.HORIZONTAL)
+			return true;
+		else
+			return false;
+	}
+
+	// Not really useful (!isHorizontal)
+	public boolean isVertical() {
+		if(this.orientation == Orientation.VERTICAL)
+			return true;
+		else
+			return false;
+	}
 }

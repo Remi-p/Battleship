@@ -53,7 +53,8 @@ public class Grid {
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
 		List<Ship> ships = ships_xml.getShips(ships_type, height, width);
 
-		System.out.println("Occupation : "+ships_type.getGridOccupation());
+		if (Config.VERBOSE)
+			System.out.println("Occupation : "+ships_type.getGridOccupation());
 		
 		double occupation = (double) ships_type.getGridOccupation() / ((double)height  *(double)width); 
 		// Ships has to take less than 20% of total number of cases, else InvalidGridException
@@ -130,6 +131,10 @@ public class Grid {
 	
 	public int getWidth() {
 		return this.width;
+	}
+
+	public List<Ship> getShips() {
+		return ships;
 	}
 	
 }

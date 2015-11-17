@@ -63,7 +63,12 @@ public class Type {
 	}
 	
 	public int getSize(String type) {
-		return types.size();
+		for	(TypeElt elt : this.types)
+			if (elt.isType(type))
+				return elt.getSize();
+		
+		// Error
+		return -1;
 	}
 
 	public int getQty(String type) {
@@ -101,6 +106,13 @@ class TypeElt {
 
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	public boolean isType(String type) {
+		if (type.compareTo(this.type) == 0)
+			return true;
+		else
+			return false;
 	}
 
 	TypeElt( String type, int size, int quantity) {
