@@ -79,7 +79,7 @@ public class Grid {
 	}
 	
 	// Ships features extraction from ships.xml
-	private void ships_extract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException{
+	private void ships_extract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException, ShipsConfigurationException{
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
 		List<Ship> ships = ships_xml.getShips(ships_type, height, width);

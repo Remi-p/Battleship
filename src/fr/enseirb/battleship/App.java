@@ -1,7 +1,7 @@
 package fr.enseirb.battleship;
 
-import java.io.FileWriter;
 
+import java.io.*;
 import tools.Config;
 import tools.SvgWriter;
 
@@ -14,6 +14,7 @@ public class App {
 		
 		//Player human = new Human();
 		//Player ia = new IA();
+		String input;
 		
 		Config.setVerbose(true);
 		
@@ -24,6 +25,24 @@ public class App {
 		if ("debug".compareTo(args[0]) == 0) {
 			writer.debugGrid(new FileWriter("debug.svg"), grid);
 		}
+		
+		do{
+			input = "";
+			char C='\0'; 
+			try {
+				while ((C=(char) System.in.read()) !='\n'){
+					if (C != '\r')  input = input+C;
+				}
+			}     
+			catch (IOException e){
+			          System.out.println("Error inputing command");
+	        } 
+			
+			
+			
+			
+		}while(true);
 	}
+	
 
 }
