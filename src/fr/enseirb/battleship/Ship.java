@@ -39,9 +39,7 @@ public class Ship {
 		}
 	}
 
-
 	// SETTERS
-	
 	public void setOrientation(String orientation) {
 		
 		if("horizontal".compareTo(orientation) == 0) {

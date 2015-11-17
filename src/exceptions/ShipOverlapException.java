@@ -1,11 +1,7 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class ShipOverlapException extends Exception {
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 	public ShipOverlapException() {
 		

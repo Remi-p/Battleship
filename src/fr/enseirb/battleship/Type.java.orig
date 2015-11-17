@@ -81,9 +81,50 @@ public class Type {
 		// Error :
 		return -1;
 	}
+<<<<<<< Updated upstream
+
+
+//Getter 
+
+	public List<TypeElt> getListTypeElt(){
+		return this.types;
+	}	
+}
+// Declaring this class here, because it's only used in that file
+class TypeElt {
+	
+	private String type;
+	private int size;
+	private int quantity;
+	
+	public String getType() {
+		return type;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+	
+	public boolean isType(String type) {
+		if (type.compareTo(this.type) == 0)
+			return true;
+		else
+			return false;
+	}
+
+	TypeElt( String type, int size, int quantity) {
+		this.type = type;
+		this.size = size;
+		this.quantity = quantity;
+=======
 	
 	//GETTER
 	public List<TypeElt> getListType() {
 		return this.types;
+>>>>>>> Stashed changes
 	}
 }

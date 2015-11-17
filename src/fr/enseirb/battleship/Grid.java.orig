@@ -65,7 +65,7 @@ public class Grid {
 	private Type configs_extract(String configs_path, String gridfilename) throws InvalidGridException {
 		// --------------- grid.xml
 		XmlParserGrid grid = new XmlParserGrid(configs_path, gridfilename);
-		
+				
 		// Dimensions
 		int height = grid.getDimHorizontal();
 		int width = grid.getDimVertical();
@@ -102,8 +102,15 @@ public class Grid {
 			
 			}
 		}
+<<<<<<< Updated upstream
+	}	
+=======
 	}
 	
+	
+	
+	
+>>>>>>> Stashed changes
 	private void setDim(int height, int width) throws InvalidGridException {
 
 		// Minimum of 10*10 grid, else InvalidGridException
