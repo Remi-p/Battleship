@@ -9,35 +9,18 @@ import tools.Config;
 
 public class IA extends Player{
 	
-	public IA() {
+	public IA() throws InvalidGridException {
 		this("Jarvis");
 	}
 	
-	public IA(String name) {
+	public IA(String name) throws InvalidGridException {
 		super(name);
 		this.grid = InitialisationGrid();
 	}
 	
-	private Grid InitialisationGrid() {
+	private Grid InitialisationGrid() throws InvalidGridException {
 		
-		Grid grid = null;
-		List<Ship> ships = null;
-		
-		try {
-
-			grid = new Grid(Config.CONFIGS, Config.GRID);
-			
-
-		} catch (InvalidGridException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ShipOutOfBoundsException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ShipOverlapException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		this.grid = new Grid(Config.CONFIGS, Config.GRID);
 		
 		return grid;
 	}

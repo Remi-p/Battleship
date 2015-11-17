@@ -9,5 +9,9 @@ public abstract class Player {
 		this.name = name;
 		this.score = 0;
 	}
+
+	public Grid getGrid() {
+		return grid;
+	}
 	
 }

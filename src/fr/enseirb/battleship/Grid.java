@@ -35,29 +35,19 @@ public class Grid {
 	}
 
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException , ShipsConfigurationException {
-		super();
-		
 		Type ships_type = configs_extract(configs_path, gridfilename);
 		ships_extract(configs_path, shipfilename, ships_type);
 	}
 	
 	// Constructor for IA
-	public Grid(String configs_path, String gridfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
-		super();
+	public Grid(String configs_path, String gridfilename) throws InvalidGridException {
 		
-		Type ships_type = configs_extract(configs_path, gridfilename);
+		// We do not throws errors about boats here, but we check them
+		
+		Type ships_type;
+		ships_type = configs_extract(configs_path, gridfilename);
+			
 		this.ships = random_ships(this.height, this.width, ships_type);
-		
-		double occupation = (double) ships_type.getGridOccupation() / ((double)height  *(double)width); 
-		// Ships has to take less than 20% of total number of cases, else InvalidGridException
-		if (occupation > 0.2) {
-			throw new InvalidGridException(occupation);
-		}
-		else {
-			if(shipGridOverLap(this.ships, ships_type) == false) {
-				throw new ShipOverlapException();
-			}
-		}
 		
 	}
 	
@@ -79,7 +69,7 @@ public class Grid {
 	}
 	
 	// Ships features extraction from ships.xml
-	private void ships_extract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException{
+	private void ships_extract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException, ShipsConfigurationException{
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
 		List<Ship> ships = ships_xml.getShips(ships_type, height, width);
@@ -134,7 +124,14 @@ public class Grid {
 					orientation = "vertical";
 				
 				try {
-					ships.add(new Ship("osef", e.getType(), x, y, orientation, e.getSize(), height, width ));
+					Ship ship = new Ship("osef", e.getType(), x, y, orientation, e.getSize(), height, width );
+					
+					// There is an overlapping problem
+					if (Grid.shipOverlapShips(ships, ships_type, ship))
+						i--;
+					else
+						ships.add(ship);
+					
 				} catch (ShipOutOfBoundsException e1) {
 					i--;
 				}
@@ -146,11 +143,9 @@ public class Grid {
 		
 	}
 	
-	// Check if overlap ships exists
-	private boolean shipGridOverLap(Collection<Ship> ships, Type ships_type) {
+	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships) {
 		
 		int x, y, size;
-		
 		// We will store all the ships coordinates
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		
@@ -175,6 +170,39 @@ public class Grid {
 				}
 			}
 		}
+		
+		return coordinates;
+	}
+	
+	// Check if a particular ship overlaps the others
+	private static boolean shipOverlapShips(Collection<Ship> ships, Type ships_type, Ship ship) {
+		
+		List<Coordinates> coordinates = getShipsCoordinates(ships);
+		
+		// Comparison between each coordinates from the ship
+		for(int j = 0; j < ship.getSize(); j++) {
+
+			switch(ship.getOrientation()) {
+	            case HORIZONTAL:
+	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX() + j, ship.getY())) > 0)
+	            		return true;
+	                break;
+
+	            case VERTICAL: 
+	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX(), ship.getY() + j)) > 0)
+	            		return true;
+	                break;
+			}
+		}
+		
+		// TODO Change output to true, sémantique
+		return false; // No overlapping
+	}
+	
+	// Check if overlap ships exists
+	private boolean shipGridOverLap(Collection<Ship> ships, Type ships_type) {
+		
+		List<Coordinates> coordinates = getShipsCoordinates(ships);
 		
 		// Comparison between each coordinates from the array
 		for (Coordinates c : coordinates) {
