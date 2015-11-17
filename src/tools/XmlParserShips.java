@@ -1,5 +1,8 @@
 package tools;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -24,10 +27,11 @@ public class XmlParserShips extends XmlParser {
 		this.ships = ships_node.getChildNodes();
 	}
 	
-	public Ship[] getShips(Type ships_type, int height, int width) throws ShipOutOfBoundsException{
+	public List<Ship> getShips(Type ships_type, int height, int width) throws ShipOutOfBoundsException{
 		
 		// Boat array initializing
-		Ship[] ships_array = new Ship[(this.ships.getLength()-1)/2];	
+		List<Ship> ships_array = new ArrayList();
+		
 		// Index of ships_array
 		int j = 0;
 		
@@ -53,7 +57,7 @@ public class XmlParserShips extends XmlParser {
 				
 				// Adding new Ship object in the array
 				 
-				ships_array[j] = new Ship(name, type, x, y, orientation, size, height, width);
+				ships_array.add(new Ship(name, type, x, y, orientation, size, height, width));
 				j++ ; // incr of ships_array index	
 				
 				if (Config.VERBOSE)

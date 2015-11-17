@@ -1,5 +1,10 @@
 package fr.enseirb.battleship;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import tools.Config;
 import tools.Coordinates;
 import tools.XmlParserGrid;
@@ -12,7 +17,7 @@ import exceptions.ShipOverlapException;
 public class Grid {
 	private int height;
 	private int width;
-	private Ship[] ships;
+	private List<Ship> ships;
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
 		this(Config.CONFIGS);
@@ -44,7 +49,7 @@ public class Grid {
 
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
-		Ship[] ships = ships_xml.getShips(ships_type, height, width);
+		List<Ship> ships = ships_xml.getShips(ships_type, height, width);
 
 		System.out.println("Occupation : "+ships_type.getGridOccupation());
 		
@@ -75,47 +80,40 @@ public class Grid {
 	}
 	
 	// Check if overlap ships exists
-	private boolean shipGridOverLap(Ship[] ships, Type ships_type) {
+	private boolean shipGridOverLap(Collection<Ship> ships, Type ships_type) {
 		
 		int x, y, size;
-		int index = 0;
 		
-		// Coordinates array initializing
-		Coordinates[] coordinates = new Coordinates[ships_type.getGridOccupation()]; 
+		// We will store all the ships coordinates
+		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		
 		// Store all coordinates in the Coordinates[]
-		for (int i = 0; i < ships.length; i++) {
+		for (Ship boat : ships) {
 			
-			size = ships[i].getSize();
-			Orientation orientation = ships[i].getOrientation();
-			x = ships[i].getX();
-			y = ships[i].getY();
+			size = boat.getSize();
+			Orientation orientation = boat.getOrientation();
+			x = boat.getX();
+			y = boat.getY();
 			
 			for(int j = 0; j < size; j++) {
 
 				switch(orientation) {
 		            case HORIZONTAL: 
-		            	coordinates[index] = new Coordinates(x + j,y);
+		            	coordinates.add(new Coordinates(x + j, y));
 		                break;
 	
 		            case VERTICAL: 
-		            	coordinates[index] = new Coordinates(x,y + j);
+		            	coordinates.add(new Coordinates(x, y + j));
 		                break;
 				}
-				index++;
 			}
 		}
 		
 		// Comparison between each coordinates from the array
-		for (int k = 0; k < coordinates.length; k++) {
-			
-			for(int l = k + 1; l < coordinates.length ; l++ ) {
-					
-				if(coordinates[k].getX() == coordinates[l].getX() 
-				   && coordinates[k].getY() == coordinates[l].getY() ) {
-					return false; // Overlapping
-				}
-			}	
+		for (Coordinates c : coordinates) {
+			if (Collections.frequency(coordinates, c) > 1)
+				// Overlapping
+				return false;
 		}
 		
 		return true; // No overlapping

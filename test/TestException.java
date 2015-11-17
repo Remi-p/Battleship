@@ -39,7 +39,7 @@ public class TestException {
 		new Grid(Config.CONFIGS, Config.GRID, "ships_overlap.xml");
 	}
 	
-	// Testing with differents coordinates
+	// Testing with different coordinates
 	@Test(expected=ShipOverlapException.class)
 	public void testGridShipsOverlapDifferents() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException {
 		new Grid(Config.CONFIGS, Config.GRID, "ships_overlap_diff.xml");
