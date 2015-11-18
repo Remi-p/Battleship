@@ -5,6 +5,7 @@ import java.util.List;
 import exceptions.InvalidGridException;
 import exceptions.ShipOutOfBoundsException;
 import exceptions.ShipOverlapException;
+import exceptions.ShipsConfigurationException;
 import tools.Config;
 
 public class IA extends Player{

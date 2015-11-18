@@ -2,6 +2,7 @@ package fr.enseirb.battleship;
 
 public abstract class Player {
 	protected String name;
+
 	protected int score;
 	Grid grid;
 	
@@ -12,6 +13,10 @@ public abstract class Player {
 
 	public Grid getGrid() {
 		return grid;
+	}
+	
+	public String getName() {
+		return name;
 	}
 	
 }

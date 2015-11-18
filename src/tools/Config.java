@@ -10,9 +10,6 @@ public class Config {
 	public final static String SHIPS = "ships.xml";
 	public final static String CONFIGS = "configs/";
 	
-	public final static int CELL_DIM = 40;
-	public final static int STROKE_WIDTH = 2;
-	
 	public static boolean VERBOSE = false;
 	
 	// Private constructor : disallow creating instance

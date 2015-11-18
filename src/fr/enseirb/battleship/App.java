@@ -2,6 +2,7 @@ package fr.enseirb.battleship;
 
 
 import java.io.*;
+
 import tools.Config;
 import tools.SvgWriter;
 
@@ -9,22 +10,29 @@ import tools.SvgWriter;
 public class App {
 
 	public static void main(String[] args) throws Exception {
-		if (args.length != 3)
-			throw new Exception("Nombre d'arguments invalides");
-		
-		//Player human = new Human();
-		//Player ia = new IA();
-		String input;
 		
 		Config.setVerbose(true);
 		
-		Grid grid = new Grid(Config.CONFIGS, args[1], args[2]);
-
-		SvgWriter writer = new SvgWriter(grid.getWidth(), grid.getHeight());
+		if (args.length != 3)
+			throw new Exception("Incorrect number of arguments.");
 		
+		// Creating players objects
+		Player human = new Human("Anonymous", args[1], args[2]);
+		Player ia = new IA();
+		
+		// We get the dimensions of grids
+		int width = human.getGrid().getWidth();
+		int height = human.getGrid().getHeight();
+		
+		// Object for writing svg debug file
+		SvgWriter writer = new SvgWriter(width, height);
+
 		if ("debug".compareTo(args[0]) == 0) {
-			writer.debugGrid(new FileWriter("debug.svg"), grid);
+			writer.debugGrids(new FileWriter("debug.svg"), human, ia);
 		}
+		
+		
+		String input;
 		
 		do{
 			input = "";
