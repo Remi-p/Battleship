@@ -20,6 +20,7 @@ public class Grid {
 	private int height;
 	private int width;
 	private List<Ship> ships;
+	private List<String> shipnames;
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
@@ -47,6 +48,8 @@ public class Grid {
 		Type ships_type;
 		ships_type = configs_extract(configs_path, gridfilename);
 			
+		this.shipnames = ShipsNameInitialisation();
+		
 		this.ships = random_ships(this.height, this.width, ships_type);
 		
 	}
@@ -124,7 +127,7 @@ public class Grid {
 					orientation = "vertical";
 				
 				try {
-					Ship ship = new Ship("osef", e.getType(), x, y, orientation, e.getSize(), height, width );
+					Ship ship = new Ship(random_shipname(this.shipnames), e.getType(), x, y, orientation, e.getSize(), height, width );
 					
 					// There is an overlapping problem
 					if (Grid.shipOverlapShips(ships, ships_type, ship))
@@ -141,6 +144,35 @@ public class Grid {
 		}
 		return ships;
 		
+	}
+	
+	private List<String> ShipsNameInitialisation() {
+		List<String> shipNames = new ArrayList<String>();
+		
+		shipNames.add("USS Enterprise");
+		shipNames.add("Destinée");
+		shipNames.add("O'Neill");
+		shipNames.add("Faucon Millenium");
+		shipNames.add("Battlestar Galactica");
+		shipNames.add("Tardis");
+		shipNames.add("Planet Express");
+		shipNames.add("Serenity");
+		shipNames.add("Voyager 1");
+		shipNames.add("Destroyeur Stellaire");
+		
+		return shipNames;
+	}
+	
+	public String random_shipname(List<String> names) {
+		String name = new String();
+		int index = (int)(Math.random() * (names.size() -1)) + 0;
+		name = names.get(index);
+		ShipsNamesDelete(names, index);
+		return name;
+	}
+	
+	public void ShipsNamesDelete(List<String> shipnames, int index) {
+		shipnames.remove(index);
 	}
 	
 	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships) {
