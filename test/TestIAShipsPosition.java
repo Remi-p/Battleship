@@ -1,12 +1,12 @@
 import java.io.FileWriter;
 import java.io.IOException;
 
-import tools.Config;
-import tools.SvgWriter;
-import exceptions.InvalidGridException;
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.IA;
 import fr.enseirb.battleship.Player;
+import fr.enseirb.battleship.exceptions.InvalidGridException;
+import fr.enseirb.battleship.tools.Config;
+import fr.enseirb.battleship.tools.SvgWriter;
 
 
 public class TestIAShipsPosition {

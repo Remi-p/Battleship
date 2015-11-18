@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-	<ships>
-	<ship type="battleship" id="K-19">
-		<position x="1" y="3" orientation="horizontal"/>
+<ships>
+	<ship type="battleship" id="Hermione">
+		<position x="6" y="2" orientation="vertical"/>
+	</ship>
+	<ship type="submarine" id="K-19">
+		<position x="0" y="0" orientation="horizontal"/>
 	</ship>
 	<ship type="destroyer" id="Titanic">
-		<position x="2" y="4" orientation="vertical"/>
+		<position x="0" y="2" orientation="vertical"/>
 	</ship>
-	<ship type="patrol-boat" id="GLaDOS">
-		<position x="6" y="5" orientation="vertical"/>
+	<ship type="patrol-boat" id="Belem">
+		<position x="2" y="2" orientation="vertical"/>
 	</ship>
-	
+	<ship type="aircraft-carrier" id="Charles de Gaulle">
+		<position x="4" y="2" orientation="vertical"/>
+	</ship>
 </ships>

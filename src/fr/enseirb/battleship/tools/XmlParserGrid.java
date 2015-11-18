@@ -1,4 +1,4 @@
-package tools;
+package fr.enseirb.battleship.tools;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -8,7 +8,7 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import fr.enseirb.battleship.Type;
+import fr.enseirb.battleship.elements.Type;
 
 // We're using both xpath and nodelist for that
 public class XmlParserGrid extends XmlParser {

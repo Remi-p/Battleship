@@ -1,4 +1,4 @@
-package exceptions;
+package fr.enseirb.battleship.exceptions;
 
 @SuppressWarnings("serial")
 public class ShipOutOfBoundsException extends Exception {
@@ -11,7 +11,8 @@ public class ShipOutOfBoundsException extends Exception {
 
 	public ShipOutOfBoundsException(String name) {
 		
-		System.out.println("The boat " + name + " exceeds the grid");
+		// TODO : find a way that this warning does not come in commandline when initializing IA boats
+		//System.out.println("The boat " + name + " exceeds the grid");
 	}
 
 }

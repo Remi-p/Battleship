@@ -1,4 +1,4 @@
-package fr.enseirb.battleship;
+package fr.enseirb.battleship.elements;
 
 public class Fire {
 	int x, y;

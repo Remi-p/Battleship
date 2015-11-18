@@ -1,4 +1,4 @@
-package fr.enseirb.battleship;
+package fr.enseirb.battleship.tools;
 
 import java.io.IOException;
 

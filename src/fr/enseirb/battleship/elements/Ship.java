@@ -1,6 +1,6 @@
-package fr.enseirb.battleship;
+package fr.enseirb.battleship.elements;
 
-import exceptions.ShipOutOfBoundsException;
+import fr.enseirb.battleship.exceptions.ShipOutOfBoundsException;
 
 public class Ship {
 	private String name;

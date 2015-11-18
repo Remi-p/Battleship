@@ -1,11 +1,11 @@
-package tools;
+package fr.enseirb.battleship.tools;
 
 import java.io.IOException;
 import java.io.Writer;
 
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Player;
-import fr.enseirb.battleship.Ship;
+import fr.enseirb.battleship.elements.Ship;
 
 // http://www.labri.fr/perso/falleri/dist/ens/pg220/tps/tp2/tp2_src.zip
 
@@ -44,8 +44,8 @@ public class SvgWriter {
 		this.space = SvgWriter.SPACE;
 		this.header = SvgWriter.HEADER;
 		
-		this.img_height = (height+1) * cell;
-		this.img_width = (width+1) * cell;
+		this.img_height = (this.width+1) * cell;
+		this.img_width = (this.height+1) * cell;
 	};
 
 	public void createGrid(Writer w) throws IOException {

@@ -1,4 +1,4 @@
-package tools;
+package fr.enseirb.battleship.elements;
 
 public class Coordinates {
 	int x;

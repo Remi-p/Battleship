@@ -1,9 +1,9 @@
-import tools.Config;
-import exceptions.InvalidGridException;
-import exceptions.ShipOutOfBoundsException;
-import exceptions.ShipOverlapException;
-import exceptions.ShipsConfigurationException;
 import fr.enseirb.battleship.Grid;
+import fr.enseirb.battleship.exceptions.InvalidGridException;
+import fr.enseirb.battleship.exceptions.ShipOutOfBoundsException;
+import fr.enseirb.battleship.exceptions.ShipOverlapException;
+import fr.enseirb.battleship.exceptions.ShipsConfigurationException;
+import fr.enseirb.battleship.tools.Config;
 
 public class TestXML {
 

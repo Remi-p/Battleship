@@ -1,4 +1,4 @@
-package exceptions;
+package fr.enseirb.battleship.exceptions;
 
 public class ShipsConfigurationException extends Exception {
 	public ShipsConfigurationException (){

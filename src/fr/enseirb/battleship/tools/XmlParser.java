@@ -1,4 +1,4 @@
-package tools;
+package fr.enseirb.battleship.tools;
 
 import java.io.File;
 

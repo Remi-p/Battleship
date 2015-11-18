@@ -1,4 +1,4 @@
-package tools;
+package fr.enseirb.battleship.tools;
 
 // 'singleton'
 // http://blog.paumard.org/2011/04/22/bilan-sur-le-pattern-singleton/

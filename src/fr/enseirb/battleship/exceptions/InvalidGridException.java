@@ -1,4 +1,4 @@
-package exceptions;
+package fr.enseirb.battleship.exceptions;
 
 @SuppressWarnings("serial")
 public class InvalidGridException extends Exception {

@@ -1,4 +1,4 @@
-package tools;
+package fr.enseirb.battleship.tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,9 +7,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import exceptions.*;
-import fr.enseirb.battleship.Ship;
-import fr.enseirb.battleship.Type;
+import fr.enseirb.battleship.elements.Ship;
+import fr.enseirb.battleship.elements.Type;
+import fr.enseirb.battleship.exceptions.*;
 
 public class XmlParserShips extends XmlParser {
 

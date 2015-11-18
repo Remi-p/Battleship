@@ -3,8 +3,8 @@ package fr.enseirb.battleship;
 
 import java.io.*;
 
-import tools.Config;
-import tools.SvgWriter;
+import fr.enseirb.battleship.tools.Config;
+import fr.enseirb.battleship.tools.SvgWriter;
 
 // Main classes
 public class App {

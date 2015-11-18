@@ -1,4 +1,4 @@
-package fr.enseirb.battleship;
+package fr.enseirb.battleship.elements;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import tools.Config;
+import fr.enseirb.battleship.tools.Config;
 
 public class Type {
 	private List<TypeElt> types;

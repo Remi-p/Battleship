@@ -5,14 +5,18 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import tools.Config;
-import tools.Coordinates;
-import tools.XmlParserGrid;
-import tools.XmlParserShips;
-import exceptions.InvalidGridException;
-import exceptions.ShipOutOfBoundsException;
-import exceptions.ShipOverlapException;
-import exceptions.ShipsConfigurationException;
+import fr.enseirb.battleship.elements.Coordinates;
+import fr.enseirb.battleship.elements.Orientation;
+import fr.enseirb.battleship.elements.Ship;
+import fr.enseirb.battleship.elements.Type;
+import fr.enseirb.battleship.elements.TypeElt;
+import fr.enseirb.battleship.exceptions.InvalidGridException;
+import fr.enseirb.battleship.exceptions.ShipOutOfBoundsException;
+import fr.enseirb.battleship.exceptions.ShipOverlapException;
+import fr.enseirb.battleship.exceptions.ShipsConfigurationException;
+import fr.enseirb.battleship.tools.Config;
+import fr.enseirb.battleship.tools.XmlParserGrid;
+import fr.enseirb.battleship.tools.XmlParserShips;
 
 
 
@@ -21,6 +25,7 @@ public class Grid {
 	private int width;
 	private List<Ship> ships;
 	private List<String> shipnames;
+	// TODO : shipnames?
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
@@ -43,7 +48,7 @@ public class Grid {
 	// Constructor for IA
 	public Grid(String configs_path, String gridfilename) throws InvalidGridException {
 		
-		// We do not throws errors about boats here, but we check them
+		// We do not throw errors about boats here, but we check them
 		
 		Type ships_type;
 		ships_type = configs_extract(configs_path, gridfilename);
