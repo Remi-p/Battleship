@@ -155,15 +155,16 @@ public class Grid {
 		List<String> shipNames = new ArrayList<String>();
 		
 		shipNames.add("USS Enterprise");
-		shipNames.add("Destinée");
+		shipNames.add("Destiny");
 		shipNames.add("O'Neill");
-		shipNames.add("Faucon Millenium");
-		shipNames.add("Battlestar Galactica");
+		shipNames.add("Millennium Falcon");
+		shipNames.add("Galactica : Battlestar");
 		shipNames.add("Tardis");
 		shipNames.add("Planet Express");
 		shipNames.add("Serenity");
 		shipNames.add("Voyager 1");
-		shipNames.add("Destroyeur Stellaire");
+		shipNames.add("Star Destroyer");
+		shipNames.add("Prometheus");
 		
 		return shipNames;
 	}

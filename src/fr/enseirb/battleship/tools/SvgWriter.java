@@ -30,9 +30,22 @@ public class SvgWriter {
 	private final static int HEADER = 50;
 	
 	private static final String line = "<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgb(0,0,0);stroke-width:%d' />\n";
-	private static final String text = "<text x='%d' y='%d' alignment-baseline='central' text-anchor='middle' font-size='%d'>%s</text>\n";
+	private static final String text = "<text x='%d' y='%d' transform='translate(0, %d) %s' alignment-baseline='central' fill='%s' text-anchor='middle' font-size='%d'>%s</text>\n";
 	private static final String boat = "<rect x='%d' y='%d' width='%d' height='%d' style='fill:rgb(0,0,0);fill-opacity:0.5;' />\n";
 
+	private void text(Writer w, int x, int y, int font_size, String text) throws IOException {
+		this.text(w, x, y, font_size, text, "", "");
+	}
+	
+	private void text(Writer w, int x, int y, int font_size, String text, int rotation) throws IOException {
+		// Rotation is made based on the origin. We need to changed pivot
+		this.text(w, x, y, font_size, text, "", "rotate(" + rotation + ", " + x + ", " + y + ")");
+	}
+	
+	private void text(Writer w, int x, int y, int font_size, String text, String color, String transform) throws IOException {
+		w.append(String.format(SvgWriter.text, x, y, font_size/2, transform, color, font_size, text));
+	}
+	
 	public SvgWriter(int width, int height) {
 		
 		this.width = width;
@@ -50,6 +63,9 @@ public class SvgWriter {
 
 	public void createGrid(Writer w) throws IOException {
 
+		// Creating a group for the background
+		w.append("<g>\n");
+		
 		// Borders
 		w.append(String.format("<rect x='%d' y='%d' width='%d' height='%d' style='fill:rgb(255,255,255);stroke-width:%d;stroke:rgb(0,0,0)' />\n", 0, 0, img_width, img_height, stroke));
 		
@@ -66,17 +82,14 @@ public class SvgWriter {
 		
 		// Numbering
 		for (int i = 0; i < width; i++) {
-			w.append(String.format(SvgWriter.text,
-					(i+1)*cell + cell/2, // x
-					cell - font_size/2, // y
-					font_size, // Font size
-					i));
-			w.append(String.format(SvgWriter.text,
-					cell/2,
-					(i+2)*cell - font_size/2,
-					font_size,
-					i));
+			// Vertical
+			this.text( w, (i+1)*cell + cell/2, cell/2, font_size, Integer.toString(i));
+			
+			// Horizontal
+			this.text( w, cell/2, (i+2)*cell - cell/2, font_size, Integer.toString(i));
 		}
+		
+		w.append("</g>\n");
 	}
 
 	public void debugGrids(Writer w, Player player1, Player player2) {
@@ -85,22 +98,18 @@ public class SvgWriter {
 			w.append("<?xml version='1.0' encoding='utf-8'?>\n");
 			
 			w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d'>\n",
-					img_width * 2 + space, img_height + header));
+					img_width * 2 + space + 100, img_height + header + 100));
+			// Empirical offset for letting boat's name outside the grids
+
+			// Eventually, styling for mouse effects
+			//w.append("<style>\nrect:hover\n{\nopacity: 0.5;\n}\n</style>");
 			
 			// First player, first grid
-			w.append(String.format(SvgWriter.text,
-					img_width/2, // x
-					header/2, // y
-					header/2, // Font size
-					player1.getName()));
+			this.text( w, img_width/2, header/2, header/2, player1.getName());
 			this.writeOneGrid(w, player1.getGrid(), 0, header);
 
 			// Second player, second grid
-			w.append(String.format(SvgWriter.text,
-					img_width/2 + img_width + space, // x
-					header/2, // y
-					header/2, // Font size
-					player2.getName()));
+			this.text( w, img_width/2 + img_width + space, header/2, header/2, player2.getName());
 			this.writeOneGrid(w, player2.getGrid(), img_width + space, header);
 			
 			w.append("</svg>");
@@ -122,25 +131,35 @@ public class SvgWriter {
 		// Boats
 		for (Ship ship : grid.getShips()) {
 			
-			if (ship.isHorizontal())
+			if (ship.isHorizontal()) {
 				w.append(String.format(SvgWriter.boat,
 									(ship.getX()+1)*cell, // Adding one, as there is numbering
 									(ship.getY()+1)*cell,
 									ship.getSize()*cell,
 									cell));
-			else
+				
+				this.text(w, (ship.getX()+1+ship.getSize()/2)*cell, 
+						(ship.getY()+1)*cell + cell/2, 
+						font_size, ship.getName());
+			}
+			else {
 				w.append(String.format(SvgWriter.boat,
 						(ship.getX()+1)*cell,
 						(ship.getY()+1)*cell,
 						cell,
 						ship.getSize()*cell));
+			
+				this.text(w, (ship.getX()+1)*cell + cell/2,
+						(ship.getY()+1+ship.getSize()/2)*cell, 
+						font_size, ship.getName(), -90);
+			}
 		}
 		
 		// Closing group
 		w.append("</g>");
 		
 	}
-	
+
 	public void debugGrid(Writer w, Grid grid) {
 		
 		try {
