@@ -8,7 +8,6 @@ import java.util.List;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.Orientation;
 import fr.enseirb.battleship.elements.Ship;
-import fr.enseirb.battleship.elements.Fire;
 import fr.enseirb.battleship.elements.Type;
 import fr.enseirb.battleship.elements.TypeElt;
 import fr.enseirb.battleship.exceptions.InvalidGridException;
@@ -19,15 +18,12 @@ import fr.enseirb.battleship.tools.Config;
 import fr.enseirb.battleship.tools.XmlParserGrid;
 import fr.enseirb.battleship.tools.XmlParserShips;
 
-
-
 public class Grid {
 	private int height;
 	private int width;
 	private List<Ship> ships;
-	private List<Fire> fires;
+	private List<Coordinates> fires;
 	private List<String> shipnames;
-	// TODO : shipnames?
 
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
@@ -133,6 +129,7 @@ public class Grid {
 				int y = (int)(Math.random() * (height-0)) + 0;
 				double o = Math.random();
 				String orientation;
+				String random_shipname;
 				
 				if (o >= 0.5)
 					orientation = "horizontal";
@@ -140,11 +137,14 @@ public class Grid {
 					orientation = "vertical";
 				
 				try {
-					Ship ship = new Ship(random_shipname(this.shipnames), e.getType(), x, y, orientation, e.getSize(), height, width );
+					random_shipname = random_shipname(this.shipnames);
+					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 					
 					// There is an overlapping problem
-					if (Grid.shipOverlapShips(ships, ships_type, ship))
+					if (Grid.shipOverlapShips(ships, ships_type, ship)) {
 						i--;
+						this.shipnames.add(random_shipname);
+					}
 					else
 						ships.add(ship);
 					
@@ -166,7 +166,7 @@ public class Grid {
 		shipNames.add("Destiny");
 		shipNames.add("O'Neill");
 		shipNames.add("Millennium Falcon");
-		shipNames.add("Galactica : Battlestar");
+		shipNames.add("Galactica Battlestar");
 		shipNames.add("Tardis");
 		shipNames.add("Planet Express");
 		shipNames.add("Serenity");
@@ -179,7 +179,7 @@ public class Grid {
 	
 	public String random_shipname(List<String> names) {
 		String name = new String();
-		int index = (int)(Math.random() * (names.size() -1)) + 0;
+		int index = (int)(Math.random() * (names.size()-1) ) + 0;
 		name = names.get(index);
 		ShipsNamesDelete(names, index);
 		return name;

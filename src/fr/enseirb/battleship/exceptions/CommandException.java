@@ -5,7 +5,7 @@ public class CommandException extends RuntimeException {
 	
 	public CommandException(){
 		System.out.println("Not a valid command.");
-		System.out.println("You can only use : view, debug and fire x y.");
+		System.out.println("You can only use : \"view\", \"debug\" and \"fire x y\".");
 	}
 
 	public CommandException(int height, int width) {

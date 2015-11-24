@@ -1,6 +1,6 @@
 package fr.enseirb.battleship;
 
-
+import fr.enseirb.battleship.exceptions.CommandException;
 import java.io.*;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.tools.Config;
@@ -32,38 +32,41 @@ public class App {
 		if ("debug".compareTo(args[0]) == 0) {
 			writer.debugGrids(new FileWriter("debug.svg"), human, ia);
 		}
-		
 		do{
-			String input;
-			Command command;
+			try {
+				
+					String input;
+					Command command;
+					
+					Read read = new Read();
+					input = read.getInput();
+					command = read.getCommand(input);
+					
+					switch(command)
+			        {
+			            case VIEW:
+			            	System.out.println("View ");
+			            break;
+			            
+			            case DEBUG:
+			            	writer.debugGrids(new FileWriter("debug.svg"), human, ia);
+			            break;
+			            
+			            case FIRE:
+			            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
+			            	//System.out.println("Fire x-> "+ fire_coordinates.getX() + " y-> " + fire_coordinates.getY());
+			            break;
+			            
+			            default: 
+			            break;
+			            
+			        }
+			}
+			catch(CommandException e) {
+						
+			}
 			
-			Read read = new Read();
-			input = read.getInput();
-			command = read.getCommand(input);
-			
-			switch(command)
-	        {
-	            case VIEW:
-	            	System.out.println("View ");
-	            break;
-	            
-	            case DEBUG:
-	            	writer.debugGrids(new FileWriter("debug.svg"), human, ia);
-	            break;
-	            
-	            case FIRE:
-	            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
-	            	System.out.println("Fire x-> "+ fire_coordinates.getX() + " y-> " + fire_coordinates.getY());
-	            break;
-	            
-	            default: 
-	            break;
-	            
-	        }
-			
-			
-		}while(true);
+		} while(true);
 	}
 	
-
 }
