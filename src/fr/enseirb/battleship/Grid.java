@@ -103,7 +103,8 @@ public class Grid {
 	}
 	
 	private void init_fires() {
-		this.fires = null;
+		List<Coordinates> fires = new ArrayList<Coordinates>();
+		this.fires = fires;
 	}
 	
 	private void setDim(int height, int width) throws InvalidGridException {
@@ -260,6 +261,14 @@ public class Grid {
 		return true; // No overlapping
 	}
 	
+	// Check if overlap ships exists
+	public void addMissedFire(Coordinates coordinates) {
+    	System.out.println("\ngr x : "+coordinates.getX());
+    	System.out.println("\ngr y : "+coordinates.getY());
+		this.fires.add(coordinates);
+	}
+	
+	
 	// GETTERS
 	// ATTENTION : methodes public a changer en fonction après
 	
@@ -273,6 +282,10 @@ public class Grid {
 
 	public List<Ship> getShips() {
 		return ships;
+	}
+	
+	public List<Coordinates> getFires() {
+		return this.fires;
 	}
 	
 }

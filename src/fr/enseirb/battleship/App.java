@@ -13,7 +13,7 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 		
-		Config.setVerbose(true);
+		Config.setVerbose(false);
 		
 		if (args.length != 3)
 			throw new Exception("Incorrect number of arguments.");
@@ -32,6 +32,8 @@ public class App {
 		if ("debug".compareTo(args[0]) == 0) {
 			writer.debugGrids(new FileWriter("debug.svg"), human, ia);
 		}
+		
+		// Human player
 		do{
 			try {
 				
@@ -54,7 +56,10 @@ public class App {
 			            
 			            case FIRE:
 			            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
-			            	//System.out.println("Fire x-> "+ fire_coordinates.getX() + " y-> " + fire_coordinates.getY());
+			            	
+			            	// Missed fires
+			            	ia.getGrid().addMissedFire(fire_coordinates);
+
 			            break;
 			            
 			            default: 
