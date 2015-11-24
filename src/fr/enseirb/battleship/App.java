@@ -2,8 +2,10 @@ package fr.enseirb.battleship;
 
 
 import java.io.*;
-
+import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.tools.Config;
+import fr.enseirb.battleship.tools.Command;
+import fr.enseirb.battleship.tools.Read;
 import fr.enseirb.battleship.tools.SvgWriter;
 
 // Main classes
@@ -31,22 +33,33 @@ public class App {
 			writer.debugGrids(new FileWriter("debug.svg"), human, ia);
 		}
 		
-		
-		String input;
-		
 		do{
-			input = "";
-			char C='\0'; 
-			try {
-				while ((C=(char) System.in.read()) !='\n'){
-					if (C != '\r')  input = input+C;
-				}
-			}     
-			catch (IOException e){
-			          System.out.println("Error inputing command");
-	        } 
+			String input;
+			Command command;
 			
+			Read read = new Read();
+			input = read.getInput();
+			command = read.getCommand(input);
 			
+			switch(command)
+	        {
+	            case VIEW:
+	            	System.out.println("View ");
+	            break;
+	            
+	            case DEBUG:
+	            	writer.debugGrids(new FileWriter("debug.svg"), human, ia);
+	            break;
+	            
+	            case FIRE:
+	            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
+	            	System.out.println("Fire x-> "+ fire_coordinates.getX() + " y-> " + fire_coordinates.getY());
+	            break;
+	            
+	            default: 
+	            break;
+	            
+	        }
 			
 			
 		}while(true);

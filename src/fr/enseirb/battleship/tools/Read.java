@@ -2,118 +2,82 @@ package fr.enseirb.battleship.tools;
 
 import java.io.IOException;
 
+import fr.enseirb.battleship.elements.Coordinates;
+import fr.enseirb.battleship.exceptions.CommandException;
+
+
 public class Read {
-	public static String S() { // Lire un String
+	
+	public String getInput() {
 		
-		String tmp = "";
+		String text = "";
 		char C='\0';
 		
 		try {
+			// Get input
 			while ((C=(char) System.in.read()) !='\n')
 	        {
-				if (C != '\r')  tmp = tmp+C;
+				if (C != '\r')  text = text+C;
 	        }
-		}
+		}		
 		catch (IOException e)
         {
 			System.out.println("Erreur de frappe");
 			System.exit(0);
-        } 
-		return tmp;
-	} // fin de S()
+        }
+		return text;
+	}
+	
+	
+	public Command getCommand(String input) throws CommandException { // Read a command
+		
+			String command = "";
+			
+			// Extract first word
+		    if (input.indexOf(' ') > -1) { // Check if there is more than one word.
+		    	command = input.substring(0, input.indexOf(' ')); // Extract first word.
+		    } 
+		    else {
+		    	command = input; // Text is the first word itself.
+		    }
+		    
+			if ("view".compareTo(command) == 0) {
+				return Command.VIEW;
+			}
+			else if("debug".compareTo(command) == 0) {
+				return Command.DEBUG;
+			}
+			else if("fire".compareTo(command) == 0) {
+				return Command.FIRE;
+			}
+			else {
+				throw new CommandException();
+			}
+			
+	} 
+	
+	public Coordinates getCoordinates(String input, int height, int width) throws CommandException {
+		
+		int x, y;
+		try{
+			String coord[] = input.split(" ", 3);
+			
+			x = Integer.parseInt(coord[1]);
+			y = Integer.parseInt(coord[2]);
+			
+			if( (x < 0 || x > width) || (y < 0 || y > height) ) {
+				throw new CommandException(height, width);
+			}
+			
+			Coordinates coordinates = new Coordinates(x,y);
+			return coordinates;
+		}
+		catch (NumberFormatException e) {
+			// Exception if x and y are not numbers.
+		}
+		return null;
+	}
 
- public static byte b()  // Lire un entier byte
- {
-         byte x=0;
-                try {
-                         x=Byte.parseByte(S());
-                        }
-                catch (NumberFormatException e) {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
- public static short s()  // Lire un entier short
- {
-         short x=0;
-                try {
-                         x=Short.parseShort(S());
-                        }
-                catch (NumberFormatException e) {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
-          
- public static int i()  // Lire un entier
- {
-         int x=0;
-                try {
-                         x=Integer.parseInt(S());
-                }        
-                catch (NumberFormatException e) {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
- public static long l()  // Lire un entier long
- {
-         long x=0;
-                try {
-                         x=Integer.parseInt(S());
-                }        
-                catch (NumberFormatException e) {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
-          
- public  static double d()  // Lire un double
- {
-        double x=0.0;
-                try {
-                        x=Double.valueOf(S()).doubleValue();
-                }    
-                catch (NumberFormatException e) {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
- public  static float f()  // Lire un float
- {
-   float x=0.0f;
-        try {
-                x=Double.valueOf(S()).floatValue();
-        }    
-        catch (NumberFormatException e)
-        {
-          System.out.println("Format num�rique incorrect");
-          System.exit(0);
-    }     
-          return x ;
- }        
-          
-          
- public  static char c()  // Lire un caractere
- {
-  String tmp=S();
-  if (tmp.length()==0)
-          return '\n';
-  else    
-                {
-                return tmp.charAt(0);
-                }
- }
 
- 
+	
 }         

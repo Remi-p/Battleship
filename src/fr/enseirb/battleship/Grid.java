@@ -8,6 +8,7 @@ import java.util.List;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.Orientation;
 import fr.enseirb.battleship.elements.Ship;
+import fr.enseirb.battleship.elements.Fire;
 import fr.enseirb.battleship.elements.Type;
 import fr.enseirb.battleship.elements.TypeElt;
 import fr.enseirb.battleship.exceptions.InvalidGridException;
@@ -24,6 +25,7 @@ public class Grid {
 	private int height;
 	private int width;
 	private List<Ship> ships;
+	private List<Fire> fires;
 	private List<String> shipnames;
 	// TODO : shipnames?
 
@@ -43,6 +45,7 @@ public class Grid {
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException , ShipsConfigurationException {
 		Type ships_type = configs_extract(configs_path, gridfilename);
 		ships_extract(configs_path, shipfilename, ships_type);
+		init_fires();
 	}
 	
 	// Constructor for IA
@@ -57,6 +60,7 @@ public class Grid {
 		
 		this.ships = random_ships(this.height, this.width, ships_type);
 		
+		init_fires();
 	}
 	
 	// Configs extraction from grid.xml
@@ -102,6 +106,10 @@ public class Grid {
 		}
 	}
 	
+	private void init_fires() {
+		this.fires = null;
+	}
+	
 	private void setDim(int height, int width) throws InvalidGridException {
 
 		// Minimum of 10*10 grid, else InvalidGridException
@@ -123,7 +131,7 @@ public class Grid {
 				
 				int x = (int)(Math.random() * (width-0)) + 0;
 				int y = (int)(Math.random() * (height-0)) + 0;
-				int o = (int)(Math.random() * (height-0)) + 0;
+				double o = Math.random();
 				String orientation;
 				
 				if (o >= 0.5)
