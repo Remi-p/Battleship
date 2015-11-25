@@ -1,10 +1,15 @@
 package fr.enseirb.battleship.tools;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Player;
+import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.Ship;
 
 // http://www.labri.fr/perso/falleri/dist/ens/pg220/tps/tp2/tp2_src.zip
@@ -33,6 +38,48 @@ public class SvgWriter {
 	private static final String text = "<text x='%d' y='%d' transform='translate(0, %d) %s' alignment-baseline='central' fill='%s' text-anchor='middle' font-size='%d'>%s</text>\n";
 	private static final String boat = "<rect x='%d' y='%d' width='%d' height='%d' style='fill:rgb(0,0,0);fill-opacity:0.5;' />\n";
 
+	private static final String fire = "<symbol id='fire'><g transform='scale(%d, %d)'>" + readFile(Config.FIRE_SVG) + "</g></symbol>";
+	
+	private String writer_debug = Config.DEBUG_SVG;
+	private String writer_play = Config.PLAY_SVG;
+	
+	// Player1 is the main
+	private Player player1;
+	private Player player2;
+	
+	// http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file
+	private static String readFile(String path) {
+		byte[] encoded;
+		try {
+			encoded = Files.readAllBytes(Paths.get(path));
+			return new String(encoded, Charset.defaultCharset());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public SvgWriter(int width, int height, Player player1, Player player2) {
+		
+		// Dimensions
+		this.width = width;
+		this.height = height;
+		this.cell = SvgWriter.CELL_DIM;
+		this.stroke = SvgWriter.STROKE_WIDTH;
+		this.font_size = this.cell / 2;
+		
+		this.space = SvgWriter.SPACE;
+		this.header = SvgWriter.HEADER;
+		
+		this.img_height = (this.width+1) * cell;
+		this.img_width = (this.height+1) * cell;
+		
+		// Players
+		this.player1 = player1;
+		this.player2 = player2;
+	};
+	
 	private void text(Writer w, int x, int y, int font_size, String text) throws IOException {
 		this.text(w, x, y, font_size, text, "", "");
 	}
@@ -45,23 +92,33 @@ public class SvgWriter {
 	private void text(Writer w, int x, int y, int font_size, String text, String color, String transform) throws IOException {
 		w.append(String.format(SvgWriter.text, x, y, font_size/2, transform, color, font_size, text));
 	}
-	
-	public SvgWriter(int width, int height) {
-		
-		this.width = width;
-		this.height = height;
-		this.cell = SvgWriter.CELL_DIM;
-		this.stroke = SvgWriter.STROKE_WIDTH;
-		this.font_size = this.cell / 2;
-		
-		this.space = SvgWriter.SPACE;
-		this.header = SvgWriter.HEADER;
-		
-		this.img_height = (this.width+1) * cell;
-		this.img_width = (this.height+1) * cell;
-	};
 
-	public void createGrid(Writer w) throws IOException {
+	private void header(Writer w) throws IOException {
+		
+		w.append("<?xml version='1.0' encoding='utf-8'?>\n");
+		
+		w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d'>\n",
+				img_width * 2 + space + 100, img_height + header + 100));
+		// Empirical offset for letting boat's name outside the grids
+
+		// Eventually, styling for mouse effects
+		//w.append("<style>\nrect:hover\n{\nopacity: 0.5;\n}\n</style>");
+		
+		// Definitions
+		w.append("<defs>");
+		w.append(String.format(fire, cell, cell));
+		w.append("</defs>");
+		
+		// First player, first grid
+		this.text( w, img_width/2, header/2, header/2, player1.getName());
+		this.writeOneGrid(w, player1.getGrid(), 0, header);
+
+		// Second player, second grid
+		this.text( w, img_width/2 + img_width + space, header/2, header/2, player2.getName());
+		this.writeOneGrid(w, player2.getGrid(), img_width + space, header);
+	}
+	
+	private void createGrid(Writer w) throws IOException {
 
 		// Creating a group for the background
 		w.append("<g>\n");
@@ -92,25 +149,12 @@ public class SvgWriter {
 		w.append("</g>\n");
 	}
 
-	public void debugGrids(Writer w, Player player1, Player player2) {
+	public void debugGrids() {
 
 		try {
-			w.append("<?xml version='1.0' encoding='utf-8'?>\n");
-			
-			w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d'>\n",
-					img_width * 2 + space + 100, img_height + header + 100));
-			// Empirical offset for letting boat's name outside the grids
-
-			// Eventually, styling for mouse effects
-			//w.append("<style>\nrect:hover\n{\nopacity: 0.5;\n}\n</style>");
-			
-			// First player, first grid
-			this.text( w, img_width/2, header/2, header/2, player1.getName());
-			this.writeOneGrid(w, player1.getGrid(), 0, header);
-
-			// Second player, second grid
-			this.text( w, img_width/2 + img_width + space, header/2, header/2, player2.getName());
-			this.writeOneGrid(w, player2.getGrid(), img_width + space, header);
+			FileWriter w = new FileWriter(writer_debug);
+		
+			header(w);
 			
 			w.append("</svg>");
 			w.close();
@@ -153,6 +197,12 @@ public class SvgWriter {
 						(ship.getY()+1+ship.getSize()/2)*cell, 
 						font_size, ship.getName(), -90);
 			}
+		}
+		
+		// Missed
+		for (Coordinates coord : grid.getFires()) {
+			// TODO : Erreur ici sur un dépassement ....
+			//w.append("<use xlink:href='#fire' x='%d' y='%d'/>", coord.getX(), coord.getY());			
 		}
 		
 		// Closing group

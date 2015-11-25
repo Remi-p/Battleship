@@ -19,9 +19,9 @@ public class TestIAShipsPosition {
 		
 		Grid grid = ia.getGrid();
 		
-		SvgWriter writer = new SvgWriter(grid.getWidth(), grid.getHeight());
+		//SvgWriter writer = new SvgWriter(grid.getWidth(), grid.getHeight());
 
-		writer.debugGrid(new FileWriter("debug.svg"), grid);
+		//writer.debugGrid(new FileWriter("debug.svg"), grid);
 	}
 
 }

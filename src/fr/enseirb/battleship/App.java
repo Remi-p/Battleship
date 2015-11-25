@@ -1,7 +1,6 @@
 package fr.enseirb.battleship;
 
 import fr.enseirb.battleship.exceptions.CommandException;
-import java.io.*;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.tools.Config;
 import fr.enseirb.battleship.tools.Command;
@@ -27,16 +26,16 @@ public class App {
 		int height = human.getGrid().getHeight();
 		
 		// Object for writing svg debug file
-		SvgWriter writer = new SvgWriter(width, height);
+		SvgWriter writer = new SvgWriter(width, height, human, ia);
 
 		if ("debug".compareTo(args[0]) == 0) {
-			writer.debugGrids(new FileWriter("debug.svg"), human, ia);
+			writer.debugGrids();
 		}
-		
+		else
 		// Human player
-		do{
-			try {
-				
+			do{
+				try {
+					
 					String input;
 					Command command;
 					
@@ -44,6 +43,7 @@ public class App {
 					input = read.getInput();
 					command = read.getCommand(input);
 					
+					// TODO : Quit ?
 					switch(command)
 			        {
 			            case VIEW:
@@ -51,7 +51,7 @@ public class App {
 			            break;
 			            
 			            case DEBUG:
-			            	writer.debugGrids(new FileWriter("debug.svg"), human, ia);
+			            	writer.debugGrids();
 			            break;
 			            
 			            case FIRE:
@@ -65,12 +65,12 @@ public class App {
 			            break;
 			            
 			        }
-			}
-			catch(CommandException e) {
-						
-			}
-			
-		} while(true);
+				}
+				catch(CommandException e) {
+							
+				}
+				
+			} while(true);
 	}
 	
 }
