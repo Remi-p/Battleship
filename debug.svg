@@ -100,14 +100,14 @@
 <text x='420' y='20' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='280' y='200' width='40' height='160' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='300' y='280' transform='translate(0, 10) rotate(-90, 300, 280)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
-<rect x='320' y='120' width='120' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='360' y='140' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
-<rect x='80' y='400' width='80' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='120' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
-<rect x='80' y='280' width='40' height='120' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='100' y='320' transform='translate(0, 10) rotate(-90, 100, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Voyager 1</text>
-<rect x='240' y='240' width='40' height='200' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='260' y='320' transform='translate(0, 10) rotate(-90, 260, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
+<rect x='160' y='360' width='160' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='240' y='380' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Galactica Battlestar</text>
+<rect x='160' y='160' width='40' height='120' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='180' y='200' transform='translate(0, 10) rotate(-90, 180, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
+<rect x='280' y='280' width='80' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='320' y='300' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
+<rect x='200' y='40' width='40' height='120' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='220' y='80' transform='translate(0, 10) rotate(-90, 220, 80)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Planet Express</text>
+<rect x='40' y='40' width='40' height='200' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='60' y='120' transform='translate(0, 10) rotate(-90, 60, 120)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Prometheus</text>
 </g></svg>

@@ -12,6 +12,7 @@ public class Ship {
 	private int y;
 	private Orientation orientation;
 	private int size;
+	private List<BoatCase> boatcases;
 	
 	public Ship(String name, String type,
 			    int x, int y, String orientation,
@@ -38,6 +39,7 @@ public class Ship {
 			else {
 				this.x = x;
 				this.y = y;
+				this.setBoatCases();
 			}
 		}
 	}
@@ -81,6 +83,10 @@ public class Ship {
 		return this.size;
 	}
 
+	public List<BoatCase> getBoatCases() {
+		return this.boatcases;
+	}
+	
 	public boolean isHorizontal() {
 		if(this.orientation == Orientation.HORIZONTAL)
 			return true;
@@ -97,23 +103,47 @@ public class Ship {
 	}
 	
 	public List<Coordinates> getBoatCoordinates(){
+		// TODO use attribute boatcases now ...
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
+		for (BoatCase boatcases : this.boatcases) {
+			coordinates.add(new Coordinates(boatcases.getX(), boatcases.getY()));
+		}
+		return coordinates;
+		
+//		List<Coordinates> coordinates = new ArrayList<Coordinates>();
+//		for(int j = 0; j < this.size; j++) {
+//	
+//			switch(this.orientation) {
+//	            case HORIZONTAL: 
+//	            	coordinates.add(new Coordinates(this.x + j, this.y));
+//	                break;
+//	
+//	            case VERTICAL: 
+//	            	coordinates.add(new Coordinates(this.x, this.y + j));
+//	                break;
+//			}
+//		}
+//		return coordinates;
+	}
+	
+	public void setBoatCases() {
+		
+		List<BoatCase> coordinates = new ArrayList<BoatCase>();
 		for(int j = 0; j < this.size; j++) {
 	
 			switch(this.orientation) {
 	            case HORIZONTAL: 
-	            	coordinates.add(new Coordinates(this.x + j, this.y));
+	            	coordinates.add(new BoatCase(this.x + j, this.y));
 	                break;
 	
 	            case VERTICAL: 
-	            	coordinates.add(new Coordinates(this.x, this.y + j));
+	            	coordinates.add(new BoatCase(this.x, this.y + j));
 	                break;
 			}
 		}
+		this.boatcases = coordinates;
+	}
 	
-	
-		return coordinates ;
-	}	
 }
 
 	

@@ -13,7 +13,7 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 		
-		Config.setVerbose(false);
+		Config.setVerbose(true);
 		
 		if (args.length != 3)
 			throw new Exception("Incorrect number of arguments.");
