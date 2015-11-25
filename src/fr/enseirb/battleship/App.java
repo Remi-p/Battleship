@@ -19,8 +19,8 @@ public class App {
 			throw new Exception("Incorrect number of arguments.");
 		
 		// Creating players objects
-		Player human = new Human("Anonymous", args[1], args[2]);
-		Player ia = new IA();
+		Human human = new Human("Anonymous", args[1], args[2]);
+		IA ia = new IA();
 		
 		// We get the dimensions of grids
 		int width = human.getGrid().getWidth();
@@ -57,7 +57,7 @@ public class App {
 			            case FIRE:
 			            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
 			            	ia.getGrid().checkHit(fire_coordinates);
-
+			            	human.checkWin();
 
 			            break;
 			            

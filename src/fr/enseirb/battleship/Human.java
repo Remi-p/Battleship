@@ -21,4 +21,8 @@ public class Human extends Player {
 		super(name);
 		this.grid = new Grid();
 	}
+	
+	public void checkWin(){
+		super.checkWin("You win");
+	}
 }

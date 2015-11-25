@@ -19,4 +19,9 @@ public abstract class Player {
 		return name;
 	}
 	
+	public void checkWin(String message){
+		if(this.getGrid().getSinkedShip() == this.getGrid().getShips().size()){
+			System.out.println(message);
+		}
+	}
 }

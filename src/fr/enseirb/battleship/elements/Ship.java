@@ -1,5 +1,8 @@
 package fr.enseirb.battleship.elements;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.enseirb.battleship.exceptions.ShipOutOfBoundsException;
 
 public class Ship {
@@ -92,4 +95,26 @@ public class Ship {
 		else
 			return false;
 	}
+	
+	public List<Coordinates> getBoatCoordinates(){
+		List<Coordinates> coordinates = new ArrayList<Coordinates>();
+		for(int j = 0; j < this.size; j++) {
+	
+			switch(this.orientation) {
+	            case HORIZONTAL: 
+	            	coordinates.add(new Coordinates(this.x + j, this.y));
+	                break;
+	
+	            case VERTICAL: 
+	            	coordinates.add(new Coordinates(this.x, this.y + j));
+	                break;
+			}
+		}
+	
+	
+		return coordinates ;
+	}	
 }
+
+	
+	

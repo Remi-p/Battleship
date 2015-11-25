@@ -24,7 +24,7 @@ public class Grid {
 	private List<Ship> ships;
 	private List<Coordinates> fires;
 	private List<String> shipnames;
-
+	private int sinkedShip;
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
 	}
@@ -42,6 +42,7 @@ public class Grid {
 		Type ships_type = configs_extract(configs_path, gridfilename);
 		ships_extract(configs_path, shipfilename, ships_type);
 		init_fires();
+		sinkedShip = 0;
 	}
 	
 	// Constructor for IA
@@ -100,7 +101,7 @@ public class Grid {
 			
 			}
 		}
-	}
+	}List<Coordinates> coordinates = new ArrayList<Coordinates>();
 	
 	private void init_fires() {
 		List<Coordinates> fires = new ArrayList<Coordinates>();
@@ -192,30 +193,12 @@ public class Grid {
 	
 	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships) {
 		
-		int x, y, size;
 		// We will store all the ships coordinates
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		
 		// Store all coordinates in the Coordinates[]
 		for (Ship boat : ships) {
-			
-			size = boat.getSize();
-			Orientation orientation = boat.getOrientation();
-			x = boat.getX();
-			y = boat.getY();
-			
-			for(int j = 0; j < size; j++) {
-
-				switch(orientation) {
-		            case HORIZONTAL: 
-		            	coordinates.add(new Coordinates(x + j, y));
-		                break;
-	
-		            case VERTICAL: 
-		            	coordinates.add(new Coordinates(x, y + j));
-		                break;
-				}
-			}
+			coordinates.addAll(boat.getBoatCoordinates());
 		}
 		
 		return coordinates;
@@ -262,8 +245,27 @@ public class Grid {
 	}
 	
 	public void checkSunk(){
-		
+		int sunk = 0;
+		int hit;
+		List<Coordinates> coordinates = new ArrayList<Coordinates>();
+		for (Ship boat : this.ships){
+			hit = 0;
+			coordinates = boat.getBoatCoordinates();
+			for(Coordinates test : this.fires){
+				if(Collections.frequency(coordinates,test) > 1){
+					hit++;
+				}
+			}
+			if(hit == boat.getSize()){
+				sunk++;
+			}
+		}
+		if(sunk>this.sinkedShip){
+			this.sinkedShip = sunk;
+			System.out.println("Sunk boat"); //TODO Search a way to get the sinked boat name
+		}
 	}
+	
 	
 	public void addFire(Coordinates coordinates) {
     	System.out.println("\ngr x : "+coordinates.getX());
@@ -274,6 +276,9 @@ public class Grid {
 	
 	private boolean alreadyFired(Coordinates coordinates){
 		if (Collections.frequency(this.fires,coordinates)>0){
+	    	System.out.println("\ngr x : "+coordinates.getX());
+	    	System.out.println("\ngr y : "+coordinates.getY());
+	    	System.out.println("Missed");
 			return true;
 		}
 		return false;
@@ -293,11 +298,7 @@ public class Grid {
 				this.addFire(coordinates);
 	    		System.out.println("Missed");
 			}
-		}
-		else{
-			System.out.println("Cell already shot");
-		}
-		
+		}		
 	}
 	
 	// GETTERS
@@ -317,6 +318,10 @@ public class Grid {
 	
 	public List<Coordinates> getFires() {
 		return this.fires;
+	}
+	
+	public int getSinkedShip(){
+		return this.sinkedShip;
 	}
 	
 }

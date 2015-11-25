@@ -21,4 +21,7 @@ public class IA extends Player{
 		return grid;
 	}
 	
+	public void checkWin(){
+		super.checkWin("You loose");
+	}
 }
