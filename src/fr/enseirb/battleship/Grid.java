@@ -261,13 +261,44 @@ public class Grid {
 		return true; // No overlapping
 	}
 	
-	// Check if overlap ships exists
-	public void addMissedFire(Coordinates coordinates) {
+	public void checkSunk(){
+		
+	}
+	
+	public void addFire(Coordinates coordinates) {
     	System.out.println("\ngr x : "+coordinates.getX());
     	System.out.println("\ngr y : "+coordinates.getY());
 		this.fires.add(coordinates);
 	}
 	
+	
+	private boolean alreadyFired(Coordinates coordinates){
+		if (Collections.frequency(this.fires,coordinates)>0){
+			return true;
+		}
+		return false;
+	}
+	
+	public void checkHit(Coordinates coordinates){
+		List<Coordinates> shipInGrid = getShipsCoordinates(this.ships);
+		if (!this.alreadyFired(coordinates)){
+			if (Collections.frequency(shipInGrid,coordinates)>0){
+				// Successful fire
+				this.addFire(coordinates);
+				this.checkSunk();
+			}
+			
+			else{
+				// Missed fire
+				this.addFire(coordinates);
+	    		System.out.println("Missed");
+			}
+		}
+		else{
+			System.out.println("Cell already shot");
+		}
+		
+	}
 	
 	// GETTERS
 	// ATTENTION : methodes public a changer en fonction après

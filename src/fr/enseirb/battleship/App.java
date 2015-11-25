@@ -56,9 +56,8 @@ public class App {
 			            
 			            case FIRE:
 			            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
-			            	
-			            	// Missed fires
-			            	ia.getGrid().addMissedFire(fire_coordinates);
+			            	ia.getGrid().checkHit(fire_coordinates);
+
 
 			            break;
 			            
