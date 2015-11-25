@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.enseirb.battleship.elements.Coordinates;
-import fr.enseirb.battleship.elements.Orientation;
+import fr.enseirb.battleship.elements.BoatCase;
 import fr.enseirb.battleship.elements.Ship;
 import fr.enseirb.battleship.elements.Type;
 import fr.enseirb.battleship.elements.TypeElt;
@@ -22,7 +22,7 @@ public class Grid {
 	private int height;
 	private int width;
 	private List<Ship> ships;
-	private List<Coordinates> fires;
+	private List<Coordinates> missedfires;
 	private List<String> shipnames;
 	private int sinkedShip;
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
@@ -42,7 +42,7 @@ public class Grid {
 		Type ships_type = configs_extract(configs_path, gridfilename);
 		ships_extract(configs_path, shipfilename, ships_type);
 		init_fires();
-		sinkedShip = 0;
+		this.sinkedShip = 0;
 	}
 	
 	// Constructor for IA
@@ -52,12 +52,10 @@ public class Grid {
 		
 		Type ships_type;
 		ships_type = configs_extract(configs_path, gridfilename);
-			
 		this.shipnames = ShipsNameInitialisation();
-		
 		this.ships = random_ships(this.height, this.width, ships_type);
-		
 		init_fires();
+		this.sinkedShip = 0;
 	}
 	
 	// Configs extraction from grid.xml
@@ -105,7 +103,7 @@ public class Grid {
 	
 	private void init_fires() {
 		List<Coordinates> fires = new ArrayList<Coordinates>();
-		this.fires = fires;
+		this.missedfires = fires;
 	}
 	
 	private void setDim(int height, int width) throws InvalidGridException {
@@ -191,14 +189,30 @@ public class Grid {
 		shipnames.remove(index);
 	}
 	
-	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships) {
+	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships, String state) {
 		
 		// We will store all the ships coordinates
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		
 		// Store all coordinates in the Coordinates[]
 		for (Ship boat : ships) {
-			coordinates.addAll(boat.getBoatCoordinates());
+			
+			if ("untouched".compareTo(state) == 0) {
+				for(BoatCase boatcase : boat.getBoatCases()) {
+					if(!boatcase.getTouched()) {
+						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
+					}
+				}
+			}
+			else if("touched".compareTo(state) == 0) {
+				for(BoatCase boatcase : boat.getBoatCases()) {
+					if(boatcase.getTouched()) {
+						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
+					}
+				}
+			}
+			else
+				coordinates.addAll(boat.getBoatCoordinates());
 		}
 		
 		return coordinates;
@@ -207,7 +221,7 @@ public class Grid {
 	// Check if a particular ship overlaps the others
 	private static boolean shipOverlapShips(Collection<Ship> ships, Type ships_type, Ship ship) {
 		
-		List<Coordinates> coordinates = getShipsCoordinates(ships);
+		List<Coordinates> coordinates = getShipsCoordinates(ships, "all");
 		
 		// Comparison between each coordinates from the ship
 		for(int j = 0; j < ship.getSize(); j++) {
@@ -225,14 +239,14 @@ public class Grid {
 			}
 		}
 		
-		// TODO Change output to true, sémantique
+		// TODO Change output to true, semantic
 		return false; // No overlapping
 	}
 	
 	// Check if overlap ships exists
 	private boolean shipGridOverLap(Collection<Ship> ships, Type ships_type) {
 		
-		List<Coordinates> coordinates = getShipsCoordinates(ships);
+		List<Coordinates> coordinates = getShipsCoordinates(ships, "all");
 		
 		// Comparison between each coordinates from the array
 		for (Coordinates c : coordinates) {
@@ -244,61 +258,58 @@ public class Grid {
 		return true; // No overlapping
 	}
 	
-	public void checkSunk(){
-		int sunk = 0;
-		int hit;
-		List<Coordinates> coordinates = new ArrayList<Coordinates>();
-		for (Ship boat : this.ships){
-			hit = 0;
-			coordinates = boat.getBoatCoordinates();
-			for(Coordinates test : this.fires){
-				if(Collections.frequency(coordinates,test) > 1){
-					hit++;
-				}
-			}
-			if(hit == boat.getSize()){
-				sunk++;
-			}
-		}
-		if(sunk>this.sinkedShip){
-			this.sinkedShip = sunk;
-			System.out.println("Sunk boat"); //TODO Search a way to get the sinked boat name
-		}
-	}
-	
-	
+	// Add missed fire
 	public void addFire(Coordinates coordinates) {
-    	System.out.println("\ngr x : "+coordinates.getX());
-    	System.out.println("\ngr y : "+coordinates.getY());
-		this.fires.add(coordinates);
+		this.missedfires.add(coordinates);
 	}
 	
-	
-	private boolean alreadyFired(Coordinates coordinates){
-		if (Collections.frequency(this.fires,coordinates)>0){
-	    	System.out.println("\ngr x : "+coordinates.getX());
-	    	System.out.println("\ngr y : "+coordinates.getY());
-	    	System.out.println("Missed");
+	private boolean alreadyFired(Coordinates coordinates, List<Coordinates> ships_coordinates){
+		if (Collections.frequency(this.missedfires,coordinates)>0){
 			return true;
 		}
-		return false;
+		else if(Collections.frequency(ships_coordinates,coordinates)>0) {
+			return true;
+		}
+		else
+			return false;
 	}
 	
-	public void checkHit(Coordinates coordinates){
-		List<Coordinates> shipInGrid = getShipsCoordinates(this.ships);
-		if (!this.alreadyFired(coordinates)){
-			if (Collections.frequency(shipInGrid,coordinates)>0){
-				// Successful fire
-				this.addFire(coordinates);
-				this.checkSunk();
-			}
+	public void checkHit(Coordinates coordinates) {
+		
+		List<Coordinates> ships_untouched_coordinates = getShipsCoordinates(this.ships, "untouched");
+		List<Coordinates> ships_touched_coordinates = getShipsCoordinates(this.ships, "touched"); 
+		
+		// If player has already fired at same coordinates
+		if (!this.alreadyFired(coordinates, ships_touched_coordinates)){
 			
-			else{
+			if (Collections.frequency(ships_untouched_coordinates,coordinates)>0){
+				// Success fire
+				for (Ship boat : this.ships) {
+					for(BoatCase boatcase : boat.getBoatCases()) {
+						if(boatcase.getX() == coordinates.getX() && boatcase.getY() == coordinates.getY()) {
+							boatcase.setTouched(); // Boat case touched
+							// If boat is sunk
+							if(boat.checkBoatSunk()) {
+								System.out.println("Sunk boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+							}
+							else {
+								System.out.println("Touched boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+							}
+							break; // We find the boat
+						}
+					}
+
+				}
+			}
+			else {
 				// Missed fire
 				this.addFire(coordinates);
-	    		System.out.println("Missed");
+	    		System.out.println("Missed at " + coordinates.getX() + " " + coordinates.getY());
 			}
-		}		
+		}	
+		else {
+			System.out.println("Already fired at " + coordinates.getX() + " " + coordinates.getY());
+		}
 	}
 	
 	// GETTERS
@@ -317,7 +328,7 @@ public class Grid {
 	}
 	
 	public List<Coordinates> getFires() {
-		return this.fires;
+		return this.missedfires;
 	}
 	
 	public int getSinkedShip(){

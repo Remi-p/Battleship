@@ -8,5 +8,13 @@ public class BoatCase extends Coordinates {
 		super(x,y);
 		this.touched = false;
 	}
+
+	public boolean getTouched() {
+		return this.touched;
+	}
+
+	public void setTouched() {
+		this.touched = true;
+	}
 	
 }

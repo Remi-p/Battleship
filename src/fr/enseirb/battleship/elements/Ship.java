@@ -13,6 +13,7 @@ public class Ship {
 	private Orientation orientation;
 	private int size;
 	private List<BoatCase> boatcases;
+	private boolean sunk;
 	
 	public Ship(String name, String type,
 			    int x, int y, String orientation,
@@ -40,6 +41,7 @@ public class Ship {
 				this.x = x;
 				this.y = y;
 				this.setBoatCases();
+				this.sunk = false;
 			}
 		}
 	}
@@ -82,6 +84,10 @@ public class Ship {
 	public int getSize() {
 		return this.size;
 	}
+	
+	public boolean getSunk() {
+		return this.sunk;
+	}
 
 	public List<BoatCase> getBoatCases() {
 		return this.boatcases;
@@ -103,27 +109,12 @@ public class Ship {
 	}
 	
 	public List<Coordinates> getBoatCoordinates(){
-		// TODO use attribute boatcases now ...
+
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		for (BoatCase boatcases : this.boatcases) {
 			coordinates.add(new Coordinates(boatcases.getX(), boatcases.getY()));
 		}
 		return coordinates;
-		
-//		List<Coordinates> coordinates = new ArrayList<Coordinates>();
-//		for(int j = 0; j < this.size; j++) {
-//	
-//			switch(this.orientation) {
-//	            case HORIZONTAL: 
-//	            	coordinates.add(new Coordinates(this.x + j, this.y));
-//	                break;
-//	
-//	            case VERTICAL: 
-//	            	coordinates.add(new Coordinates(this.x, this.y + j));
-//	                break;
-//			}
-//		}
-//		return coordinates;
 	}
 	
 	public void setBoatCases() {
@@ -142,6 +133,25 @@ public class Ship {
 			}
 		}
 		this.boatcases = coordinates;
+	}
+	
+	// Check if boat is sunk
+	public boolean checkBoatSunk() {
+		
+		int hit = 0;
+			for(BoatCase boatcase : this.boatcases){
+				if(boatcase.getTouched()){
+					hit++;
+				}
+			}
+		
+		if(hit == this.size) {
+			this.sunk = true;
+			return true;
+		}
+		else
+			return false;
+				
 	}
 	
 }

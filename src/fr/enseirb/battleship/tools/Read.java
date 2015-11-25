@@ -54,6 +54,9 @@ public class Read {
 					else if("debug".compareTo(command) == 0) {
 						return Command.DEBUG;
 					}
+					else if("quit".compareTo(command) == 0) {
+						return Command.QUIT;
+					}
 					else {
 						throw new CommandException();
 					}

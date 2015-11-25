@@ -43,7 +43,6 @@ public class App {
 					input = read.getInput();
 					command = read.getCommand(input);
 					
-					// TODO : Quit ?
 					switch(command)
 			        {
 			            case VIEW:
@@ -59,6 +58,11 @@ public class App {
 			            	ia.getGrid().checkHit(fire_coordinates);
 			            	human.checkWin();
 
+			            break;
+			            
+			            case QUIT:
+			            	System.out.println("End of the game. Bye !");
+			            	System.exit(0);
 			            break;
 			            
 			            default: 

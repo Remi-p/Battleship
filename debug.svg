@@ -163,14 +163,14 @@
 <text x='420' y='20' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='280' y='240' width='160' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='360' y='260' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
-<rect x='160' y='120' width='120' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='200' y='140' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Millennium Falcon</text>
-<rect x='120' y='240' width='40' height='80' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='140' y='280' transform='translate(0, 10) rotate(-90, 140, 280)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
-<rect x='240' y='200' width='40' height='120' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='260' y='240' transform='translate(0, 10) rotate(-90, 260, 240)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Serenity</text>
-<rect x='160' y='160' width='40' height='200' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='180' y='240' transform='translate(0, 10) rotate(-90, 180, 240)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
+<rect x='240' y='80' width='40' height='160' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='260' y='160' transform='translate(0, 10) rotate(-90, 260, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
+<rect x='320' y='80' width='40' height='120' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='340' y='120' transform='translate(0, 10) rotate(-90, 340, 120)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>USS Enterprise</text>
+<rect x='320' y='240' width='40' height='80' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='340' y='280' transform='translate(0, 10) rotate(-90, 340, 280)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Galactica Battlestar</text>
+<rect x='120' y='280' width='120' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='160' y='300' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Serenity</text>
+<rect x='160' y='40' width='200' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<text x='240' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
 </g></svg>
