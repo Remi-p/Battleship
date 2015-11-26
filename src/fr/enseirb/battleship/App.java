@@ -49,11 +49,13 @@ public class App {
 						switch(command)
 				        {
 				            case VIEW:
-				            	System.out.println("View ");
+				            	writer.view(1);
+				            	System.out.println("View written in " + writer.getWriter_play());
 				            break;
 				            
 				            case DEBUG:
 				            	writer.debugGrids();
+				            	System.out.println("Debug written in " + writer.getWriter_debug());
 				            break;
 				            
 				            case FIRE:

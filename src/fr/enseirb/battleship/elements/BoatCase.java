@@ -9,7 +9,7 @@ public class BoatCase extends Coordinates {
 		this.touched = false;
 	}
 
-	public boolean getTouched() {
+	public boolean touched() {
 		return this.touched;
 	}
 

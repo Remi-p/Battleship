@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 
 import fr.enseirb.battleship.Grid;
 import fr.enseirb.battleship.Player;
+import fr.enseirb.battleship.elements.BoatCase;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.Ship;
 
@@ -34,9 +35,11 @@ public class SvgWriter {
 	private final static int SPACE = 20;
 	private final static int HEADER = 50;
 	
+	private final static String SUNK_COL = "rgb(214, 11, 11)";
+	
 	private static final String line = "<line x1='%d' y1='%d' x2='%d' y2='%d' style='stroke:rgb(0,0,0);stroke-width:%d' />\n";
 	private static final String text = "<text x='%d' y='%d' transform='translate(0, %d) %s' alignment-baseline='central' fill='%s' text-anchor='middle' font-size='%d'>%s</text>\n";
-	private static final String boat = "<rect x='%d' y='%d' width='%d' height='%d' style='fill:rgb(0,0,0);fill-opacity:0.5;' />\n";
+	private static final String boat = "<rect x='%d' y='%d' width='%d' height='%d' style='fill:%s;fill-opacity:0.5;' />\n";
 
 	private static final String fire = "<symbol id='fire'><g transform='scale(%d, %d)'>" + readFile(Config.FIRE_SVG) + "</g></symbol>";
 	
@@ -80,20 +83,51 @@ public class SvgWriter {
 		this.player2 = player2;
 	};
 	
+	private void boat(Writer w, Ship ship) throws IOException {
+
+		String color;
+		
+		if (ship.isSunk())
+			color = SUNK_COL;
+		else
+			color = "rgb(0, 0, 0)";
+		
+		if (ship.isHorizontal()) {
+			boat(w, ship.getX(), ship.getY(), ship.getSize(), 1, color);
+			
+			this.text(w, (ship.getX()+1+ship.getSize()/2)*cell, 
+					(ship.getY()+1)*cell + cell/2, 
+					font_size, ship.getName());
+		}
+		else {
+			boat(w, ship.getX(), ship.getY(), 1, ship.getSize(), color);
+		
+			this.text(w, (ship.getX()+1)*cell + cell/2,
+					(ship.getY()+1+ship.getSize()/2)*cell, 
+					font_size, ship.getName(), -90);
+		}
+	}
+	// Coordinates are given in grid-based format
+	private void boat(Writer w, int x, int y, int width, int height, String color) throws IOException {
+		w.append(String.format(SvgWriter.boat,
+				(x+1)*cell, // Adding one, as there is numbering
+				(y+1)*cell,
+				width*cell,
+				height*cell, color));
+	}
+	
 	private void text(Writer w, int x, int y, int font_size, String text) throws IOException {
 		this.text(w, x, y, font_size, text, "", "");
 	}
-	
 	private void text(Writer w, int x, int y, int font_size, String text, int rotation) throws IOException {
 		// Rotation is made based on the origin. We need to changed pivot
 		this.text(w, x, y, font_size, text, "", "rotate(" + rotation + ", " + x + ", " + y + ")");
 	}
-	
 	private void text(Writer w, int x, int y, int font_size, String text, String color, String transform) throws IOException {
 		w.append(String.format(SvgWriter.text, x, y, font_size/2, transform, color, font_size, text));
 	}
 
-	private void header(Writer w) throws IOException {
+	private void header(Writer w, Player player1, Player player2) throws IOException {
 		
 		w.append("<?xml version='1.0' encoding='utf-8'?>\n");
 		
@@ -109,13 +143,11 @@ public class SvgWriter {
 		w.append(String.format(fire, cell, cell));
 		w.append("</defs>");
 		
-		// First player, first grid
+		// First player
 		this.text( w, img_width/2, header/2, header/2, player1.getName());
-		this.writeOneGrid(w, player1.getGrid(), 0, header);
 
-		// Second player, second grid
+		// Second player
 		this.text( w, img_width/2 + img_width + space, header/2, header/2, player2.getName());
-		this.writeOneGrid(w, player2.getGrid(), img_width + space, header);
 	}
 	
 	private void createGrid(Writer w) throws IOException {
@@ -154,7 +186,13 @@ public class SvgWriter {
 		try {
 			FileWriter w = new FileWriter(writer_debug);
 		
-			header(w);
+			header(w, player1, player2);
+
+			// First grid
+			this.writeOneGrid(w, player1.getGrid(), 0, header);
+
+			// Second
+			this.writeOneGrid(w, player2.getGrid(), img_width + space, header);
 			
 			w.append("</svg>");
 			w.close();
@@ -166,6 +204,9 @@ public class SvgWriter {
 	}
 	
 	private void writeOneGrid(Writer w, Grid grid, int x, int y) throws IOException {
+		this.writeOneGrid(w, grid, x, y, false);
+	}
+	private void writeOneGrid(Writer w, Grid grid, int x, int y, boolean hidden) throws IOException {
 
 		// Creating a group for the grid
 		w.append(String.format("<g transform='translate(%d, %d)'>\n", x, y));
@@ -175,33 +216,26 @@ public class SvgWriter {
 		// Boats
 		for (Ship ship : grid.getShips()) {
 			
-			if (ship.isHorizontal()) {
-				w.append(String.format(SvgWriter.boat,
-									(ship.getX()+1)*cell, // Adding one, as there is numbering
-									(ship.getY()+1)*cell,
-									ship.getSize()*cell,
-									cell));
-				
-				this.text(w, (ship.getX()+1+ship.getSize()/2)*cell, 
-						(ship.getY()+1)*cell + cell/2, 
-						font_size, ship.getName());
-			}
-			else {
-				w.append(String.format(SvgWriter.boat,
-						(ship.getX()+1)*cell,
-						(ship.getY()+1)*cell,
-						cell,
-						ship.getSize()*cell));
+			// If ship is part of an hidden grid, but is sunked, we display it
+			if ((hidden && ship.isSunk()) || !hidden)
+				boat(w, ship);
 			
-				this.text(w, (ship.getX()+1)*cell + cell/2,
-						(ship.getY()+1+ship.getSize()/2)*cell, 
-						font_size, ship.getName(), -90);
-			}
+			// We display touched cases only when the boat is still alive
+			if (!ship.isSunk())
+				for (BoatCase coord : ship.getBoatCases())
+					// TODO : Changed symbol
+					if (coord.touched()) {
+						w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", (coord.getX()+1)*cell, (coord.getY()+1)*cell));
+					
+						// When the grid is of type hidden, we need to show that there was, once, a boat-part at this location
+						if (hidden)
+							boat(w, coord.getX(), coord.getY(), 1, 1, SUNK_COL);
+					}
 		}
 		
 		// Missed
 		for (Coordinates coord : grid.getFires()) {
-			w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", coord.getX()*cell, coord.getY()*cell));			
+			w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", (coord.getX()+1)*cell, (coord.getY()+1)*cell));			
 		}
 		
 		// Closing group
@@ -226,5 +260,48 @@ public class SvgWriter {
 			e.printStackTrace();
 		}
 	}
+
+	public String getWriter_debug() {
+		return writer_debug;
+	}
+
+	public String getWriter_play() {
+		return writer_play;
+	}
+
+	// Display the view from one of the player perspective
+	public void view(int i) {
+		
+		Player main, hide;
+		if (i == 1) {
+			main = player1;
+			hide = player2; 
+		}
+		else {
+			main = player1;
+			hide = player2;
+		}
+
+		try {
+			FileWriter w = new FileWriter(writer_play);
+		
+			header(w, main, hide);
+
+			// First grid, everything is shown
+			this.writeOneGrid(w, player1.getGrid(), 0, header);
+
+			// Second, partially hidden
+			this.writeOneGrid(w, player2.getGrid(), img_width + space, header, true);
+			
+			w.append("</svg>");
+			w.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	
 }

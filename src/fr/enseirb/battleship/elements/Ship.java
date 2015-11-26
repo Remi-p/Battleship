@@ -85,7 +85,7 @@ public class Ship {
 		return this.size;
 	}
 	
-	public boolean getSunk() {
+	public boolean isSunk() {
 		return this.sunk;
 	}
 
@@ -140,7 +140,7 @@ public class Ship {
 		
 		int hit = 0;
 			for(BoatCase boatcase : this.boatcases){
-				if(boatcase.getTouched()){
+				if(boatcase.touched()){
 					hit++;
 				}
 			}

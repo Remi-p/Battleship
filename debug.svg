@@ -64,6 +64,7 @@
     </g>
   </g>
 </g></symbol></defs><text x='220' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Anonymous</text>
+<text x='680' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Jarvis</text>
 <g transform='translate(0, 50)'>
 <g>
 <rect x='0' y='0' width='440' height='440' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
@@ -108,12 +109,17 @@
 <text x='420' y='20' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='40' y='40' width='120' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<rect x='280' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='300' y='200' transform='translate(0, 10) rotate(-90, 300, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Hermione</text>
+<use xlink:href='#fire' x='280' y='240'/><rect x='40' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='80' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>K-19</text>
-<rect x='40' y='120' width='40' height='80' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
+<rect x='40' y='120' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='60' y='160' transform='translate(0, 10) rotate(-90, 60, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Titanic</text>
-</g><text x='680' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Jarvis</text>
-<g transform='translate(460, 50)'>
+<rect x='120' y='120' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
+<rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='220' y='200' transform='translate(0, 10) rotate(-90, 220, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
+<use xlink:href='#fire' x='320' y='280'/><use xlink:href='#fire' x='80' y='80'/><use xlink:href='#fire' x='400' y='320'/></g><g transform='translate(460, 50)'>
 <g>
 <rect x='0' y='0' width='440' height='440' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
 <line x1='40' y1='0' x2='40' y2='440' style='stroke:rgb(0,0,0);stroke-width:4' />
@@ -157,8 +163,14 @@
 <text x='420' y='20' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='40' y='320' width='120' height='40' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='80' y='340' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
-<rect x='40' y='360' width='40' height='80' style='fill:rgb(0,0,0);fill-opacity:0.5;' />
-<text x='60' y='400' transform='translate(0, 10) rotate(-90, 60, 400)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
-</g></svg>
+<rect x='200' y='240' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='220' y='320' transform='translate(0, 10) rotate(-90, 220, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Galactica Battlestar</text>
+<rect x='160' y='160' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='200' y='180' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
+<rect x='160' y='80' width='80' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<text x='200' y='100' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
+<rect x='40' y='200' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='80' y='220' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
+<rect x='160' y='120' width='200' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='240' y='140' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>USS Enterprise</text>
+<use xlink:href='#fire' x='280' y='120'/><use xlink:href='#fire' x='240' y='80'/></g></svg>

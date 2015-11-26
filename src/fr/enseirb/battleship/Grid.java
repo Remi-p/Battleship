@@ -196,14 +196,14 @@ public class Grid {
 			
 			if ("untouched".compareTo(state) == 0) {
 				for(BoatCase boatcase : boat.getBoatCases()) {
-					if(!boatcase.getTouched()) {
+					if(!boatcase.touched()) {
 						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
 					}
 				}
 			}
 			else if("touched".compareTo(state) == 0) {
 				for(BoatCase boatcase : boat.getBoatCases()) {
-					if(boatcase.getTouched()) {
+					if(boatcase.touched()) {
 						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
 					}
 				}
@@ -356,7 +356,7 @@ public class Grid {
 	
 	public boolean checkAllShipSunk(){
 		for(Ship boat : this.ships) {
-			if(!boat.getSunk()) 
+			if(!boat.isSunk()) 
 				return false;
 		}
 		return true;
