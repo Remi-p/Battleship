@@ -88,9 +88,8 @@ public class Read {
 
 		}
 		catch (NumberFormatException e) {
-
+			throw new CommandException();
 		}
-		return null;
 	}
 
 
