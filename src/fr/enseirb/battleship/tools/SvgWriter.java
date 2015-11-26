@@ -201,8 +201,7 @@ public class SvgWriter {
 		
 		// Missed
 		for (Coordinates coord : grid.getFires()) {
-			// TODO : Erreur ici sur un dépassement ....
-			//w.append("<use xlink:href='#fire' x='%d' y='%d'/>", coord.getX(), coord.getY());			
+			w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", coord.getX()*cell, coord.getY()*cell));			
 		}
 		
 		// Closing group
