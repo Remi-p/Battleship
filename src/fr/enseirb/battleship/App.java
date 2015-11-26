@@ -59,8 +59,11 @@ public class App {
 				            case FIRE:
 				            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
 				            	if(ia.getGrid().checkHit(fire_coordinates, "human")) {
-					            	human.checkWin();
-					            	break humanloop;
+					            	if(ia.checkWin("human")) {
+					            		break gameloop;
+					            	}
+					            	else
+					            		break humanloop;
 				            	}
 				            break;
 				            
@@ -86,8 +89,10 @@ public class App {
 					// IA turn
 					Coordinates random_coordinates = human.grid.getRandomCoordinates();
 	            	if(human.getGrid().checkHit(random_coordinates, ia.getName())) {
-		            	human.checkWin();
-		            	break ialoop;
+		            	if(ia.checkWin(human.getName()))
+		            		break gameloop;
+		            	else
+		            		break ialoop;
 	            	}
 				} while(true);
 

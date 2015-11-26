@@ -24,7 +24,6 @@ public class Grid {
 	private List<Ship> ships;
 	private List<Coordinates> missedfires;
 	private List<String> shipnames;
-	private int sinkedShip;
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
 	}
@@ -42,7 +41,6 @@ public class Grid {
 		Type ships_type = configs_extract(configs_path, gridfilename);
 		ships_extract(configs_path, shipfilename, ships_type);
 		init_fires();
-		this.sinkedShip = 0;
 	}
 	
 	// Constructor for IA
@@ -55,7 +53,6 @@ public class Grid {
 		this.shipnames = ShipsNameInitialisation();
 		this.ships = random_ships(this.height, this.width, ships_type);
 		init_fires();
-		this.sinkedShip = 0;
 	}
 	
 	// Configs extraction from grid.xml
@@ -357,8 +354,12 @@ public class Grid {
 		return this.missedfires;
 	}
 	
-	public int getSinkedShip(){
-		return this.sinkedShip;
+	public boolean checkAllShipSunk(){
+		for(Ship boat : this.ships) {
+			if(!boat.getSunk()) 
+				return false;
+		}
+		return true;
 	}
 	
 }

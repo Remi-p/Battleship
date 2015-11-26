@@ -19,9 +19,16 @@ public abstract class Player {
 		return name;
 	}
 	
-	public void checkWin(String message){
-		if(this.getGrid().getSinkedShip() == this.getGrid().getShips().size()){
-			System.out.println(message);
+	public boolean checkWin(String name){
+		if(this.getGrid().checkAllShipSunk()){
+			if(name.compareTo("human") == 0)
+				System.out.println("You win !");
+			else {
+				System.out.println(name + " win !");
+				System.out.println("You loose !");
+			}
+			return true;
 		}
+		return false;
 	}
 }
