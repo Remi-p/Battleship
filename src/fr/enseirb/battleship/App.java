@@ -12,7 +12,7 @@ public class App {
 
 	public static void main(String[] args) throws Exception {
 		
-		Config.setVerbose(true);
+		Config.setVerbose(false);
 		
 		if (args.length != 3)
 			throw new Exception("Incorrect number of arguments.");
@@ -31,50 +31,68 @@ public class App {
 		if ("debug".compareTo(args[0]) == 0) {
 			writer.debugGrids();
 		}
-		else
+		else {
 		// Human player
+			gameloop:
 			do{
-				try {
-					
-					String input;
-					Command command;
-					
-					Read read = new Read();
-					input = read.getInput();
-					command = read.getCommand(input);
-					
-					switch(command)
-			        {
-			            case VIEW:
-			            	System.out.println("View ");
-			            break;
-			            
-			            case DEBUG:
-			            	writer.debugGrids();
-			            break;
-			            
-			            case FIRE:
-			            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
-			            	ia.getGrid().checkHit(fire_coordinates);
-			            	human.checkWin();
+				humanloop:
+				do{
+					try {
+						
+						String input;
+						Command command;
+						
+						Read read = new Read();
+						input = read.getInput();
+						command = read.getCommand(input);
+						
+						switch(command)
+				        {
+				            case VIEW:
+				            	System.out.println("View ");
+				            break;
+				            
+				            case DEBUG:
+				            	writer.debugGrids();
+				            break;
+				            
+				            case FIRE:
+				            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
+				            	if(ia.getGrid().checkHit(fire_coordinates, "human")) {
+					            	human.checkWin();
+					            	break humanloop;
+				            	}
+				            break;
+				            
+				            case QUIT:
+				            	System.out.println("End of the game. Bye !");
+				            	break gameloop;
 
-			            break;
-			            
-			            case QUIT:
-			            	System.out.println("End of the game. Bye !");
-			            	System.exit(0);
-			            break;
-			            
-			            default: 
-			            break;
-			            
-			        }
-				}
-				catch(CommandException e) {
-							
-				}
+				            
+				            default: 
+				            break;
+				            
+				        }
+					}
+					catch(CommandException e) {
+								
+					}
+					
+				} while(true);
+				// End human loop
 				
+			ialoop:
+				do {
+					// IA turn
+					Coordinates random_coordinates = human.grid.getRandomCoordinates();
+	            	if(human.getGrid().checkHit(random_coordinates, ia.getName())) {
+		            	human.checkWin();
+		            	break ialoop;
+	            	}
+				} while(true);
+
 			} while(true);
+			// End game loop
+    	System.exit(0); // End of game
 	}
-	
-}
+}}

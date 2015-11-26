@@ -274,7 +274,9 @@ public class Grid {
 			return false;
 	}
 	
-	public void checkHit(Coordinates coordinates) {
+	public boolean checkHit(Coordinates coordinates, String name) {
+		
+		boolean bool = false;
 		
 		List<Coordinates> ships_untouched_coordinates = getShipsCoordinates(this.ships, "untouched");
 		List<Coordinates> ships_touched_coordinates = getShipsCoordinates(this.ships, "touched"); 
@@ -289,13 +291,22 @@ public class Grid {
 						if(boatcase.getX() == coordinates.getX() && boatcase.getY() == coordinates.getY()) {
 							boatcase.setTouched(); // Boat case touched
 							// If boat is sunk
+							
+							bool = true;
+							
 							if(boat.checkBoatSunk()) {
-								System.out.println("Sunk boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+								if(name.compareTo("human") == 0)
+									System.out.println("Sunk boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+								else
+									System.out.println(name + " sunk boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+
 							}
 							else {
-								System.out.println("Touched boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+								if(name.compareTo("human") == 0)
+									System.out.println("Touched boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
+								else
+									System.out.println(name + " touched boat " + boat.getName() + " at " + coordinates.getX() + " " + coordinates.getY() );
 							}
-							break; // We find the boat
 						}
 					}
 
@@ -304,12 +315,27 @@ public class Grid {
 			else {
 				// Missed fire
 				this.addFire(coordinates);
-	    		System.out.println("Missed at " + coordinates.getX() + " " + coordinates.getY());
+				if(name.compareTo("human") == 0)
+					System.out.println("Missed at " + coordinates.getX() + " " + coordinates.getY());
+				else
+					System.out.println(name + " missed at " + coordinates.getX() + " " + coordinates.getY());
+				bool = true;
 			}
 		}	
 		else {
-			System.out.println("Already fired at " + coordinates.getX() + " " + coordinates.getY());
+			if(name.compareTo("human") == 0)
+				System.out.println("Already fired at " + coordinates.getX() + " " + coordinates.getY());
+				
+			bool = false;
 		}
+		return bool;
+	}
+	
+	public Coordinates getRandomCoordinates(){
+		int x = (int)(Math.random() * (this.width-0)) + 0 ; 
+		int y = (int)(Math.random() * (this.height-0)) + 0 ;
+		Coordinates coordinates = new Coordinates(x,y);
+		return coordinates;
 	}
 	
 	// GETTERS
