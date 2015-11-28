@@ -111,7 +111,7 @@
 </g>
 <rect x='280' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='300' y='200' transform='translate(0, 10) rotate(-90, 300, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Hermione</text>
-<use xlink:href='#fire' x='280' y='240'/><rect x='40' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<rect x='40' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='80' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>K-19</text>
 <rect x='40' y='120' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='60' y='160' transform='translate(0, 10) rotate(-90, 60, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Titanic</text>
@@ -119,7 +119,7 @@
 <text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
 <rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='220' y='200' transform='translate(0, 10) rotate(-90, 220, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
-<use xlink:href='#fire' x='320' y='280'/><use xlink:href='#fire' x='80' y='80'/><use xlink:href='#fire' x='400' y='320'/></g><g transform='translate(460, 50)'>
+<use xlink:href='#fire' x='280' y='40'/><use xlink:href='#fire' x='320' y='200'/><use xlink:href='#fire' x='120' y='400'/></g><g transform='translate(460, 50)'>
 <g>
 <rect x='0' y='0' width='440' height='440' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
 <line x1='40' y1='0' x2='40' y2='440' style='stroke:rgb(0,0,0);stroke-width:4' />
@@ -163,7 +163,5 @@
 <text x='420' y='20' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='160' y='80' width='80' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<text x='200' y='100' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
-<use xlink:href='#fire' x='280' y='120'/><rect x='280' y='120' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#fire' x='240' y='80'/></g></svg>
+<use xlink:href='#fire' x='200' y='200'/><rect x='200' y='200' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<use xlink:href='#fire' x='120' y='120'/><use xlink:href='#fire' x='240' y='240'/></g></svg>
