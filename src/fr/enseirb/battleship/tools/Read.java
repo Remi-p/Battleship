@@ -75,7 +75,7 @@ public class Read {
 				x = Integer.parseInt(coord[1]);
 				y = Integer.parseInt(coord[2]);
 				
-				if( (x < 0 || x > width) || (y < 0 || y > height) ) {
+				if( (x < 0 || x >= width) || (y < 0 || y >= height) ) {
 					throw new CommandException(height, width);
 				}
 				
