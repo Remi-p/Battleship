@@ -61,8 +61,8 @@ public class Grid {
 		XmlParserGrid grid = new XmlParserGrid(configs_path, gridfilename);
 		
 		// Dimensions
-		int height = grid.getDimHorizontal();
-		int width = grid.getDimVertical();
+		int width = grid.getDimHorizontal();
+		int height = grid.getDimVertical();
 		
 		this.setDim(height, width);
 				

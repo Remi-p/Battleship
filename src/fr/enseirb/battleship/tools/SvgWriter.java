@@ -75,8 +75,8 @@ public class SvgWriter {
 		this.space = SvgWriter.SPACE;
 		this.header = SvgWriter.HEADER;
 		
-		this.img_height = (this.width+1) * cell;
-		this.img_width = (this.height+1) * cell;
+		this.img_height = (this.height+1) * cell;
+		this.img_width = (this.width+1) * cell;
 		
 		// Players
 		this.player1 = player1;
@@ -162,21 +162,20 @@ public class SvgWriter {
 		w.append(String.format(SvgWriter.line, cell, 0, cell, img_height, stroke*2));
 		w.append(String.format(SvgWriter.line, 0, cell, img_width, cell, stroke*2));
 		
-		for (int i = 2; i <= width; i++) {
+		for (int i = 2; i <= width; i++)
 			// Vertical
 			w.append(String.format(SvgWriter.line, i*cell, 0, i*cell, img_height, stroke));
+		for (int i = 2; i <= height; i++)
 			// Horizontal
 			w.append(String.format(SvgWriter.line, 0, i*cell, img_width, i*cell, stroke));
-		}
 		
 		// Numbering
-		for (int i = 0; i < width; i++) {
-			// Vertical
+		// Vertical
+		for (int i = 0; i < width; i++)
 			this.text( w, (i+1)*cell + cell/2, cell/2, font_size, Integer.toString(i));
-			
-			// Horizontal
+		// Horizontal
+		for (int i = 0; i < height; i++)
 			this.text( w, cell/2, (i+2)*cell - cell/2, font_size, Integer.toString(i));
-		}
 		
 		w.append("</g>\n");
 	}
