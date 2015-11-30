@@ -31,10 +31,10 @@ public class Ship {
 		}
 		else {
 			
-			if(this.orientation == Orientation.HORIZONTAL && x+size > height_grid ) {
+			if(this.orientation == Orientation.HORIZONTAL && x+size > width_grid ) {
 				throw new ShipOutOfBoundsException(name);
 			}
-			else if(this.orientation == Orientation.VERTICAL && y+size > width_grid ) {
+			else if(this.orientation == Orientation.VERTICAL && y+size > height_grid ) {
 				throw new ShipOutOfBoundsException(name);
 			}
 			else {
