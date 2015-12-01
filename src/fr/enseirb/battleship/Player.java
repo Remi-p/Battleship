@@ -31,4 +31,6 @@ public abstract class Player {
 		}
 		return false;
 	}
+	
+	abstract public boolean play(Player player);
 }

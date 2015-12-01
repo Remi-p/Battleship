@@ -9,8 +9,18 @@ public class Coordinates {
 		this.y = y;
 	}
 	
-	// GETTERS
+	static public Coordinates strToCoord(String txt) {
+		 String[] coord_txt = txt.split(":");
+		 
+		 return new Coordinates(Integer.parseInt(coord_txt[0]),
+				 				Integer.parseInt(coord_txt[1]));
+	}
+
+	public String toString() {
+		return this.getX() + ":" + this.getY();
+	}
 	
+	// GETTERS
 	public int getX() {
 		return this.x;
 	}
