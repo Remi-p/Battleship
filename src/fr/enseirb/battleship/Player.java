@@ -4,7 +4,7 @@ public abstract class Player {
 	protected String name;
 
 	protected int score;
-	Grid grid;
+	protected Grid grid;
 	
 	public Player(String name) {
 		this.name = name;

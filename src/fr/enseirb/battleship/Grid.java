@@ -24,6 +24,7 @@ public class Grid {
 	private List<Ship> ships;
 	private List<Coordinates> missedfires;
 	private List<String> shipnames;
+	
 	public Grid() throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException, ShipsConfigurationException {
 		this(Config.CONFIGS);
 	}
@@ -170,6 +171,8 @@ public class Grid {
 		shipNames.add("Voyager 1");
 		shipNames.add("Star Destroyer");
 		shipNames.add("Prometheus");
+		
+		// TODO : exception
 		
 		return shipNames;
 	}

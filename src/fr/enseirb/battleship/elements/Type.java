@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 
 import fr.enseirb.battleship.tools.Config;
 
+// TODO s
 public class Type {
 	private List<TypeElt> types;
 	

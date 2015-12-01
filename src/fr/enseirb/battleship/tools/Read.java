@@ -11,6 +11,7 @@ public class Read {
 	public String getInput() {
 		
 		String text = "";
+		// TODO c
 		char C='\0';
 		
 		try {
