@@ -51,6 +51,10 @@ public class Human extends Player {
 		}
 	}
 	
+	public void closeScktOpponent() throws IOException {
+		this.opponent.close();
+	}
+	
 	@Override
 	public boolean play(Player player) {return false;}
 	

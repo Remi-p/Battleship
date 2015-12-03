@@ -18,7 +18,7 @@ public class RemoteHuman extends Human {
 	
 	public RemoteHuman(Socket socket) throws InvalidGridException, ShipOutOfBoundsException,
 			ShipOverlapException, ShipsConfigurationException {
-		super();
+		super("Remote Human");
 		this.socket = socket;
 		
 		try {
@@ -47,6 +47,10 @@ public class RemoteHuman extends Human {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// Socket has been closed
+		if (recv == null)
+			return true;
 		
 		Coordinates recv_coord = Coordinates.strToCoord(recv);
 		
