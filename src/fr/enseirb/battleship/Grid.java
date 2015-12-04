@@ -126,24 +126,28 @@ public class Grid {
 			double o = Math.random();
 			int x = 0;
 			int y = 0;
-			double number_cell = (height*width)/ships_type.getTotalQty();
-			int box_index = 1;
-			int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
-			int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
-			int number_box =(int) Math.floor(height/height_box*width/width_box );
-			int dec_x = 0;
-			int dec_y = 0;
+				double number_cell = (height*width)/ships_type.getTotalQty();
+				int box_index = 1;
+				int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
+				int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
+				int number_box =(int) Math.floor(height/height_box*width/width_box );
+				int dec_x = 0;
+				int dec_y = 0;
+			
+			int pack_box_index = (int)(Math.random()*number_box+1);
+			
 			for (TypeElt e : ships_type.getListType()) {
 				
 				for( int i = 0; i < e.getQuantity(); i++) {
 					o = Math.random();
 					switch(strategy){
+					
 						case RANDOM:
 							 x = (int)(Math.random() * (width-0)) + 0;
-							 y = (int)(Math.random() * (height-0)) + 0;
+							 y = (int)(Math.random() * (height-0)) + 0;						
 							break;
-						case FAR :
 							
+						case FAR :
 							do{
 								box_index = (int)(Math.random()*number_box+1);
 							}while(Collections.frequency(indexs,box_index) >0);
@@ -154,9 +158,14 @@ public class Grid {
 							x = (int)((width_box+1)*dec_x);
 							y = (int)((height_box)*dec_y +dec_x);
 							break;
+							
 						case PACK :
-							 x = (int)(Math.random() * (width-0)) + 0;
-							 y = (int)(Math.random() * (height-0)) + 0;
+	
+							dec_x = (int)((pack_box_index-1)%Math.floor(width/width_box));
+							dec_y = (int)(Math.floor((pack_box_index-1)/Math.floor(width/width_box)));
+							x = (int)(Math.random()*width_box + dec_x*width_box);
+							y = (int)(Math.random()*height_box + dec_y*height_box);
+							
 							break;
 							
 					}
