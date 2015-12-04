@@ -2,7 +2,9 @@ package fr.enseirb.battleship;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 
 import fr.enseirb.battleship.elements.Coordinates;
@@ -15,6 +17,7 @@ public class RemoteHuman extends Human {
 
 	private Socket socket;
 	private BufferedReader in;
+	private InputStream inputStream;
 	
 	public RemoteHuman(Socket socket) throws InvalidGridException, ShipOutOfBoundsException,
 			ShipOverlapException, ShipsConfigurationException {
@@ -22,7 +25,8 @@ public class RemoteHuman extends Human {
 		this.socket = socket;
 		
 		try {
-			this.in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			this.inputStream = socket.getInputStream();
+			this.in = new BufferedReader(new InputStreamReader(this.inputStream));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,8 +53,10 @@ public class RemoteHuman extends Human {
 		}
 		
 		// Socket has been closed
-		if (recv == null)
+		if (recv == null) {
+			System.out.println("Disconnected.");
 			return true;
+		}
 		
 		Coordinates recv_coord = Coordinates.strToCoord(recv);
 		
@@ -63,4 +69,15 @@ public class RemoteHuman extends Human {
 
 	}
 
+	public void recvGrid() throws Exception {
+		ObjectInputStream ois = null;
+		
+		ois = new ObjectInputStream(this.inputStream);
+		
+	    this.grid = (Grid) ois.readObject();
+	      
+	    //ois.close();
+		      
+	}
+	
 }

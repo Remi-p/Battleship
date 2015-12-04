@@ -19,7 +19,13 @@ import fr.enseirb.battleship.tools.Config;
 import fr.enseirb.battleship.tools.XmlParserGrid;
 import fr.enseirb.battleship.tools.XmlParserShips;
 
-public class Grid {
+public class Grid implements java.io.Serializable {
+	/**
+	 * Serial allows to block the system if he receives a serialized version of
+	 * an ancient object version
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int height;
 	private int width;
 	private List<Ship> ships;

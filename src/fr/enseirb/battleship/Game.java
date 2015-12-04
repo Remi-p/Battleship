@@ -1,6 +1,7 @@
 package fr.enseirb.battleship;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -50,6 +51,12 @@ public class Game {
 		}
 		else // Against IA
 			player2 = new IA();
+		
+		// When we are on multiplayer, we exchange grids
+		if (this.isServer() || this.isClient()) {
+			player1.sendGridToOpponent();
+			((RemoteHuman) player2).recvGrid();
+		}
 		
 		// Object for writing svg debug file
 		this.writer = new SvgWriter(getWidth(), getHeight(), player1, player2);

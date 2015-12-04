@@ -42,6 +42,7 @@ public class SvgWriter {
 	private static final String boat = "<rect x='%d' y='%d' width='%d' height='%d' style='fill:%s;fill-opacity:0.5;' />\n";
 
 	private static final String fire = "<symbol id='fire'><g transform='scale(%d, %d)'>" + readFile(Config.FIRE_SVG) + "</g></symbol>";
+	private static final String missed = "<symbol id='missed'><g transform='scale(%d, %d)'>" + readFile(Config.MISSED_SVG) + "</g></symbol>";
 	
 	private String writer_debug = Config.DEBUG_SVG;
 	private String writer_play = Config.PLAY_SVG;
@@ -141,6 +142,7 @@ public class SvgWriter {
 		// Definitions
 		w.append("<defs>");
 		w.append(String.format(fire, cell, cell));
+		w.append(String.format(missed, cell, cell));
 		w.append("</defs>");
 		
 		// First player
@@ -234,7 +236,7 @@ public class SvgWriter {
 		
 		// Missed
 		for (Coordinates coord : grid.getFires()) {
-			w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", (coord.getX()+1)*cell, (coord.getY()+1)*cell));			
+			w.append(String.format("<use xlink:href='#missed' x='%d' y='%d'/>", (coord.getX()+1)*cell, (coord.getY()+1)*cell));			
 		}
 		
 		// Closing group

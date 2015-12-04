@@ -1,6 +1,7 @@
 package fr.enseirb.battleship;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.net.Socket;
 
@@ -49,6 +50,19 @@ public class Human extends Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void sendGridToOpponent() throws Exception {
+		ObjectOutputStream oos = null;
+		
+		oos = new ObjectOutputStream(this.out);
+		
+		// Writing object in stream
+		oos.writeObject(this.grid);
+		oos.flush();
+		
+		// Do not use close ; it will close the socket
+		//oos.close();
 	}
 	
 	public void closeScktOpponent() throws IOException {

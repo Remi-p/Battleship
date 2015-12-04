@@ -5,7 +5,7 @@ import java.util.List;
 
 import fr.enseirb.battleship.exceptions.ShipOutOfBoundsException;
 
-public class Ship {
+public class Ship implements java.io.Serializable {
 	private String name;
 	private String type;
 	private int x;

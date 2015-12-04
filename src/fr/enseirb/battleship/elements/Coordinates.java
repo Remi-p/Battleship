@@ -1,6 +1,6 @@
 package fr.enseirb.battleship.elements;
 
-public class Coordinates {
+public class Coordinates implements java.io.Serializable {
 	int x;
 	int y;
 	
