@@ -8,6 +8,7 @@ import java.util.List;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.BoatCase;
 import fr.enseirb.battleship.elements.Ship;
+import fr.enseirb.battleship.elements.Strategy;
 import fr.enseirb.battleship.elements.Type;
 import fr.enseirb.battleship.elements.TypeElt;
 import fr.enseirb.battleship.exceptions.InvalidGridException;
@@ -50,9 +51,10 @@ public class Grid {
 		// We do not throw errors about boats here, but we check them
 		
 		Type ships_type;
+		Strategy strategy = Strategy.FAR;
 		ships_type = configs_extract(configs_path, gridfilename);
 		this.shipnames = ShipsNameInitialisation();
-		this.ships = random_ships(this.height, this.width, ships_type);
+		this.ships = randomShips(this.height, this.width, ships_type, strategy);
 		init_fires();
 	}
 	
@@ -114,48 +116,79 @@ public class Grid {
 			this.width = width;
 		}
 	}
-	
-	private List<Ship> random_ships(int height, int width, Type ships_type) {
 		
-		List<Ship> ships = new ArrayList<Ship>();
-		
-		for (TypeElt e : ships_type.getListType()) {
+		private List<Ship> randomShips(int height, int width, Type ships_type,Strategy strategy) {
 			
-			for( int i = 0; i < e.getQuantity(); i++) {
+			List<Ship> ships = new ArrayList<Ship>();
+			List<Integer>  indexs = new ArrayList<Integer>();
+			String orientation;
+			String random_shipname;
+			double o = Math.random();
+			int x = 0;
+			int y = 0;
+			double number_cell = (height*width)/ships_type.getTotalQty();
+			int box_index = 1;
+			int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
+			int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
+			int number_box =(int) Math.floor(height/height_box*width/width_box );
+			int dec_x = 0;
+			int dec_y = 0;
+			for (TypeElt e : ships_type.getListType()) {
 				
-				int x = (int)(Math.random() * (width-0)) + 0;
-				int y = (int)(Math.random() * (height-0)) + 0;
-				double o = Math.random();
-				String orientation;
-				String random_shipname;
-				
-				if (o >= 0.5)
-					orientation = "horizontal";
-				else
-					orientation = "vertical";
-				
-				try {
-					random_shipname = random_shipname(this.shipnames);
-					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
-					
-					// There is an overlapping problem
-					if (Grid.shipOverlapShips(ships, ships_type, ship)) {
-						i--;
-						this.shipnames.add(random_shipname);
+				for( int i = 0; i < e.getQuantity(); i++) {
+					o = Math.random();
+					switch(strategy){
+						case RANDOM:
+							 x = (int)(Math.random() * (width-0)) + 0;
+							 y = (int)(Math.random() * (height-0)) + 0;
+							break;
+						case FAR :
+							
+							do{
+								box_index = (int)(Math.random()*number_box+1);
+							}while(Collections.frequency(indexs,box_index) >0);
+						
+							indexs.add(box_index);					
+							dec_x = (int)((box_index-1)%Math.floor(width/width_box));
+							dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
+							x = (int)((width_box+1)*dec_x);
+							y = (int)((height_box)*dec_y +dec_x);
+							break;
+						case PACK :
+							 x = (int)(Math.random() * (width-0)) + 0;
+							 y = (int)(Math.random() * (height-0)) + 0;
+							break;
+							
 					}
-					else
-						ships.add(ship);
+						if (o >= 0.5)
+							orientation = "horizontal";
+						else
+							orientation = "vertical";
 					
-				} catch (ShipOutOfBoundsException e1) {
-					i--;
+					try {
+						random_shipname = random_shipname(this.shipnames);
+						Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
+						
+						// There is an overlapping problem
+						if (Grid.shipOverlapShips(ships, ships_type, ship)) {
+							i--;
+							this.shipnames.add(random_shipname);
+						}
+						else
+							ships.add(ship);
+						
+					} catch (ShipOutOfBoundsException e1) {
+						i--;
+					}
+					
+					
 				}
-				
-				
 			}
+			return ships;
+			
 		}
-		return ships;
 		
-	}
+	
 	
 	private List<String> ShipsNameInitialisation() {
 		List<String> shipNames = new ArrayList<String>();

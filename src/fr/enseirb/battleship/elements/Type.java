@@ -83,6 +83,14 @@ public class Type {
 		return -1;
 	}
 	
+	public int getTotalQty(){
+		int elements = 0;
+		for (TypeElt e : types){
+			elements += e.getQuantity();
+		}
+		return elements;
+	}
+	
 	//GETTER
 	public List<TypeElt> getListType() {
 		return this.types;
