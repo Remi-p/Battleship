@@ -12,7 +12,7 @@ Enseirb-Matmeca, 2015
 
 T2-G1
 
-# Step 1
+# Step 1 : Grid
 
 ## Importing Grid & ships
 
@@ -36,3 +36,33 @@ $ java fr.enseirb.battleship.App debug grid.xml ships.xml
 ```
 
 * The drawing writing process is managed in the *SvgWriter* class
+
+# Step 2 : Game
+
+## Turn by turn
+
+* Function `turnOfPlayer(i)` processes the turn of IA or Human player
+	* It calls the abstract method `play` of player and his children
+* Keyboards inputs are handled in the `play` method of *Human* class, extending *Player*
+* Random fires of the IA are managed in the `play` method of *IA*, extending *Player*
+	* Random coordinates are generated from `getRandomCoordinates` of *Grid*
+	* They keep being generated while none have been encounter satisfying every conditions of `checkHit` (*Grid*)
+
+# Step 3 : Advanced IA
+
+## Strategies
+
+* Boats placement and attack strategy are indicated in **grid.xml** by the user.
+	* These informations change the way the function `.......` behaves
+
+# Bonus : Network
+
+## Multiplayer
+
+* *RemoteHuman*, extending *Player*, is seamlessly changing the way *IA* behaved
+	* It uses the same function, `play`, but the program waits for external data
+* An optional **opponent** socket is added in *Human*
+	* When defined, the class sends through the socket information of human moves
+* At initialization, grids are exchanged between players
+	* The use of *Java.io.Serializable* allows us to convert a *Grid* to a String
+	* *Human* and *RemoteHuman* implements respectively `sendGridToOpponent` and `recvGrid` for exchanging grids
