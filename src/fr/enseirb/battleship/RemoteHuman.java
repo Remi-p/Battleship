@@ -60,7 +60,7 @@ public class RemoteHuman extends Human {
 		
 		Coordinates recv_coord = Coordinates.strToCoord(recv);
 		
-    	if(player.getGrid().checkHit(recv_coord, this.getName())) {
+    	if(player.getGrid().checkHit(recv_coord, this.getName())>0) {
         	if(this.checkWin(player.getName()))
         		return true;
     	}

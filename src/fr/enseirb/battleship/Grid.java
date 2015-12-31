@@ -322,9 +322,9 @@ public class Grid implements java.io.Serializable {
 			return false;
 	}
 	
-	public boolean checkHit(Coordinates coordinates, String name) {
+	public int checkHit(Coordinates coordinates, String name) {
 		
-		boolean bool = false;
+		int status = 0;
 		
 		List<Coordinates> ships_untouched_coordinates = getShipsCoordinates(this.ships, "untouched");
 		List<Coordinates> ships_touched_coordinates = getShipsCoordinates(this.ships, "touched"); 
@@ -340,7 +340,7 @@ public class Grid implements java.io.Serializable {
 							boatcase.setTouched(); // Boat case touched
 							// If boat is sunk
 							
-							bool = true;
+							status = 1;
 							
 							if(boat.checkBoatSunk()) {
 								if(name.compareTo("human") == 0)
@@ -367,21 +367,28 @@ public class Grid implements java.io.Serializable {
 					System.out.println("Missed at " + coordinates.getX() + " " + coordinates.getY());
 				else
 					System.out.println(name + " missed at " + coordinates.getX() + " " + coordinates.getY());
-				bool = true;
+				status = 2;
 			}
 		}	
 		else {
 			if(name.compareTo("human") == 0)
 				System.out.println("Already fired at " + coordinates.getX() + " " + coordinates.getY());
 				
-			bool = false;
+			status = 0;
 		}
-		return bool;
+		return status;
 	}
 	
 	public Coordinates getRandomCoordinates(){
 		int x = (int)(Math.random() * (this.width-0)) + 0 ; 
 		int y = (int)(Math.random() * (this.height-0)) + 0 ;
+		Coordinates coordinates = new Coordinates(x,y);
+		return coordinates;
+	}
+	
+	public Coordinates getRandomSmartCoordinates(){
+		int x = (int)Math.floor((Math.random()*(this.width/2))) * 2;
+		int y = (int)Math.floor((Math.random()*(this.height/2))) * 2;
 		Coordinates coordinates = new Coordinates(x,y);
 		return coordinates;
 	}

@@ -101,7 +101,7 @@ public class Human extends Player {
 		            
 		            case FIRE:
 		            	Coordinates fire_coordinates = read.getCoordinates(input, height, width);
-		            	if(player.getGrid().checkHit(fire_coordinates, "human")) {
+		            	if(player.getGrid().checkHit(fire_coordinates, "human")>0) {
 		            		
 		            		// If socket is set, we send informations
 		            		if (this.opponent != null)
