@@ -129,6 +129,8 @@ public class XmlParserGrid extends XmlParser {
 				return Strategy.PACK;
 			case "far":
 				return Strategy.FAR;
+			case "perso":
+				return Strategy.PERSO;
 			default :
 				return Strategy.RANDOM;
 		}

@@ -13,6 +13,7 @@ public class IA extends Player{
 	private Coordinates cell_locked;
 	private Direction direction_locked;
 	private int depth;
+	private boolean hybrid;
 	
 	public IA() throws InvalidGridException {	
 		this("Jarvis");
@@ -23,6 +24,10 @@ public class IA extends Player{
 		getPlacement();
 		getFiring();
 		this.grid = InitialisationGrid();
+		this.cell_locked = this.grid.getRandomCoordinates();
+		this.direction_locked = Direction.NORTH;
+		this.depth = 0;
+		this.hybrid = false;
 	}
 	
 	private Grid InitialisationGrid() throws InvalidGridException {
@@ -35,6 +40,8 @@ public class IA extends Player{
 	public void checkWin(){
 		super.checkWin("You loose");
 	}
+	
+	
 
 	// Return true when the gameloop needs to be broken
 	@Override
@@ -45,6 +52,9 @@ public class IA extends Player{
 			Coordinates fire_coordinates;
 			// IA turn
 			switch (this.firing){
+			case PERSO:
+				this.hybrid = true;
+				this.firing = Strategy.FAR;
 			case PACK:
 				switch (this.direction_locked){
 				case NORTH:
@@ -62,10 +72,21 @@ public class IA extends Player{
 				}
 				
 				
-				hit = player.getGrid().checkHit(fire_coordinates, this.getName());
+				
+				if(fire_coordinates.getX() >= 0 && fire_coordinates.getY() >= 0)
+					hit = player.getGrid().checkHit(fire_coordinates, this.getName());
+				else 
+					hit = 0;
+				
 	        	if(hit == 0){
 	        		if(this.direction_locked == Direction.EAST)
-	        			this.firing = Strategy.FAR;   
+	        			if(hybrid)
+	        				this.firing = Strategy.FAR;
+	        			else{
+	        				this.cell_locked = player.grid.getRandomCoordinates();
+	        				this.depth = 1;
+	        				this.direction_locked = Direction.NORTH;
+	        			}
 	        		else{
 	        			this.depth = 1;
 	        			this.direction_locked =  this.direction_locked.getNext();
@@ -81,7 +102,13 @@ public class IA extends Player{
         		}
         		else{
         			if(this.direction_locked == Direction.EAST)
-	        			this.firing = Strategy.FAR;   
+	        			if(hybrid)
+	        				this.firing = Strategy.FAR;
+	        			else{
+	        				this.cell_locked = player.grid.getRandomCoordinates();
+	        				this.depth = 1;
+	        				this.direction_locked = Direction.NORTH;
+	        			}
 	        		else{
 	        			this.depth = 1;
 	        			this.direction_locked =  this.direction_locked.getNext();
@@ -89,25 +116,37 @@ public class IA extends Player{
         			break opponentloop;
         		}
 				
+				
 			case FAR:
 				fire_coordinates = player.grid.getRandomSmartCoordinates();
 				hit= player.getGrid().checkHit(fire_coordinates, this.getName());
 	        	if( hit == 1) {
 	            	if(this.checkWin(player.getName()))
 	            		return true;
-	            	else
+	            	if(hybrid){
 	            		this.cell_locked = fire_coordinates;
 	            		this.firing = Strategy.PACK;
 	            		this.depth = 1;
 	            		this.direction_locked = Direction.NORTH;
 	            		break opponentloop;
+	            	}
+	            	else
+	            		break opponentloop;
 	        	}
 	        	else if(hit ==2)
 	        		break opponentloop;
+	        	
 			case RANDOM:
-				break;
-			default:
-				break;
+				fire_coordinates = player.grid.getRandomCoordinates();
+				hit= player.getGrid().checkHit(fire_coordinates, this.getName());
+	        	if( hit == 1) {
+	            	if(this.checkWin(player.getName()))
+	            		return true;
+	            	else
+	            		break opponentloop;
+	        	}
+	        	else if(hit ==2)
+	        		break opponentloop;
 			}	
 		} while(true);
 	
