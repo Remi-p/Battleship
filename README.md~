@@ -52,19 +52,8 @@ $ java fr.enseirb.battleship.App debug grid.xml ships.xml
 
 ## Strategies
 
-* Boats placement and firing strategies are indicated in **grid.xml** by the user.
-	* These informations change the way the functions `play` and `randomShips` behave.
-* For both placement and firing, the **RANDOM** strategy is the simplest way the IA plays. Boats and firing coordinates are random.
-
-* Placement strategies
-	* **PACK** : The pack strategy consists in divinding the grid by rectangular sections. The algorithm choose one section randomly and place boats in it.
-	* **FAR** : As above, the grid is shared in rectangular sections. However, each section includes only and maximally one boat.
-	* **PERSO** : This strategy is a mix of the pack and far strategies. Boats are packed in groups of three and seperated in differents sections
-
-* Firing strategies
-	* **PACK** : The IA fires very close coordinates.
-	* **FAR** : Contrary to pack strategy, the IA fires far coordinates.
-	* **PERSO** : This is a hybrid strategy. The IA starts by applying the far strategy and once it touched a boat it turns to pack strategy in order to sunk the boat.
+* Boats placement and attack strategy are indicated in **grid.xml** by the user.
+	* These informations change the way the function `.......` behaves
 
 # Bonus : Network
 
