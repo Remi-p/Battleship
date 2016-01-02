@@ -46,26 +46,24 @@ public class Grid implements java.io.Serializable {
 	}
 
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException , ShipsConfigurationException {
-		Type ships_type = configs_extract(configs_path, gridfilename);
-		ships_extract(configs_path, shipfilename, ships_type);
+		Type ships_type = configsExtract(configs_path, gridfilename);
+		shipsExtract(configs_path, shipfilename, ships_type);
 		init_fires();
 	}
 	
 	// Constructor for IA
-	public Grid(String configs_path, String gridfilename) throws InvalidGridException {
-		
+	public Grid(String configs_path, String gridfilename, Strategy placement, Strategy firing) throws InvalidGridException {
+
 		// We do not throw errors about boats here, but we check them
-		
 		Type ships_type;
-		Strategy strategy = Strategy.FAR;
-		ships_type = configs_extract(configs_path, gridfilename);
+		ships_type = configsExtract(configs_path, gridfilename);
 		this.shipnames = ShipsNameInitialisation();
-		this.ships = randomShips(this.height, this.width, ships_type, strategy);
+		this.ships = randomShips(this.height, this.width, ships_type, placement);
 		init_fires();
 	}
 	
 	// Configs extraction from grid.xml
-	private Type configs_extract(String configs_path, String gridfilename) throws InvalidGridException {
+	private Type configsExtract(String configs_path, String gridfilename) throws InvalidGridException {
 		// --------------- grid.xml
 		XmlParserGrid grid = new XmlParserGrid(configs_path, gridfilename);
 		
@@ -82,7 +80,7 @@ public class Grid implements java.io.Serializable {
 	}
 	
 	// Ships features extraction from ships.xml
-	private void ships_extract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException, ShipsConfigurationException{
+	private void shipsExtract(String configs_path, String shipfilename, Type ships_type) throws InvalidGridException, ShipOverlapException, ShipOutOfBoundsException, ShipsConfigurationException{
 		// -------------- ships.xml
 		XmlParserShips ships_xml = new XmlParserShips(configs_path, shipfilename);
 		List<Ship> ships = ships_xml.getShips(ships_type, height, width);

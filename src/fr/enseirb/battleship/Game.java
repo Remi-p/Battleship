@@ -6,7 +6,13 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import fr.enseirb.battleship.elements.Strategy;
+import fr.enseirb.battleship.tools.Config;
 import fr.enseirb.battleship.tools.SvgWriter;
+import fr.enseirb.battleship.tools.XmlParserGrid;
 
 public class Game {
 
@@ -50,6 +56,9 @@ public class Game {
 			player1.setOpponent(socketServeur);
 		}
 		else // Against IA
+			
+			
+			
 			player2 = new IA();
 		
 		// When we are on multiplayer, we exchange grids

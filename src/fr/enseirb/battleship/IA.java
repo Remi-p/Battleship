@@ -5,26 +5,29 @@ import fr.enseirb.battleship.elements.Strategy;
 import fr.enseirb.battleship.elements.Direction;
 import fr.enseirb.battleship.exceptions.InvalidGridException;
 import fr.enseirb.battleship.tools.Config;
+import fr.enseirb.battleship.tools.XmlParserGrid;
 
 public class IA extends Player{
-	private Strategy strategy;
+	private Strategy placement;
+	private Strategy firing;
 	private Coordinates cell_locked;
 	private Direction direction_locked;
 	private int depth;
 	
-	public IA() throws InvalidGridException {
+	public IA() throws InvalidGridException {	
 		this("Jarvis");
 	}
 	
 	public IA(String name) throws InvalidGridException {
 		super(name);
+		getPlacement();
+		getFiring();
 		this.grid = InitialisationGrid();
-		this.strategy = Strategy.FAR;
 	}
 	
 	private Grid InitialisationGrid() throws InvalidGridException {
 		
-		this.grid = new Grid(Config.CONFIGS, Config.GRID);
+		this.grid = new Grid(Config.CONFIGS, Config.GRID, this.placement, this.firing);
 		
 		return grid;
 	}
@@ -41,7 +44,7 @@ public class IA extends Player{
 		do {
 			Coordinates fire_coordinates;
 			// IA turn
-			switch (this.strategy){
+			switch (this.firing){
 			case PACK:
 				switch (this.direction_locked){
 				case NORTH:
@@ -62,7 +65,7 @@ public class IA extends Player{
 				hit = player.getGrid().checkHit(fire_coordinates, this.getName());
 	        	if(hit == 0){
 	        		if(this.direction_locked == Direction.EAST)
-	        			this.strategy = Strategy.FAR;   
+	        			this.firing = Strategy.FAR;   
 	        		else{
 	        			this.depth = 1;
 	        			this.direction_locked =  this.direction_locked.getNext();
@@ -78,7 +81,7 @@ public class IA extends Player{
         		}
         		else{
         			if(this.direction_locked == Direction.EAST)
-	        			this.strategy = Strategy.FAR;   
+	        			this.firing = Strategy.FAR;   
 	        		else{
 	        			this.depth = 1;
 	        			this.direction_locked =  this.direction_locked.getNext();
@@ -94,7 +97,7 @@ public class IA extends Player{
 	            		return true;
 	            	else
 	            		this.cell_locked = fire_coordinates;
-	            		this.strategy = Strategy.PACK;
+	            		this.firing = Strategy.PACK;
 	            		this.depth = 1;
 	            		this.direction_locked = Direction.NORTH;
 	            		break opponentloop;
@@ -110,4 +113,23 @@ public class IA extends Player{
 	
 		return false;
 	}
+	
+	private void getPlacement() {
+		XmlParserGrid grid = new XmlParserGrid(Config.CONFIGS, Config.GRID);
+		this.placement = grid.getPlacement();
+		
+		if (Config.VERBOSE)
+			System.out.println("Placement : " + this.placement);
+		
+	}
+	
+	private void getFiring() {
+		XmlParserGrid grid = new XmlParserGrid(Config.CONFIGS, Config.GRID);
+		this.firing = grid.getFiring();
+		
+		if (Config.VERBOSE)
+			System.out.println("Firing : " + this.firing);
+	}
+	
+	
 }

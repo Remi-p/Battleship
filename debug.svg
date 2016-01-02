@@ -1,73 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<<<<<<< Updated upstream
 <svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='1400' height='950'>
-<defs><symbol id='fire'><g transform='scale(40, 40)'>  <g
-     transform="translate(-152.15644,-891.40925)"
-     id="layer1">
-    <g
-       style="fill-rule:evenodd"
-       id="g470"
-       transform="matrix(0.16369246,0,0,0.16369246,-31.506341,-295.50694)">
-      <desc
-         id="desc472">Group</desc>
-      <path
-         id="path526"
-         d="m 1125.6454,7253.9455 0,-0.028 -0,-0.029 0,-0.029 -0,-0.033 -0.01,-0.028 -0.01,-0.029 -0.01,-0.024 -0.01,-0.029 -0.01,-0.028 -0.014,-0.024 -0.014,-0.028 -0.019,-0.024 -0.019,-0.024 -0.014,-0.019 -0.024,-0.024 -0.019,-0.019 -0.024,-0.024 -0.019,-0.014 -0.024,-0.019 -0.024,-0.019 -0.028,-0.014 -0.024,-0.014 -0.029,-0.01 -0.028,-0.01 -0.024,-0.01 -0.028,-0.01 -0.029,-0.01 -0.033,-0 -0.029,0 -0.028,-0 -0.029,0 -0.028,0 -0.029,0 -0.028,0 -0.033,0 -0.029,0.01 -0.028,0.01 -0.024,0.01 -0.029,0.01 -0.028,0.01 -0.024,0.014 -0.029,0.014 -0.024,0.019 -0.024,0.019 -0.019,0.014 -0.024,0.024 -0.019,0.019 -0.024,0.024 -0.014,0.019 -0.019,0.024 -0.019,0.024 -0.014,0.028 -0.014,0.024 -0.01,0.028 -0.01,0.029 -0.01,0.024 -0.01,0.029 -0.01,0.028 -0,0.033 0,0.029 -0,0.029 0,0.028 0,0.029 0,0.029 0,0.029 0,0.033 0.01,0.029 0.01,0.028 0.01,0.024 0.01,0.029 0.01,0.029 0.014,0.024 0.014,0.028 0.019,0.024 0.019,0.024 0.014,0.019 0.024,0.024 0.019,0.019 0.024,0.024 0.019,0.014 0.024,0.019 0.024,0.019 0.029,0.014 0.024,0.014 0.028,0.01 0.029,0.01 0.024,0.01 0.028,0.01 0.029,0.01 0.033,0 0.028,0 0.029,0 0.028,0 0.029,0 0.028,-0 0.029,0 0.033,-0 0.029,-0.01 0.028,-0.01 0.024,-0.01 0.028,-0.01 0.029,-0.01 0.024,-0.014 0.028,-0.014 0.024,-0.019 0.024,-0.019 0.019,-0.014 0.024,-0.024 0.019,-0.019 0.024,-0.024 0.014,-0.019 0.019,-0.024 0.019,-0.024 0.014,-0.028 0.014,-0.024 0.01,-0.029 0.01,-0.029 0.01,-0.024 0.01,-0.028 0.01,-0.029 0,-0.033 0,-0.029 0,-0.029 0,-0.029 z"
-         style="fill:#000000" />
-      <path
-         d="m 1125.7072,7250.9005 0.3375,0.095 -0.4516,0.7696 0.252,0.01 -0.3613,0.6413 0.2614,0.01 -0.4469,0.7126 -0.2186,-0.014 0.2044,-0.456 -0.2282,-0 0.3185,-0.6223 -0.2044,-0.014 0.5372,-1.1259 z"
-         id="path542"
-         style="fill:#000000" />
-      <path
-         d="m 1124.3998,7256.9906 -0.3423,-0.095 0.4564,-0.7695 -0.2567,-0.01 0.3661,-0.6413 -0.2663,-0.01 0.4422,-0.7126 0.2234,0.014 -0.2044,0.456 0.2282,0 -0.3185,0.6223 0.2044,0.01 -0.5325,1.1306 z"
-         id="path554"
-         style="fill:#000000" />
-      <path
-         d="m 1124.0956,7250.9813 0.3375,-0.09 -0,0.8931 0.2235,-0.1187 0.01,0.7363 0.2329,-0.1235 -0.028,0.8408 -0.1996,0.095 -0.048,-0.4941 -0.2092,0.1093 -0.033,-0.7031 -0.1807,0.1 -0.1,-1.2446 z"
-         id="path570"
-         style="fill:#000000" />
-      <path
-         d="m 1126.0067,7256.9098 -0.3375,0.09 0,-0.8979 -0.2234,0.1188 -0.01,-0.7316 -0.233,0.1235 0.028,-0.8408 0.1997,-0.095 0.048,0.494 0.2091,-0.114 0.033,0.7078 0.1807,-0.1 0.1,1.2446 z"
-         id="path582"
-         style="fill:#000000" />
-      <path
-         d="m 1122.7406,7251.8554 0.2473,-0.2423 0.4468,0.7743 0.1332,-0.2138 0.3755,0.6318 0.1331,-0.2232 0.4041,0.741 -0.1283,0.1806 -0.29,-0.4038 -0.1236,0.1995 -0.3756,-0.5891 -0.1141,0.1711 -0.7084,-1.0261 z"
-         id="path598"
-         style="fill:#000000" />
-      <path
-         d="m 1127.3616,7256.0357 -0.2472,0.2423 -0.4421,-0.7743 -0.1331,0.2185 -0.3756,-0.6366 -0.1379,0.2233 -0.3993,-0.7411 0.1236,-0.1852 0.29,0.4038 0.1283,-0.1948 0.3756,0.589 0.1094,-0.171 0.7083,1.0261 z"
-         id="path610"
-         style="fill:#000000" />
-      <path
-         d="m 1122.0038,7253.29 0.095,-0.3373 0.7702,0.4513 0.01,-0.2518 0.6418,0.3611 0.01,-0.2613 0.7131,0.4465 -0.019,0.2185 -0.4516,-0.2042 -0,0.228 -0.6228,-0.3183 -0.014,0.2043 -1.1267,-0.5368 z"
-         id="path626"
-         style="fill:#000000" />
-      <path
-         d="m 1128.0985,7254.5964 -0.095,0.342 -0.7701,-0.4561 -0,0.2566 -0.6465,-0.3658 -0.01,0.266 -0.7131,-0.4418 0.019,-0.2233 0.4517,0.2043 0,-0.228 0.6228,0.3183 0.014,-0.2043 1.1267,0.5321 z"
-         id="path638"
-         style="fill:#000000" />
-      <path
-         d="m 1122.0846,7254.9004 -0.086,-0.3373 0.8938,0 -0.1189,-0.2232 0.7369,-0.01 -0.1284,-0.2328 0.8463,0.029 0.09,0.1995 -0.4944,0.048 0.1141,0.209 -0.7036,0.033 0.095,0.1805 -1.2455,0.1 z"
-         id="path654"
-         style="fill:#000000" />
-      <path
-         d="m 1128.0177,7252.9907 0.09,0.3373 -0.8985,-0 0.1188,0.2233 -0.7368,0.01 0.1283,0.2328 -0.8462,-0.029 -0.09,-0.1995 0.4944,-0.048 -0.1141,-0.2091 0.7036,-0.033 -0.095,-0.1805 1.2456,-0.1 z"
-         id="path666"
-         style="fill:#000000" />
-      <path
-         d="m 1122.9593,7256.2542 -0.2424,-0.247 0.7749,-0.4418 -0.2187,-0.133 0.637,-0.3753 -0.2234,-0.1377 0.7416,-0.3991 0.1855,0.1236 -0.4041,0.2897 0.1949,0.1235 -0.5895,0.3801 0.1711,0.1092 -1.0269,0.7078 z"
-         id="path682"
-         style="fill:#000000" />
-      <path
-         d="m 1127.1429,7251.6369 0.2425,0.247 -0.7749,0.4465 0.2139,0.133 -0.6323,0.3753 0.2235,0.133 -0.7417,0.4038 -0.1806,-0.1283 0.4041,-0.2897 -0.1997,-0.1235 0.5895,-0.3801 -0.1711,-0.1092 1.0268,-0.7078 z"
-         id="path694"
-         style="fill:#000000" />
-    </g>
-  </g>
-</g></symbol></defs><text x='320' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Anonymous</text>
-<text x='980' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Jarvis</text>
-=======
-<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='1000' height='590'>
 <defs><symbol id='fire'><g transform='scale(40, 40)'><g
      transform="matrix(0.00220524,0,0,0.00220663,-0.03301685,-0.03549806)"
      id="g3381"><g
@@ -183,9 +115,8 @@
      id="path3430-2-7-4"
      style="opacity:0.5;fill:none;fill-opacity:1;stroke:#001560;stroke-width:0.06978552;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
      </g>
-</g></symbol></defs><text x='220' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Anonymous</text>
-<text x='680' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Jarvis</text>
->>>>>>> Stashed changes
+</g></symbol></defs><text x='320' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Anonymous</text>
+<text x='980' y='25' transform='translate(0, 12) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='25'>Jarvis</text>
 <g transform='translate(0, 50)'>
 <g>
 <rect x='0' y='0' width='640' height='800' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
@@ -258,7 +189,6 @@
 <text x='20' y='740' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>17</text>
 <text x='20' y='780' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>18</text>
 </g>
-<<<<<<< Updated upstream
 <rect x='280' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='300' y='200' transform='translate(0, 10) rotate(-90, 300, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Hermione</text>
 <rect x='40' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
@@ -269,20 +199,7 @@
 <text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
 <rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='220' y='200' transform='translate(0, 10) rotate(-90, 220, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
-</g><g transform='translate(660, 50)'>
-=======
-<rect x='400' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='420' y='200' transform='translate(0, 10) rotate(-90, 420, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Hermione</text>
-<rect x='40' y='40' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='60' y='80' transform='translate(0, 10) rotate(-90, 60, 80)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>K-19</text>
-<rect x='80' y='120' width='80' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='120' y='140' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Titanic</text>
-<rect x='120' y='200' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='140' y='240' transform='translate(0, 10) rotate(-90, 140, 240)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
-<rect x='200' y='240' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='220' y='320' transform='translate(0, 10) rotate(-90, 220, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
-<use xlink:href='#missed' x='320' y='240'/><use xlink:href='#missed' x='240' y='40'/><use xlink:href='#missed' x='280' y='40'/><use xlink:href='#missed' x='160' y='80'/><use xlink:href='#missed' x='360' y='400'/></g><g transform='translate(460, 50)'>
->>>>>>> Stashed changes
+<use xlink:href='#missed' x='120' y='440'/><use xlink:href='#missed' x='200' y='440'/><use xlink:href='#missed' x='360' y='280'/><use xlink:href='#missed' x='440' y='40'/><use xlink:href='#missed' x='280' y='680'/></g><g transform='translate(660, 50)'>
 <g>
 <rect x='0' y='0' width='640' height='800' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
 <line x1='40' y1='0' x2='40' y2='800' style='stroke:rgb(0,0,0);stroke-width:4' />
@@ -354,28 +271,14 @@
 <text x='20' y='740' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>17</text>
 <text x='20' y='780' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>18</text>
 </g>
-<<<<<<< Updated upstream
-<rect x='160' y='280' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='180' y='360' transform='translate(0, 10) rotate(-90, 180, 360)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>USS Enterprise</text>
-<rect x='40' y='240' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='80' y='260' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Millennium Falcon</text>
-<rect x='80' y='320' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='100' y='360' transform='translate(0, 10) rotate(-90, 100, 360)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
-<rect x='160' y='240' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='200' y='260' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
-<rect x='40' y='280' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='60' y='360' transform='translate(0, 10) rotate(-90, 60, 360)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Planet Express</text>
-</g></svg>
-=======
-<rect x='240' y='80' width='160' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='320' y='100' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Voyager 1</text>
-<rect x='40' y='200' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='60' y='240' transform='translate(0, 10) rotate(-90, 60, 240)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Millennium Falcon</text>
-<rect x='200' y='280' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='220' y='320' transform='translate(0, 10) rotate(-90, 220, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
-<rect x='280' y='120' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='320' y='140' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Serenity</text>
-<rect x='120' y='80' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
-<use xlink:href='#missed' x='320' y='320'/><use xlink:href='#missed' x='360' y='360'/><use xlink:href='#missed' x='400' y='400'/><use xlink:href='#missed' x='80' y='80'/><use xlink:href='#missed' x='240' y='240'/></g></svg>
->>>>>>> Stashed changes
+<rect x='200' y='600' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='220' y='680' transform='translate(0, 10) rotate(-90, 220, 680)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Millennium Falcon</text>
+<rect x='200' y='560' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='240' y='580' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Serenity</text>
+<rect x='200' y='520' width='80' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='240' y='540' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Galactica Battlestar</text>
+<rect x='320' y='560' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='340' y='600' transform='translate(0, 10) rotate(-90, 340, 600)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>USS Enterprise</text>
+<rect x='280' y='600' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='300' y='680' transform='translate(0, 10) rotate(-90, 300, 680)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
+<use xlink:href='#missed' x='80' y='440'/><use xlink:href='#missed' x='240' y='240'/><use xlink:href='#missed' x='320' y='400'/><use xlink:href='#missed' x='280' y='240'/><use xlink:href='#missed' x='520' y='40'/></g></svg>
