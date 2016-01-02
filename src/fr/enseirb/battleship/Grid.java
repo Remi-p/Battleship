@@ -137,6 +137,7 @@ public class Grid implements java.io.Serializable {
 				int number_box =(int) Math.floor(height/height_box*width/width_box );
 				int dec_x = 0;
 				int dec_y = 0;
+				int boat_in_box = 0;
 			
 			int pack_box_index = (int)(Math.random()*number_box+1);
 			
@@ -172,7 +173,23 @@ public class Grid implements java.io.Serializable {
 							
 							break;
 							
+						case PERSO : 
+							if(boat_in_box ==0){
+								do{
+									box_index = (int)(Math.random()*number_box+1);
+								}while(Collections.frequency(indexs,box_index) >0);
+								indexs.add(box_index);	
+							}				
+							dec_x = (int)((box_index-1)%Math.floor(width/width_box));
+							dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
+							x = (int)(Math.random()*width_box + dec_x*width_box);
+							y = (int)(Math.random()*height_box + dec_y*height_box);
+							boat_in_box ++;
+							boat_in_box = boat_in_box%3; 
+							break;
 					}
+					
+						
 						if (o >= 0.5)
 							orientation = "horizontal";
 						else

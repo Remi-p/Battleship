@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid>
 	<dimensions>
-		<horizontal>10</horizontal>
-		<vertical>10</vertical>
+		<horizontal>20</horizontal>
+		<vertical>20</vertical>
 	</dimensions>
 	<ships>
 		<battleship size="4">1</battleship>
@@ -11,5 +11,5 @@
 		<patrol-boat size="3">1</patrol-boat>
 		<aircraft-carrier size="5">1</aircraft-carrier>
 	</ships>
-	<strategies placement="far" firing="perso"/>
+	<strategies placement="perso" firing="perso"/>
 </grid>
