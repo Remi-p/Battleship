@@ -40,8 +40,6 @@ public class IA extends Player{
 	public void checkWin(){
 		super.checkWin("You loose");
 	}
-	
-	
 
 	// Return true when the gameloop needs to be broken
 	@Override
@@ -70,8 +68,7 @@ public class IA extends Player{
 					fire_coordinates = new Coordinates(this.cell_locked.getX()+this.depth,this.cell_locked.getY());
 					break;
 				}
-				
-				
+
 				
 				if(fire_coordinates.getX() >= 0 && fire_coordinates.getY() >= 0)
 					hit = player.getGrid().checkHit(fire_coordinates, this.getName());

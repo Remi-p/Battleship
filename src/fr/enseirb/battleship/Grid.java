@@ -48,7 +48,7 @@ public class Grid implements java.io.Serializable {
 	public Grid(String configs_path, String gridfilename, String shipfilename) throws InvalidGridException, ShipOutOfBoundsException, ShipOverlapException , ShipsConfigurationException {
 		Type ships_type = configsExtract(configs_path, gridfilename);
 		shipsExtract(configs_path, shipfilename, ships_type);
-		init_fires();
+		initFires();
 	}
 	
 	// Constructor for IA
@@ -59,7 +59,7 @@ public class Grid implements java.io.Serializable {
 		ships_type = configsExtract(configs_path, gridfilename);
 		this.shipnames = ShipsNameInitialisation();
 		this.ships = randomShips(this.height, this.width, ships_type, placement);
-		init_fires();
+		initFires();
 	}
 	
 	// Configs extraction from grid.xml
@@ -105,7 +105,7 @@ public class Grid implements java.io.Serializable {
 		}
 	}List<Coordinates> coordinates = new ArrayList<Coordinates>();
 	
-	private void init_fires() {
+	private void initFires() {
 		List<Coordinates> fires = new ArrayList<Coordinates>();
 		this.missedfires = fires;
 	}
@@ -196,7 +196,7 @@ public class Grid implements java.io.Serializable {
 							orientation = "vertical";
 					
 					try {
-						random_shipname = random_shipname(this.shipnames);
+						random_shipname = randomShipname(this.shipnames);
 						Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 						
 						// There is an overlapping problem
@@ -240,7 +240,7 @@ public class Grid implements java.io.Serializable {
 		return shipNames;
 	}
 	
-	public String random_shipname(List<String> names) {
+	public String randomShipname(List<String> names) {
 		String name = new String();
 		int index = (int)(Math.random() * (names.size()-1) ) + 0;
 		name = names.get(index);
@@ -409,7 +409,7 @@ public class Grid implements java.io.Serializable {
 	}
 	
 	// GETTERS
-	// ATTENTION : methodes public a changer en fonction après
+	// ATTENTION : methodes public a changer en fonction après	
 	
 	public int getHeight() {
 		return this.height;
