@@ -171,7 +171,7 @@
 <text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
 <rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='220' y='200' transform='translate(0, 10) rotate(-90, 220, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
-<use xlink:href='#missed' x='240' y='360'/><use xlink:href='#missed' x='200' y='360'/><use xlink:href='#missed' x='240' y='400'/><use xlink:href='#missed' x='280' y='360'/><use xlink:href='#missed' x='400' y='120'/><use xlink:href='#missed' x='360' y='160'/><use xlink:href='#missed' x='400' y='200'/><use xlink:href='#missed' x='440' y='160'/><use xlink:href='#missed' x='80' y='160'/><use xlink:href='#missed' x='40' y='200'/></g><g transform='translate(460, 50)'>
+</g><g transform='translate(460, 50)'>
 <g>
 <rect x='0' y='0' width='440' height='440' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
 <line x1='40' y1='0' x2='40' y2='440' style='stroke:rgb(0,0,0);stroke-width:4' />
@@ -215,14 +215,14 @@
 <text x='20' y='380' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>8</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='160' y='240' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='180' y='320' transform='translate(0, 10) rotate(-90, 180, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>O'Neill</text>
-<rect x='240' y='240' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='280' y='260' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
-<use xlink:href='#fire' x='280' y='240'/><rect x='160' y='160' width='80' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='200' y='180' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Millennium Falcon</text>
-<use xlink:href='#fire' x='160' y='160'/><rect x='240' y='200' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='280' y='220' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Planet Express</text>
-<rect x='200' y='240' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
-<text x='220' y='320' transform='translate(0, 10) rotate(-90, 220, 320)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
-<use xlink:href='#missed' x='280' y='320'/><use xlink:href='#missed' x='360' y='400'/><use xlink:href='#missed' x='160' y='120'/><use xlink:href='#missed' x='80' y='80'/><use xlink:href='#missed' x='360' y='320'/><use xlink:href='#missed' x='200' y='200'/><use xlink:href='#missed' x='240' y='280'/><use xlink:href='#missed' x='120' y='80'/></g></svg>
+<rect x='160' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='180' y='200' transform='translate(0, 10) rotate(-90, 180, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Star Destroyer</text>
+<rect x='240' y='120' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='260' y='160' transform='translate(0, 10) rotate(-90, 260, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Destiny</text>
+<rect x='200' y='120' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='220' y='160' transform='translate(0, 10) rotate(-90, 220, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>USS Enterprise</text>
+<rect x='240' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='280' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Galactica Battlestar</text>
+<rect x='160' y='80' width='200' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<text x='240' y='100' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Tardis</text>
+</g></svg>
