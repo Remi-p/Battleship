@@ -56,9 +56,6 @@ public class Game {
 			player1.setOpponent(socketServeur);
 		}
 		else // Against IA
-			
-			
-			
 			player2 = new IA();
 		
 		// When we are on multiplayer, we exchange grids
@@ -69,11 +66,6 @@ public class Game {
 		
 		// Object for writing svg debug file
 		this.writer = new SvgWriter(getWidth(), getHeight(), player1, player2);
-	}
-	
-	// We exchange grids, so that each game knows the grid of the opponent
-	private void gridExchange() {
-		
 	}
 	
 	// This function call itself when finished, to take charge of the next turn
@@ -106,6 +98,7 @@ public class Game {
 	
 	public void debugAndExit() {
 		this.writer.debugGrids();
+		System.out.println("End of debug.");
     	System.exit(0); // End of game
 	}
 	

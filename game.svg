@@ -161,17 +161,17 @@
 <text x='20' y='380' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>8</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<rect x='280' y='120' width='40' height='160' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<rect x='280' y='120' width='40' height='160' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='300' y='200' transform='translate(0, 10) rotate(-90, 300, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Hermione</text>
-<rect x='40' y='40' width='120' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<use xlink:href='#fire' x='280' y='200'/><rect x='40' y='40' width='120' height='40' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='80' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>K-19</text>
-<rect x='40' y='120' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<use xlink:href='#fire' x='40' y='40'/><rect x='40' y='120' width='40' height='80' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='60' y='160' transform='translate(0, 10) rotate(-90, 60, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Titanic</text>
-<rect x='120' y='120' width='40' height='120' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<rect x='120' y='120' width='40' height='120' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='140' y='160' transform='translate(0, 10) rotate(-90, 140, 160)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Belem</text>
-<rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
+<use xlink:href='#fire' x='120' y='200'/><rect x='200' y='120' width='40' height='200' style='fill:rgb(0, 0, 0);fill-opacity:0.5;' />
 <text x='220' y='200' transform='translate(0, 10) rotate(-90, 220, 200)' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Charles de Gaulle</text>
-<use xlink:href='#missed' x='40' y='360'/><use xlink:href='#missed' x='280' y='80'/><use xlink:href='#missed' x='240' y='200'/><use xlink:href='#missed' x='280' y='280'/><use xlink:href='#missed' x='320' y='200'/><use xlink:href='#missed' x='120' y='360'/><use xlink:href='#missed' x='40' y='400'/><use xlink:href='#missed' x='40' y='280'/><use xlink:href='#missed' x='120' y='80'/><use xlink:href='#missed' x='80' y='200'/><use xlink:href='#missed' x='120' y='240'/><use xlink:href='#missed' x='160' y='200'/><use xlink:href='#missed' x='120' y='0'/><use xlink:href='#missed' x='0' y='40'/><use xlink:href='#missed' x='160' y='40'/><use xlink:href='#missed' x='120' y='280'/></g><g transform='translate(460, 50)'>
+<use xlink:href='#missed' x='120' y='360'/><use xlink:href='#missed' x='360' y='40'/></g><g transform='translate(460, 50)'>
 <g>
 <rect x='0' y='0' width='440' height='440' style='fill:rgb(255,255,255);stroke-width:2;stroke:rgb(0,0,0)' />
 <line x1='40' y1='0' x2='40' y2='440' style='stroke:rgb(0,0,0);stroke-width:4' />
@@ -215,9 +215,7 @@
 <text x='20' y='380' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>8</text>
 <text x='20' y='420' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>9</text>
 </g>
-<use xlink:href='#fire' x='40' y='280'/><rect x='40' y='280' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#fire' x='80' y='280'/><rect x='80' y='280' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#fire' x='400' y='360'/><rect x='400' y='360' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#fire' x='360' y='240'/><rect x='360' y='240' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#fire' x='40' y='40'/><rect x='40' y='40' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
-<use xlink:href='#missed' x='40' y='80'/><use xlink:href='#missed' x='40' y='120'/><use xlink:href='#missed' x='40' y='200'/><use xlink:href='#missed' x='40' y='240'/><use xlink:href='#missed' x='40' y='320'/><use xlink:href='#missed' x='40' y='400'/><use xlink:href='#missed' x='80' y='400'/><use xlink:href='#missed' x='280' y='400'/><use xlink:href='#missed' x='280' y='160'/><use xlink:href='#missed' x='80' y='200'/><use xlink:href='#missed' x='80' y='240'/><use xlink:href='#missed' x='80' y='320'/><use xlink:href='#missed' x='280' y='280'/><use xlink:href='#missed' x='280' y='360'/><use xlink:href='#missed' x='360' y='400'/><use xlink:href='#missed' x='360' y='160'/><use xlink:href='#missed' x='120' y='200'/><use xlink:href='#missed' x='120' y='240'/><use xlink:href='#missed' x='320' y='240'/><use xlink:href='#missed' x='120' y='80'/><use xlink:href='#missed' x='200' y='280'/></g></svg>
+<use xlink:href='#fire' x='80' y='80'/><rect x='80' y='80' width='40' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<rect x='40' y='40' width='80' height='40' style='fill:rgb(214, 11, 11);fill-opacity:0.5;' />
+<text x='80' y='60' transform='translate(0, 10) ' alignment-baseline='central' fill='' text-anchor='middle' font-size='20'>Voyager 1</text>
+<use xlink:href='#missed' x='200' y='240'/><use xlink:href='#missed' x='360' y='120'/></g></svg>

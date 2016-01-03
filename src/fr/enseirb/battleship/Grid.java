@@ -121,101 +121,103 @@ public class Grid implements java.io.Serializable {
 		}
 	}
 		
-		private List<Ship> randomShips(int height, int width, Type ships_type,Strategy strategy) {
-			
-			List<Ship> ships = new ArrayList<Ship>();
-			List<Integer>  indexs = new ArrayList<Integer>();
-			String orientation;
-			String random_shipname;
-			double o = Math.random();
-			int x = 0;
-			int y = 0;
-				double number_cell = (height*width)/ships_type.getTotalQty();
-				int box_index = 1;
-				int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
-				int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
-				int number_box =(int) Math.floor(height/height_box*width/width_box );
-				int dec_x = 0;
-				int dec_y = 0;
-				int boat_in_box = 0;
-			
-			int pack_box_index = (int)(Math.random()*number_box+1);
+	private List<Ship> randomShips(int height, int width, Type ships_type,Strategy strategy) {
+		
+		List<Ship> ships = new ArrayList<Ship>();
+		List<Integer>  indexs = new ArrayList<Integer>();
+		String orientation;
+		String random_shipname;
+		double o = Math.random();
+		int x = 0;
+		int y = 0;
+			double number_cell = (height*width)/ships_type.getTotalQty();
+			int box_index = 1;
+			int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
+			int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
+			int number_box =(int) Math.floor(height/height_box*width/width_box );
+			int dec_x = 0;
+			int dec_y = 0;
+			int boat_in_box = 0;
+		
+		int pack_box_index = (int)(Math.random()*number_box+1);
 
-			for (TypeElt e : ships_type.getListType()) {
+		if (Config.VERBOSE) System.out.println("Placing Boats");
+		
+		for (TypeElt e : ships_type.getListType()) {
+			
+			for( int i = 0; i < e.getQuantity(); i++) {
+				o = Math.random();
+				switch(strategy){
 				
-				for( int i = 0; i < e.getQuantity(); i++) {
-					o = Math.random();
-					switch(strategy){
+					case RANDOM:
+						 x = (int)(Math.random() * (width-0)) + 0;
+						 y = (int)(Math.random() * (height-0)) + 0;						
+						break;
+						
+					case FAR :
+						do{
+							box_index = (int)(Math.random()*number_box+1);
+						}while(Collections.frequency(indexs,box_index) >0);
 					
-						case RANDOM:
-							 x = (int)(Math.random() * (width-0)) + 0;
-							 y = (int)(Math.random() * (height-0)) + 0;						
-							break;
-							
-						case FAR :
+						indexs.add(box_index);					
+						dec_x = (int)((box_index-1)%Math.floor(width/width_box));
+						dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
+						x = (int)((width_box+1)*dec_x);
+						y = (int)((height_box)*dec_y +dec_x);
+						break;
+						
+					case PACK :
+
+						dec_x = (int)((pack_box_index-1)%Math.floor(width/width_box));
+						dec_y = (int)(Math.floor((pack_box_index-1)/Math.floor(width/width_box)));
+						x = (int)(Math.random()*width_box + dec_x*width_box);
+						y = (int)(Math.random()*height_box + dec_y*height_box);
+						
+						break;
+						
+					case PERSO : 
+						if(boat_in_box ==0){
 							do{
 								box_index = (int)(Math.random()*number_box+1);
 							}while(Collections.frequency(indexs,box_index) >0);
-						
-							indexs.add(box_index);					
-							dec_x = (int)((box_index-1)%Math.floor(width/width_box));
-							dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
-							x = (int)((width_box+1)*dec_x);
-							y = (int)((height_box)*dec_y +dec_x);
-							break;
-							
-						case PACK :
-	
-							dec_x = (int)((pack_box_index-1)%Math.floor(width/width_box));
-							dec_y = (int)(Math.floor((pack_box_index-1)/Math.floor(width/width_box)));
-							x = (int)(Math.random()*width_box + dec_x*width_box);
-							y = (int)(Math.random()*height_box + dec_y*height_box);
-							
-							break;
-							
-						case PERSO : 
-							if(boat_in_box ==0){
-								do{
-									box_index = (int)(Math.random()*number_box+1);
-								}while(Collections.frequency(indexs,box_index) >0);
-								indexs.add(box_index);	
-							}				
-							dec_x = (int)((box_index-1)%Math.floor(width/width_box));
-							dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
-							x = (int)(Math.random()*width_box + dec_x*width_box);
-							y = (int)(Math.random()*height_box + dec_y*height_box);
-							boat_in_box ++;
-							boat_in_box = boat_in_box%3; 
-							break;
-					}
+							indexs.add(box_index);	
+						}				
+						dec_x = (int)((box_index-1)%Math.floor(width/width_box));
+						dec_y = (int)(Math.floor((box_index-1)/Math.floor(width/width_box)));
+						x = (int)(Math.random()*width_box + dec_x*width_box);
+						y = (int)(Math.random()*height_box + dec_y*height_box);
+						boat_in_box ++;
+						boat_in_box = boat_in_box%3; 
+						break;
+				}
+				
 					
-						
-						if (o >= 0.5)
-							orientation = "horizontal";
-						else
-							orientation = "vertical";
+					if (o >= 0.5)
+						orientation = "horizontal";
+					else
+						orientation = "vertical";
 
-					try {
-						random_shipname = randomShipname(this.shipnames);	
-						Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
-					
-						// There is an overlapping problem
-						if (!Grid.shipOverlapShips(ships, ships_type, ship)) {
-							i--;
-						}
-						else {
-							ships.add(ship);
-							ShipsNamesDelete(this.shipnames, random_shipname);
-						}
-					
-					} catch (ShipOutOfBoundsException e1) {
+				try {
+					random_shipname = randomShipname(this.shipnames);	
+					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
+				
+					// There is an overlapping problem
+					if (!Grid.shipOverlapShips(ships, ships_type, ship)) {
 						i--;
 					}
-	
+					else {
+						ships.add(ship);
+						ShipsNamesDelete(this.shipnames, random_shipname);
+					}
+				
+				} catch (ShipOutOfBoundsException e1) {
+					i--;
 				}
+
 			}
-			return ships;
 		}
+		return ships;
+	}
 
 	
 	private List<String> ShipsNameInitialisation() {
