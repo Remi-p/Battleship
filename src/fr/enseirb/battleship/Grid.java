@@ -194,34 +194,29 @@ public class Grid implements java.io.Serializable {
 							orientation = "horizontal";
 						else
 							orientation = "vertical";
-					
-					
-						
+
 					try {
-						random_shipname = randomShipname(this.shipnames);
+						random_shipname = randomShipname(this.shipnames);	
 						Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
-						
+					
 						// There is an overlapping problem
-						if (Grid.shipOverlapShips(ships, ships_type, ship)) {
+						if (!Grid.shipOverlapShips(ships, ships_type, ship)) {
 							i--;
-							this.shipnames.add(random_shipname);
 						}
-						else
+						else {
 							ships.add(ship);
-						
+							ShipsNamesDelete(this.shipnames, random_shipname);
+						}
+					
 					} catch (ShipOutOfBoundsException e1) {
 						i--;
-						
 					}
-					
-					
+	
 				}
 			}
 			return ships;
-			
 		}
-		
-	
+
 	
 	private List<String> ShipsNameInitialisation() {
 		List<String> shipNames = new ArrayList<String>();
@@ -247,12 +242,18 @@ public class Grid implements java.io.Serializable {
 		String name = new String();
 		int index = (int)(Math.random() * (names.size()-1) ) + 0;
 		name = names.get(index);
-		ShipsNamesDelete(names, index);
 		return name;
 	}
 	
-	public void ShipsNamesDelete(List<String> shipnames, int index) {
-		shipnames.remove(index);
+	public void ShipsNamesDelete(List<String> shipnames, String random_name) {
+		int ind = 0;
+		for(String name:shipnames) {
+			ind++;
+			if(name.compareTo(random_name) == 0) {
+				break;
+			}
+		}
+		shipnames.remove(ind);
 	}
 	
 	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships, String state) {
@@ -295,18 +296,18 @@ public class Grid implements java.io.Serializable {
 			switch(ship.getOrientation()) {
 	            case HORIZONTAL:
 	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX() + j, ship.getY())) > 0)
-	            		return true;
+	            		return false;
 	                break;
 
 	            case VERTICAL: 
 	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX(), ship.getY() + j)) > 0)
-	            		return true;
+	            		return false;
 	                break;
 			}
 		}
 		
 		// TODO Change output to true, semantic
-		return false; // No overlapping
+		return true; // No overlapping
 	}
 	
 	// Check if overlap ships exists
@@ -411,8 +412,7 @@ public class Grid implements java.io.Serializable {
 		return coordinates;
 	}
 	
-	// GETTERS
-	// ATTENTION : methodes public a changer en fonction après	
+	// GETTERS	
 	
 	public int getHeight() {
 		return this.height;
