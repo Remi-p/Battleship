@@ -195,8 +195,10 @@ public class Grid implements java.io.Serializable {
 						else
 							orientation = "vertical";
 					
+					random_shipname = randomShipname(this.shipnames);
+						
 					try {
-						random_shipname = randomShipname(this.shipnames);
+						
 						Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 						
 						// There is an overlapping problem
@@ -209,6 +211,7 @@ public class Grid implements java.io.Serializable {
 						
 					} catch (ShipOutOfBoundsException e1) {
 						i--;
+						this.shipnames.add(random_shipname);
 					}
 					
 					

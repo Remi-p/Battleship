@@ -11,5 +11,5 @@
 		<patrol-boat size="3">1</patrol-boat>
 		<aircraft-carrier size="5">1</aircraft-carrier>
 	</ships>
-	<strategies placement="perso" firing="perso"/>
+	<strategies placement="pack" firing="pack"/>
 </grid>
