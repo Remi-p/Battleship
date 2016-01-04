@@ -14,7 +14,7 @@ local.properties
 .loadpath
 
 # Eclipse Core
-.project
+# .project
 
 # External tool builders
 .externalToolBuilders/
@@ -26,7 +26,7 @@ local.properties
 .cproject
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+# .classpath
 
 # Java annotation processor (APT)
 .factorypath
@@ -42,7 +42,7 @@ local.properties
 
 
 ### Java ###
-*.class
+# *.class
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -57,7 +57,5 @@ hs_err_pid*
 
 debug.svg
 view.svg
-
-/bin1/
 
 *~
