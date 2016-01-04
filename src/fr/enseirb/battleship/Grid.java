@@ -139,6 +139,7 @@ public class Grid implements java.io.Serializable {
 		int dec_y = 0;
 		int boat_in_box = 0;
 		int max_nb = 0;
+		boolean double_pack = false;
 		
 		int pack_box_index = (int)(Math.random()*number_box+1);
 
@@ -152,10 +153,22 @@ public class Grid implements java.io.Serializable {
 				
 				// After 100 tries we change the section
 				if(max_nb == 100){
-					pack_box_index = (int)(Math.random()*number_box+1);
-					if (Config.VERBOSE) System.out.println("Changing section ...");
-					max_nb = 0;
-					break;
+					if(double_pack == false) {
+						if (pack_box_index%Math.floor(height/height_box) == 0){
+							pack_box_index -= 1;
+						}
+						else{
+							pack_box_index += 1;
+						}
+						if (Config.VERBOSE) System.out.println("Changing section ...");
+						max_nb = 0;
+						double_pack = true;
+						}
+					else {
+						if (Config.VERBOSE) System.out.println("Changing section ...");
+						pack_box_index = (int)(Math.random()*number_box+1);
+						max_nb = 0;
+					}
 				}
 				
 				switch(strategy){
