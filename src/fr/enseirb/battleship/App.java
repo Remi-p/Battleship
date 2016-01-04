@@ -7,7 +7,7 @@ public class App {
 	
 	public static void main(String[] args) throws Exception {
 		
-		Config.setVerbose(true);
+		Config.setVerbose(false);
 		
 		Game game = new Game(args);
 		

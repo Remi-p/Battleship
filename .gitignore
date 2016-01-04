@@ -4,7 +4,6 @@
 *.pydevproject
 .metadata
 .gradle
-bin/
 tmp/
 *.tmp
 *.bak
@@ -60,3 +59,5 @@ debug.svg
 view.svg
 
 /bin1/
+
+*~

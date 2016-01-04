@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid>
 	<dimensions>
-		<horizontal>50</horizontal>
-		<vertical>100</vertical>
+		<horizontal>10</horizontal>
+		<vertical>10</vertical>
 	</dimensions>
 	<ships>
-		<battleship size="4">2</battleship>
-		<submarine size="3">5</submarine>
-		<destroyer size="2">2</destroyer>
-		<patrol-boat size="3">2</patrol-boat>
-		<aircraft-carrier size="5">5</aircraft-carrier>
+		<battleship size="4">1</battleship>
+		<submarine size="3">1</submarine>
+		<destroyer size="2">1</destroyer>
+		<patrol-boat size="3">1</patrol-boat>
+		<aircraft-carrier size="5">1</aircraft-carrier>
 	</ships>
-	<strategies placement="pack" firing="perso"/>
+	<strategies placement="random" firing="random"/>
 </grid>
