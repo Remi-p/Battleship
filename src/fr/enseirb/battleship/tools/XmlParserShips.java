@@ -68,7 +68,6 @@ public class XmlParserShips extends XmlParser {
 				}
 				
 				// Adding new Ship object in the array
-				
 				ships_array.add(new Ship(name, type, x, y, orientation, size, height, width));
 				j++ ; // incr of ships_array index	
 				

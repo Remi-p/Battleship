@@ -23,14 +23,14 @@ public class IA extends Player{
 		super(name);
 		getPlacement();
 		getFiring();
-		this.grid = InitialisationGrid();
+		this.grid = initialisationGrid();
 		this.cell_locked = this.grid.getRandomCoordinates();
 		this.direction_locked = Direction.NORTH;
 		this.depth = 0;
 		this.hybrid = false;
 	}
 	
-	private Grid InitialisationGrid() throws InvalidGridException {
+	private Grid initialisationGrid() throws InvalidGridException {
 		
 		this.grid = new Grid(Config.CONFIGS, Config.GRID, this.placement, this.firing);
 		
