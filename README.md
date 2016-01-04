@@ -6,7 +6,7 @@ Object oriented programming project
 
 **ENSEIRB-MATMECA**, 2015
 
-T2-G1
+T2-G1, Groupe 10
 
 # Step 1 : Grid
 
@@ -18,7 +18,7 @@ T2-G1
 ## Exceptions / placing AI boats
 
 * Exceptions are dealt with in the **exceptions** package
-* Most of the time, they are not catch, but directly sent to the main method :
+* Most of the time, they are not catch, but directly sent to the main method
 * However, they are a few exceptions which are catched
 	* `ShipOutOfBoundsException` is catched to determined if the randomly created boat (for the AI) is inside the grid
 	* `ShipOverlapException` is replaced, for random generation, by a simple boolean-return function for testing overlapping between AI boats
@@ -35,7 +35,7 @@ T2-G1
 $ java fr.enseirb.battleship.App debug grid.xml ships.xml
 ```
 
-**Remark** : The game has been built in order to be launched on eclipse. If you want to try it on a terminal, please place yourself in the `/bin` directory, and make a symbolic link of `../configs`, before launching.
+**Remark** : The game has been built in order to be launched on Eclipse. If you want to try it on a terminal, please place yourself in the `/bin` directory, and make a symbolic link of `../configs`, before launching.
 
 * The drawing writing process is managed in the *SvgWriter* class
 
@@ -65,14 +65,14 @@ $ java fr.enseirb.battleship.App play grid.xml ships.xml
 * For both placement and firing, the **RANDOM** strategy is the simplest way the IA plays. Boats and firing coordinates are random.
 
 * Placement strategies
-	* **PACK** : The pack strategy consists in divinding the grid by rectangular sections. The algorithm choose one section randomly and place boats in it.
+	* **PACK** : The pack strategy consists in dividing the grid by rectangular sections. The algorithm chooses one section randomly and places boats in it.
 	* **FAR** : As above, the grid is shared in rectangular sections. However, each section includes only and maximally one boat.
-	* **PERSO** : This strategy is a mix of the pack and far strategies. Boats are packed in groups of three and seperated in differents sections
+	* **PERSO** : This strategy is a mix of pack and far strategies. Boats are packed in groups of three and seperated in differents sections
 
 * Firing strategies
-	* **PACK** : The IA fires very close coordinates.
-	* **FAR** : Contrary to pack strategy, the IA fires far coordinates.
-	* **PERSO** : This is a hybrid strategy. The IA starts by applying the far strategy and once it touched a boat it turns to pack strategy in order to sunk the boat.
+	* **PACK** : The IA fires coordinates close from each other.
+	* **FAR** : Contrary to the pack strategy, the IA fires coordinates far from each other.
+	* **PERSO** : This is a hybrid strategy. The IA starts by applying the far strategy, and once it touches a boat, it turns to pack strategy in order to sunk the boat.
 
 # Bonus : Network
 
