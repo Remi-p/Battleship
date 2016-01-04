@@ -9,7 +9,6 @@ public class InvalidGridException extends Exception {
 	}
 
 	public InvalidGridException(int height, int width) {
-		
 		System.out.println("The minimum size of the grid is 10x10.");
 		System.out.println("\th = " + height + "\n\tw = " + width);
 	}

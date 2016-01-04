@@ -36,7 +36,6 @@ public class XmlParserShips extends XmlParser {
 		int j = 0;
 		
 		int number = 0;
-		//
 		
 		for (int i = 0; i < ships.getLength(); i++) {
 
@@ -69,7 +68,7 @@ public class XmlParserShips extends XmlParser {
 				
 				// Adding new Ship object in the array
 				ships_array.add(new Ship(name, type, x, y, orientation, size, height, width));
-				j++ ; // incr of ships_array index	
+				j++ ; // incrementing ships_array index	
 				
 				if (Config.VERBOSE)
 					System.out.println("Player has one " + size + "-length " + type +

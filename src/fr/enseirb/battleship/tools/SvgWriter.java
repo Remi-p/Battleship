@@ -13,6 +13,7 @@ import fr.enseirb.battleship.elements.BoatCase;
 import fr.enseirb.battleship.elements.Coordinates;
 import fr.enseirb.battleship.elements.Ship;
 
+// Inspired inter alia by
 // http://www.labri.fr/perso/falleri/dist/ens/pg220/tps/tp2/tp2_src.zip
 
 public class SvgWriter {
@@ -58,7 +59,6 @@ public class SvgWriter {
 			encoded = Files.readAllBytes(Paths.get(path));
 			return new String(encoded, Charset.defaultCharset());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -84,6 +84,7 @@ public class SvgWriter {
 		this.player2 = player2;
 	};
 	
+	// Method for a ship from Ship class
 	private void boat(Writer w, Ship ship) throws IOException {
 
 		String color;
@@ -133,13 +134,13 @@ public class SvgWriter {
 		w.append("<?xml version='1.0' encoding='utf-8'?>\n");
 		
 		w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d'>\n",
-				img_width * 2 + space + 100, img_height + header + 100));
+				img_width * 2 + space + 50, img_height + header + 50));
 		// Empirical offset for letting boat's name outside the grids
 
 		// Eventually, styling for mouse effects
 		//w.append("<style>\nrect:hover\n{\nopacity: 0.5;\n}\n</style>");
 		
-		// Definitions
+		// Definitions (for elements)
 		w.append("<defs>");
 		w.append(String.format(fire, cell, cell));
 		w.append(String.format(missed, cell, cell));
@@ -224,7 +225,7 @@ public class SvgWriter {
 			// We display touched cases only when the boat is still alive
 			if (!ship.isSunk())
 				for (BoatCase coord : ship.getBoatCases())
-					// TODO : Changed symbol
+
 					if (coord.touched()) {
 						w.append(String.format("<use xlink:href='#fire' x='%d' y='%d'/>", (coord.getX()+1)*cell, (coord.getY()+1)*cell));
 					
@@ -279,8 +280,8 @@ public class SvgWriter {
 			hide = player2; 
 		}
 		else {
-			main = player1;
-			hide = player2;
+			main = player2;
+			hide = player1;
 		}
 
 		try {
@@ -289,10 +290,10 @@ public class SvgWriter {
 			header(w, main, hide);
 
 			// First grid, everything is shown
-			this.writeOneGrid(w, player1.getGrid(), 0, header);
+			this.writeOneGrid(w, main.getGrid(), 0, header);
 
 			// Second, partially hidden
-			this.writeOneGrid(w, player2.getGrid(), img_width + space, header, true);
+			this.writeOneGrid(w, hide.getGrid(), img_width + space, header, true);
 			
 			w.append("</svg>");
 			w.close();
