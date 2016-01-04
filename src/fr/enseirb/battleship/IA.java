@@ -50,10 +50,11 @@ public class IA extends Player{
 			Coordinates fire_coordinates;
 			// IA turn
 			switch (this.firing){
-			case PERSO:
+			
+			case PERSO:						// Enable the hybrid mode , start in strategy far
 				this.hybrid = true;
 				this.firing = Strategy.FAR;
-			case PACK:
+			case PACK:								// Fire from a locked cell in all 4 directions , continue in the direction while it hits something
 				switch (this.direction_locked){
 				case NORTH:
 					fire_coordinates = new Coordinates(this.cell_locked.getX(),this.cell_locked.getY()-this.depth);
@@ -70,26 +71,26 @@ public class IA extends Player{
 				}
 
 				
-				if(fire_coordinates.getX() >= 0 && fire_coordinates.getY() >= 0)
+				if(fire_coordinates.getX() >= 0 && fire_coordinates.getY() >= 0)			// If the fire is in the grid , check if it hit
 					hit = player.getGrid().checkHit(fire_coordinates, this.getName());
 				else 
 					hit = 0;
 				
-	        	if(hit == 0){
-	        		if(this.direction_locked == Direction.EAST)
-	        			if(hybrid)
+	        	if(hit == 0){											// Fire isn't in the grid
+	        		if(this.direction_locked == Direction.EAST)			// Reach the last direction
+	        			if(hybrid)										// If hybrid mode , change strategy
 	        				this.firing = Strategy.FAR;
-	        			else{
+	        			else{											// Else choose an another locked cell
 	        				this.cell_locked = player.grid.getRandomCoordinates();
 	        				this.depth = 1;
 	        				this.direction_locked = Direction.NORTH;
 	        			}
-	        		else{
+	        		else{												// Change direction
 	        			this.depth = 1;
 	        			this.direction_locked =  this.direction_locked.getNext();
 	        		}
 	        	}
-        		else if(hit ==1){
+        		else if(hit ==1){							// If a ship is touched check if the IA win and continue firing in the same direction
 	            	if(this.checkWin(player.getName()))
 	            		return true;
 	            	else{
@@ -97,7 +98,7 @@ public class IA extends Player{
 	            		break opponentloop;
 	            	}
         		}
-        		else{
+        		else{										// Fire missed
         			if(this.direction_locked == Direction.EAST)
 	        			if(hybrid)
 	        				this.firing = Strategy.FAR;
@@ -114,13 +115,13 @@ public class IA extends Player{
         		}
 				
 				
-			case FAR:
+			case FAR:				// Fire at separate coordinates
 				fire_coordinates = player.grid.getRandomSmartCoordinates();
 				hit= player.getGrid().checkHit(fire_coordinates, this.getName());
 	        	if( hit == 1) {
 	            	if(this.checkWin(player.getName()))
 	            		return true;
-	            	if(hybrid){
+	            	if(hybrid){		// if it hit and we are in hybrid mode , change strategy
 	            		this.cell_locked = fire_coordinates;
 	            		this.firing = Strategy.PACK;
 	            		this.depth = 1;
@@ -133,7 +134,7 @@ public class IA extends Player{
 	        	else if(hit ==2)
 	        		break opponentloop;
 	        	
-			case RANDOM:
+			case RANDOM:		// Fire at random coordinates
 				fire_coordinates = player.grid.getRandomCoordinates();
 				hit= player.getGrid().checkHit(fire_coordinates, this.getName());
 	        	if( hit == 1) {

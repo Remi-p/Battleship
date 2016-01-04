@@ -138,7 +138,7 @@ public class Grid implements java.io.Serializable {
 		int max_nb = 0;
 		boolean double_pack = false;											// If true , during PACK strategy the ships will be dispatch in different boxes
 		
-		int pack_box_index = (int)(Math.random()*number_box+1);					// Choose a box
+		int pack_box_index = (int)(Math.random()*number_box);					// Choose a box
 
 		if (Config.VERBOSE) System.out.println("Placing Boats ...");
 		
