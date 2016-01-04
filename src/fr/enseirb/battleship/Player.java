@@ -1,8 +1,8 @@
 package fr.enseirb.battleship;
 
 public abstract class Player {
+	
 	protected String name;
-
 	protected int score;
 	protected Grid grid;
 	

@@ -11,14 +11,13 @@ public class Read {
 	public String getInput() {
 		
 		String text = "";
-		// TODO c
-		char C='\0';
+		char c='\0';
 		
 		try {
 			// Get input
-			while ((C=(char) System.in.read()) !='\n')
+			while ((c=(char) System.in.read()) !='\n')
 	        {
-				if (C != '\r')  text = text+C;
+				if (c != '\r')  text = text+c;
 	        }
 		}		
 		catch (IOException e)

@@ -109,7 +109,6 @@ public class Ship implements java.io.Serializable {
 	}
 	
 	public List<Coordinates> getBoatCoordinates(){
-
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
 		for (BoatCase boatcases : this.boatcases) {
 			coordinates.add(new Coordinates(boatcases.getX(), boatcases.getY()));
@@ -117,8 +116,9 @@ public class Ship implements java.io.Serializable {
 		return coordinates;
 	}
 	
+	// Return the list of the boat coordinates in function of
+	// his origin and his orientation
 	public void setBoatCases() {
-		
 		List<BoatCase> coordinates = new ArrayList<BoatCase>();
 		for(int j = 0; j < this.size; j++) {
 	

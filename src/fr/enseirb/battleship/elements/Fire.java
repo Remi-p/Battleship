@@ -5,7 +5,6 @@ public class Fire {
 	
 	Fire(int x, int y){
 		super ();
-		
 		this.x = x;
 		this.y = y;
 	}

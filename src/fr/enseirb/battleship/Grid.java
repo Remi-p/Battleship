@@ -57,7 +57,7 @@ public class Grid implements java.io.Serializable {
 		// We do not throw errors about boats here, but we check them
 		Type ships_type;
 		ships_type = configsExtract(configs_path, gridfilename);
-		this.shipnames = ShipsNameInitialisation();
+		this.shipnames = shipsNameInitialisation();
 		this.ships = randomShips(this.height, this.width, ships_type, placement);
 		initFires();
 	}
@@ -222,7 +222,6 @@ public class Grid implements java.io.Serializable {
 
 				try {
 					random_shipname = randomShipname(this.shipnames);	
-					if (Config.VERBOSE) System.out.println("Ship name : " + random_shipname + "size : " + this.shipnames.size());
 					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 				
 					// There is an overlapping problem
@@ -232,7 +231,7 @@ public class Grid implements java.io.Serializable {
 					else {
 						ships.add(ship);
 						if(this.shipnames.size() != 0) {
-							ShipsNamesDelete(this.shipnames, random_shipname);
+							shipsNamesDelete(this.shipnames, random_shipname);
 						}
 					}
 				
@@ -247,8 +246,8 @@ public class Grid implements java.io.Serializable {
 		return ships;
 	}
 
-	
-	private List<String> ShipsNameInitialisation() {
+	// Initialize the list of names which are provided to IA
+	private List<String> shipsNameInitialisation() {
 		List<String> shipNames = new ArrayList<String>();
 		
 		shipNames.add("USS Enterprise");
@@ -278,7 +277,7 @@ public class Grid implements java.io.Serializable {
 		return name;
 	}
 	
-	public void ShipsNamesDelete(List<String> shipnames, String random_name) {
+	private void shipsNamesDelete(List<String> shipnames, String random_name) {
 		int ind = 0;
 
 			for(String name:shipnames) {
