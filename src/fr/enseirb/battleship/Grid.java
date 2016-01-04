@@ -130,18 +130,18 @@ public class Grid implements java.io.Serializable {
 		double o = Math.random();
 		int x = 0;
 		int y = 0;
-		double number_cell = (height*width)/ships_type.getTotalQty();
-		int box_index = 1;
-		int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
+		double number_cell = (height*width)/ships_type.getTotalQty();		//Ratio available cells over ships cells 
+		int box_index = 1;													//Index of the box where ships are put
+		int width_box = (int)Math.floor(width*number_cell/(height*width)+1);	// Dimensions of the boxes
 		int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
-		int number_box =(int) Math.floor(height/height_box*width/width_box );
+		int number_box =(int) Math.floor(height/height_box*width/width_box );	// Total number of boxes
 		int dec_x = 0;
 		int dec_y = 0;
 		int boat_in_box = 0;
 		int max_nb = 0;
-		boolean double_pack = false;
+		boolean double_pack = false;											// If true , during PACK strategy the ships will be dispatch in different boxes
 		
-		int pack_box_index = (int)(Math.random()*number_box+1);
+		int pack_box_index = (int)(Math.random()*number_box+1);					// Choose a box
 
 		if (Config.VERBOSE) System.out.println("Placing Boats ...");
 		
@@ -153,7 +153,7 @@ public class Grid implements java.io.Serializable {
 				
 				// After 100 tries we change the section
 				if(max_nb == 100){
-					if(double_pack == false) {
+					if(double_pack == false) {		//Try to get into adjacent boxes 
 						if (pack_box_index%Math.floor(height/height_box) == 0){
 							pack_box_index -= 1;
 						}
@@ -162,7 +162,7 @@ public class Grid implements java.io.Serializable {
 						}
 						if (Config.VERBOSE) System.out.println("Changing section ...");
 						max_nb = 0;
-						double_pack = true;
+						double_pack = true;			
 						}
 					else {
 						if (Config.VERBOSE) System.out.println("Changing section ...");
@@ -173,12 +173,12 @@ public class Grid implements java.io.Serializable {
 				
 				switch(strategy){
 				
-					case RANDOM:
+					case RANDOM:										//Ships locations are random all over the grid
 						 x = (int)(Math.random() * (width-0)) + 0;
 						 y = (int)(Math.random() * (height-0)) + 0;						
 						break;
 						
-					case FAR :
+					case FAR :										// One ship is placed in one box chosen randomly 
 						do{
 							box_index = (int)(Math.random()*number_box+1);
 						}while(Collections.frequency(indexs,box_index) >0);
@@ -190,7 +190,7 @@ public class Grid implements java.io.Serializable {
 						y = (int)((height_box)*dec_y +dec_x);
 						break;
 						
-					case PACK :
+					case PACK :																// Put all the ships in one box , if it fails we take one more box on the side. 
 
 						dec_x = (int)((pack_box_index-1)%Math.floor(width/width_box));
 						dec_y = (int)(Math.floor((pack_box_index-1)/Math.floor(width/width_box)));
@@ -199,7 +199,7 @@ public class Grid implements java.io.Serializable {
 						
 						break;
 						
-					case PERSO : 
+					case PERSO : 											// Put 3 ships in boxes chosen randomly
 						if(boat_in_box ==0){
 							do{
 								box_index = (int)(Math.random()*number_box+1);
@@ -214,7 +214,7 @@ public class Grid implements java.io.Serializable {
 						boat_in_box = boat_in_box%3; 
 						break;
 				}
-
+				//Determine a random orientation
 				if (o >= 0.5)
 					orientation = "horizontal";
 				else
@@ -229,6 +229,7 @@ public class Grid implements java.io.Serializable {
 					if (!Grid.shipOverlapShips(ships, ships_type, ship)) {
 						i--;
 					}
+					// Successful addition of a boat
 					else {
 						ships.add(ship);
 						if(this.shipnames.size() != 0) {
