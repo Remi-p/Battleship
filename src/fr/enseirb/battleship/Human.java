@@ -47,7 +47,6 @@ public class Human extends Player {
 		try {
 			this.out = new PrintStream(opp.getOutputStream());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -61,7 +60,7 @@ public class Human extends Player {
 		oos.writeObject(this.grid);
 		oos.flush();
 		
-		// Do not use close ; it will close the socket
+		// We don't use close ; it will close the socket
 		//oos.close();
 	}
 	

@@ -9,7 +9,6 @@ import org.w3c.dom.NodeList;
 
 import fr.enseirb.battleship.tools.Config;
 
-// TODO s
 public class Type {
 	private List<TypeElt> types;
 	
@@ -26,7 +25,7 @@ public class Type {
 	// Return number of cases taken by ships
 	public int getGridOccupation() {
 
-		// Number of case taken by ships
+		// Number of cases taken by ships
 		int num_cases = 0;
 
 		for (TypeElt e : types) {

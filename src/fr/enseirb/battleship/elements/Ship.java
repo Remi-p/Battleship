@@ -59,7 +59,6 @@ public class Ship implements java.io.Serializable {
 	
 	
 	// GETTERS
-	// ATTENTION : methodes public a changer en fonction après
 	
 	public String getName() {
 		return this.name;
@@ -110,9 +109,10 @@ public class Ship implements java.io.Serializable {
 	
 	public List<Coordinates> getBoatCoordinates(){
 		List<Coordinates> coordinates = new ArrayList<Coordinates>();
-		for (BoatCase boatcases : this.boatcases) {
+		
+		for (BoatCase boatcases : this.boatcases)
 			coordinates.add(new Coordinates(boatcases.getX(), boatcases.getY()));
-		}
+		
 		return coordinates;
 	}
 	

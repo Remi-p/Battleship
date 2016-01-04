@@ -28,7 +28,6 @@ public class RemoteHuman extends Human {
 			this.inputStream = socket.getInputStream();
 			this.in = new BufferedReader(new InputStreamReader(this.inputStream));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -37,7 +36,6 @@ public class RemoteHuman extends Human {
 		try {
 			this.socket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -48,7 +46,6 @@ public class RemoteHuman extends Human {
 		try {
 			recv = in.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
