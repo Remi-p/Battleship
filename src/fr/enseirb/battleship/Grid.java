@@ -20,9 +20,10 @@ import fr.enseirb.battleship.tools.XmlParserGrid;
 import fr.enseirb.battleship.tools.XmlParserShips;
 
 public class Grid implements java.io.Serializable {
+	
 	/**
 	 * Serial allows to block the system if he receives a serialized version of
-	 * an ancient object version
+	 * an ancient object version (when exchanging grids)
 	 */
 	private static final long serialVersionUID = 1L;
 	
@@ -62,7 +63,7 @@ public class Grid implements java.io.Serializable {
 		initFires();
 	}
 	
-	// Configs extraction from grid.xml
+	// Config extraction from grid.xml
 	private Type configsExtract(String configs_path, String gridfilename) throws InvalidGridException {
 		// --------------- grid.xml
 		XmlParserGrid grid = new XmlParserGrid(configs_path, gridfilename);
@@ -88,22 +89,18 @@ public class Grid implements java.io.Serializable {
 		if (Config.VERBOSE)
 			System.out.println("Occupation : "+ships_type.getGridOccupation());
 		
-		// TODO : A déplacer
 		double occupation = (double) ships_type.getGridOccupation() / ((double)height  *(double)width); 
 		// Ships has to take less than 20% of total number of cases, else InvalidGridException
 		if (occupation > 0.2) {
 			throw new InvalidGridException(occupation);
 		}
 		else {
-			if(shipGridOverLap(ships, ships_type) == false) {
+			if (shipGridOverLap(ships, ships_type) == true)
 				throw new ShipOverlapException();
-			}
-			else{
+			else
 				this.ships = ships;
-			
-			}
 		}
-	}List<Coordinates> coordinates = new ArrayList<Coordinates>();
+	}
 	
 	private void initFires() {
 		List<Coordinates> fires = new ArrayList<Coordinates>();
@@ -225,7 +222,7 @@ public class Grid implements java.io.Serializable {
 					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 				
 					// There is an overlapping problem
-					if (!Grid.shipOverlapShips(ships, ships_type, ship)) {
+					if (Grid.shipOverlapShips(ships, ships_type, ship)) {
 						i--;
 					}
 					// Successful addition of a boat
@@ -268,26 +265,27 @@ public class Grid implements java.io.Serializable {
 	
 	public String randomShipname(List<String> names) {
 		String name = new String();
-		if(names.size() == 0) {
+		
+		if(names.size() == 0)
 			name = "Unknown";
-		}
 		else {
-		int index = (int)(Math.random() * (names.size()-1) ) + 0;
-		name = names.get(index);
+			int index = (int)(Math.random() * (names.size()-1) ) + 0;
+			name = names.get(index);
 		}
+		
 		return name;
 	}
 	
 	private void shipsNamesDelete(List<String> shipnames, String random_name) {
 		int ind = 0;
 
-			for(String name:shipnames) {
-				if(name.compareTo(random_name) == 0) {
-					break;
-				}
-				ind++;
-			}
-			shipnames.remove(ind);
+		for(String name:shipnames) {
+			if(name.compareTo(random_name) == 0)
+				break;
+			
+			ind++;
+		}
+		shipnames.remove(ind);
 	}
 	
 	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships, String state) {
@@ -299,18 +297,14 @@ public class Grid implements java.io.Serializable {
 		for (Ship boat : ships) {
 			
 			if ("untouched".compareTo(state) == 0) {
-				for(BoatCase boatcase : boat.getBoatCases()) {
-					if(!boatcase.touched()) {
+				for(BoatCase boatcase : boat.getBoatCases())
+					if(!boatcase.touched())
 						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
-					}
-				}
 			}
 			else if("touched".compareTo(state) == 0) {
-				for(BoatCase boatcase : boat.getBoatCases()) {
-					if(boatcase.touched()) {
+				for(BoatCase boatcase : boat.getBoatCases())
+					if(boatcase.touched())
 						coordinates.add(new Coordinates(boatcase.getX(), boatcase.getY()));
-					}
-				}
 			}
 			else
 				coordinates.addAll(boat.getBoatCoordinates());
@@ -319,7 +313,7 @@ public class Grid implements java.io.Serializable {
 		return coordinates;
 	}
 	
-	// Check if a particular ship overlaps the others
+	// Check if a PARTICULAR ship overlaps the others
 	private static boolean shipOverlapShips(Collection<Ship> ships, Type ships_type, Ship ship) {
 		
 		List<Coordinates> coordinates = getShipsCoordinates(ships, "all");
@@ -330,21 +324,20 @@ public class Grid implements java.io.Serializable {
 			switch(ship.getOrientation()) {
 	            case HORIZONTAL:
 	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX() + j, ship.getY())) > 0)
-	            		return false;
+	            		return true;
 	                break;
 
 	            case VERTICAL: 
 	            	if (Collections.frequency(coordinates, new Coordinates(ship.getX(), ship.getY() + j)) > 0)
-	            		return false;
+	            		return true;
 	                break;
 			}
 		}
 		
-		// TODO Change output to true, semantic
-		return true; // No overlapping
+		return false; // No overlapping
 	}
 	
-	// Check if overlap ships exists
+	// Check if at least one of the ships overlaps the others
 	private boolean shipGridOverLap(Collection<Ship> ships, Type ships_type) {
 		
 		List<Coordinates> coordinates = getShipsCoordinates(ships, "all");
@@ -353,10 +346,10 @@ public class Grid implements java.io.Serializable {
 		for (Coordinates c : coordinates) {
 			if (Collections.frequency(coordinates, c) > 1)
 				// Overlapping
-				return false;
+				return true;
 		}
 		
-		return true; // No overlapping
+		return false; // No overlapping
 	}
 	
 	// Add missed fire
@@ -365,12 +358,12 @@ public class Grid implements java.io.Serializable {
 	}
 	
 	private boolean alreadyFired(Coordinates coordinates, List<Coordinates> ships_coordinates){
-		if (Collections.frequency(this.missedfires,coordinates)>0){
+		if (Collections.frequency(this.missedfires,coordinates)>0)
 			return true;
-		}
-		else if(Collections.frequency(ships_coordinates,coordinates)>0) {
+		
+		else if(Collections.frequency(ships_coordinates,coordinates)>0)
 			return true;
-		}
+		
 		else
 			return false;
 	}
@@ -382,7 +375,7 @@ public class Grid implements java.io.Serializable {
 		List<Coordinates> ships_untouched_coordinates = getShipsCoordinates(this.ships, "untouched");
 		List<Coordinates> ships_touched_coordinates = getShipsCoordinates(this.ships, "touched"); 
 		
-		// If player has already fired at same coordinates
+		// If player hasn't already fired at same coordinates
 		if (!this.alreadyFired(coordinates, ships_touched_coordinates)){
 			
 			if (Collections.frequency(ships_untouched_coordinates,coordinates)>0){

@@ -1,24 +1,20 @@
 package fr.enseirb.battleship;
 
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import fr.enseirb.battleship.elements.Strategy;
-import fr.enseirb.battleship.tools.Config;
 import fr.enseirb.battleship.tools.SvgWriter;
-import fr.enseirb.battleship.tools.XmlParserGrid;
 
 public class Game {
 
 	private Human player1;
+	// Seamless for player2's subclass (IA, RemoteHuman)
 	private Player player2;
+	// debug, play, etc.
 	private String type;
+	
 	private SvgWriter writer;
 
 	// Saved only in order to close the socket
@@ -36,6 +32,7 @@ public class Game {
 		this.type = args[0];
 		
 		// http://www.jmdoudoux.fr/java/dej/chap-net.htm
+		// Behavior is not the same if we are a server or a client
 		if (this.isServer()) {
 			
 			// Port is passed in args[3]
@@ -70,18 +67,20 @@ public class Game {
 	
 	// This function call itself when finished, to take charge of the next turn
 	public void turnOfPlayer(boolean i) {
-		if (i) {
+		
+		if (i) { // Turn of player #1
 			if (player1.play(player2, writer, getHeight(), getWidth()))
 				return;
 			else
 				turnOfPlayer(!i);
 		}
-		else {
+		else { // Turn of player #2
 			if (player2.play(player1))
 				return;
 			else
 				turnOfPlayer(!i);
 		}
+		
 	}
 	
 	public boolean isServer() {
@@ -117,6 +116,7 @@ public class Game {
 				socketServer.close();
 			
 			player1.closeScktOpponent();
+			
 			// If this is multiplayer, player2 is of type RemoteHuman
 			((RemoteHuman)player2).closeSocket();
 		}

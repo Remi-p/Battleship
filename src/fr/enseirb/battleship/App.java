@@ -2,7 +2,7 @@ package fr.enseirb.battleship;
 
 import fr.enseirb.battleship.tools.Config;
 
-// Main classes
+// Main class
 public class App {
 	
 	public static void main(String[] args) throws Exception {
