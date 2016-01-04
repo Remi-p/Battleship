@@ -10,6 +10,7 @@ public class Config {
 	
 	public final static String FIRE_SVG = "configs/fire.svg"; 
 	public final static String MISSED_SVG = "configs/missed.svg"; 
+	public final static String FIRE_GRADIENTS = "configs/fire_gradients.svg";
 	
 	public final static String DEBUG_SVG = "debug.svg";
 	public final static String PLAY_SVG = "game.svg";

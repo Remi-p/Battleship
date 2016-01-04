@@ -44,6 +44,8 @@ public class SvgWriter {
 
 	private static final String fire = "<symbol id='fire'><g transform='scale(%d, %d)'>" + readFile(Config.FIRE_SVG) + "</g></symbol>";
 	private static final String missed = "<symbol id='missed'><g transform='scale(%d, %d)'>" + readFile(Config.MISSED_SVG) + "</g></symbol>";
+	// We need to extract the gradients from the fire symbol, because gradients does not work within a symbol in Firefox
+	private static final String fire_gradients = readFile(Config.FIRE_GRADIENTS);
 	
 	private String writer_debug = Config.DEBUG_SVG;
 	private String writer_play = Config.PLAY_SVG;
@@ -133,7 +135,7 @@ public class SvgWriter {
 		
 		w.append("<?xml version='1.0' encoding='utf-8'?>\n");
 		
-		w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d'>\n",
+		w.append(String.format("<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='%d' height='%d' xmlns:xlink='http://www.w3.org/1999/xlink'>\n",
 				img_width * 2 + space + 50, img_height + header + 50));
 		// Empirical offset for letting boat's name outside the grids
 
@@ -142,6 +144,7 @@ public class SvgWriter {
 		
 		// Definitions (for elements)
 		w.append("<defs>");
+		w.append(fire_gradients);
 		w.append(String.format(fire, cell, cell));
 		w.append(String.format(missed, cell, cell));
 		w.append("</defs>");

@@ -1,0 +1,75 @@
+<linearGradient
+         id="SVGID_1_"
+         y2="16.455999"
+         gradientUnits="userSpaceOnUse"
+         x2="230.92999"
+         y1="16.455999"
+         x1="229.97"><stop
+           style="stop-color:#6D0000"
+           offset="0"
+           id="stop6" /><stop
+           style="stop-color:#ED1C24"
+           offset="1"
+           id="stop8" /></linearGradient>
+<linearGradient
+         id="SVGID_2_"
+         y2="17.204"
+         gradientUnits="userSpaceOnUse"
+         x2="231.92"
+         y1="17.204"
+         x1="230.92999"><stop
+           style="stop-color:#6D0000"
+           offset="0"
+           id="stop13" /><stop
+           style="stop-color:#ED1C24"
+           offset="1"
+           id="stop15" /></linearGradient>
+<linearGradient
+         id="SVGID_3_"
+         y2="243.42"
+         gradientUnits="userSpaceOnUse"
+         x2="468.44"
+         y1="243.42"
+         x1="14.975"><stop
+           style="stop-color:#6D0000"
+           offset="0"
+           id="stop20" /><stop
+           style="stop-color:#ED1C24"
+           offset="1"
+           id="stop22" /></linearGradient>
+<radialGradient
+         id="SVGID_4_"
+         gradientUnits="userSpaceOnUse"
+         cy="16.455999"
+         cx="230.45"
+         r="0.42860001"><stop
+           style="stop-color:#FFF200"
+           offset="0"
+           id="stop29" /><stop
+           style="stop-color:#F26822"
+           offset="1"
+           id="stop31" /></radialGradient>
+<radialGradient
+         id="SVGID_5_"
+         gradientUnits="userSpaceOnUse"
+         cy="17.204"
+         cx="231.42"
+         r="0.43979999"><stop
+           style="stop-color:#FFF200"
+           offset="0"
+           id="stop36" /><stop
+           style="stop-color:#F26822"
+           offset="1"
+           id="stop38" /></radialGradient>
+<radialGradient
+         id="SVGID_6_"
+         gradientUnits="userSpaceOnUse"
+         cy="236.07001"
+         cx="247.08"
+         r="157.62"><stop
+           style="stop-color:#FFF200"
+           offset="0"
+           id="stop43" /><stop
+           style="stop-color:#F26822"
+           offset="1"
+           id="stop45" /></radialGradient>
