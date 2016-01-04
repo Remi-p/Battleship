@@ -35,7 +35,7 @@ T2-G1, Groupe 10
 $ java fr.enseirb.battleship.App debug grid.xml ships.xml
 ```
 
-**Remark** : The game has been built in order to be launched on Eclipse. If you want to try it on a terminal, please place yourself in the `/bin` directory, and make a symbolic link of `../configs`, before launching.
+**Remark** : The game has been built in order to be launched on Eclipse. If you want to try it on a terminal, please place yourself in the root directory of the project, and use the option `-classpath bin/` in the launch command.
 
 * The drawing writing process is managed in the *SvgWriter* class
 
