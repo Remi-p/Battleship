@@ -130,23 +130,34 @@ public class Grid implements java.io.Serializable {
 		double o = Math.random();
 		int x = 0;
 		int y = 0;
-			double number_cell = (height*width)/ships_type.getTotalQty();
-			int box_index = 1;
-			int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
-			int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
-			int number_box =(int) Math.floor(height/height_box*width/width_box );
-			int dec_x = 0;
-			int dec_y = 0;
-			int boat_in_box = 0;
+		double number_cell = (height*width)/ships_type.getTotalQty();
+		int box_index = 1;
+		int width_box = (int)Math.floor(width*number_cell/(height*width)+1);
+		int height_box = (int)Math.floor(height*number_cell/(height*width)+1);
+		int number_box =(int) Math.floor(height/height_box*width/width_box );
+		int dec_x = 0;
+		int dec_y = 0;
+		int boat_in_box = 0;
+		int max_nb = 0;
 		
 		int pack_box_index = (int)(Math.random()*number_box+1);
 
-		if (Config.VERBOSE) System.out.println("Placing Boats");
+		if (Config.VERBOSE) System.out.println("Placing Boats ...");
 		
 		for (TypeElt e : ships_type.getListType()) {
 			
 			for( int i = 0; i < e.getQuantity(); i++) {
+				max_nb++;
 				o = Math.random();
+				
+				// After 100 tries we change the section
+				if(max_nb == 100){
+					pack_box_index = (int)(Math.random()*number_box+1);
+					if (Config.VERBOSE) System.out.println("Changing section ...");
+					max_nb = 0;
+					break;
+				}
+				
 				switch(strategy){
 				
 					case RANDOM:
@@ -190,15 +201,15 @@ public class Grid implements java.io.Serializable {
 						boat_in_box = boat_in_box%3; 
 						break;
 				}
-				
-					
-					if (o >= 0.5)
-						orientation = "horizontal";
-					else
-						orientation = "vertical";
+
+				if (o >= 0.5)
+					orientation = "horizontal";
+				else
+					orientation = "vertical";
 
 				try {
 					random_shipname = randomShipname(this.shipnames);	
+					if (Config.VERBOSE) System.out.println("Ship name : " + random_shipname + "size : " + this.shipnames.size());
 					Ship ship = new Ship(random_shipname, e.getType(), x, y, orientation, e.getSize(), height, width );
 				
 					// There is an overlapping problem
@@ -207,7 +218,9 @@ public class Grid implements java.io.Serializable {
 					}
 					else {
 						ships.add(ship);
-						ShipsNamesDelete(this.shipnames, random_shipname);
+						if(this.shipnames.size() != 0) {
+							ShipsNamesDelete(this.shipnames, random_shipname);
+						}
 					}
 				
 				} catch (ShipOutOfBoundsException e1) {
@@ -216,6 +229,8 @@ public class Grid implements java.io.Serializable {
 
 			}
 		}
+		if (Config.VERBOSE) System.out.println("Placing Boats succeed");
+
 		return ships;
 	}
 
@@ -235,27 +250,31 @@ public class Grid implements java.io.Serializable {
 		shipNames.add("Star Destroyer");
 		shipNames.add("Prometheus");
 		
-		// TODO : exception
-		
 		return shipNames;
 	}
 	
 	public String randomShipname(List<String> names) {
 		String name = new String();
+		if(names.size() == 0) {
+			name = "Unknown";
+		}
+		else {
 		int index = (int)(Math.random() * (names.size()-1) ) + 0;
 		name = names.get(index);
+		}
 		return name;
 	}
 	
 	public void ShipsNamesDelete(List<String> shipnames, String random_name) {
 		int ind = 0;
-		for(String name:shipnames) {
-			ind++;
-			if(name.compareTo(random_name) == 0) {
-				break;
+
+			for(String name:shipnames) {
+				if(name.compareTo(random_name) == 0) {
+					break;
+				}
+				ind++;
 			}
-		}
-		shipnames.remove(ind);
+			shipnames.remove(ind);
 	}
 	
 	public static List<Coordinates> getShipsCoordinates(Collection<Ship> ships, String state) {
