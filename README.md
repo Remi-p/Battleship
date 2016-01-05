@@ -47,6 +47,8 @@ The game can be launched with the following command :
 $ java fr.enseirb.battleship.App play grid.xml ships.xml
 ```
 
+The list of the commands is displayed when an error occures.
+
 ## Turn by turn
 
 * Function `turnOfPlayer(i)` processes the turn of IA or Human player
@@ -55,6 +57,11 @@ $ java fr.enseirb.battleship.App play grid.xml ships.xml
 * Random fires of the IA are managed in the `play` method of *IA*, extending *Player*
 	* Random coordinates are generated from `getRandomCoordinates` of *Grid*
 	* They keep being generated while none have been encounter satisfying every conditions of `checkHit` (*Grid*)
+
+## Updated drawing
+
+* A `debug` drawing can still be made by using the same name command during Play mode. See [debug.svg](debug.svg)
+* `view`, on the contrary, only shows the full grid of the current player, and the missed/touched fires he made against his opponent. See [game.svg](game.svg)
 
 # Step 3 : Advanced IA
 
