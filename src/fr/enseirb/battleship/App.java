@@ -20,8 +20,10 @@ public class App {
 			System.out.println("Opponent will play first.");
 			game.turnOfPlayer(false);
 		}
-		else
+		else {
+			System.out.println("You will play first.");
 			game.turnOfPlayer(true);
+		}
 		
 		game.end();
 	}

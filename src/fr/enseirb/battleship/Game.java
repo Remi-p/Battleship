@@ -38,6 +38,8 @@ public class Game {
 			// Port is passed in args[3]
 			this.socketServer = new ServerSocket(Integer.parseInt(args[3]));
 			
+			System.out.println("Waiting for client ...");
+			
 			Socket socketClient = this.socketServer.accept();
 			
 			player2 = new RemoteHuman(socketClient);
